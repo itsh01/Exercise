@@ -48,3 +48,9 @@ div.gallery-wrapper {
 	border-radius: 20px;
 	height: 200px;
 }
+blockquote:before {
+	content: '"';
+}
+blockquote:after {
+	content: '"';
+}
