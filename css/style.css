@@ -19,22 +19,32 @@ a:hover {
 	min-height: 800px;
 	background: rgba(255, 255, 255, 0.94);
 	border-radius: 10px;
-
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
+	border: #333333 1px solid;
 }
 ul.link-list {
-	list-style: square;
+list-style:none;
+    padding-left:0;
+}
+ul.link-list li{
+	display: inline-block;
+	background: rgba(0,0,0,0.1);
+	border-radius: 10px;
+	padding: 10px;
 }
 img.gallery {
+	display: inline-block;
 	border-radius: 20px;
 	opacity: .8;
-	width: 300px;
+	height: 200px;
 }
 img.gallery:hover {
 	opacity: 1;
 	transition: all 0.3s linear;
 }
 div.gallery-wrapper {
+	display: inline-block;
 	background: #000000;
 	border-radius: 20px;
-	width: 300px;
+	height: 200px;
 }
