@@ -1,13 +1,40 @@
 body {
 	font-family: Tahoma, sans-serif;
+	background: url("http://hdwallpaperd.com/wp-content/uploads/1685318.jpg");
 }
 
 h1 {
 	text-align: center;
 }
-.container{
-	margin: 2em;
+a {
+	text-decoration: none;
+	font-weight: bold;
 }
-ul.link-list{
+a:hover {
+	text-decoration: underline;
+}
+.container {
+	margin: 2em 8em;
+	padding: 1em;
+	min-height: 800px;
+	background: rgba(255, 255, 255, 0.94);
+	border-radius: 10px;
+
+}
+ul.link-list {
 	list-style: square;
+}
+img.gallery {
+	border-radius: 20px;
+	opacity: .8;
+	width: 300px;
+}
+img.gallery:hover {
+	opacity: 1;
+	transition: all 0.3s linear;
+}
+div.gallery-wrapper {
+	background: #000000;
+	border-radius: 20px;
+	width: 300px;
 }
