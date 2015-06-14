@@ -107,4 +107,10 @@ footer span {
 	position: absolute;
 	visibility: hidden;
 }
+fieldset {
+	border: none;
+}
+textarea {
+	resize: none;
+}
 
