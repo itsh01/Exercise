@@ -62,3 +62,17 @@ q:before {
 q:after {
 	content: '"';
 }
+.side-nav {
+	position: fixed;
+	right: 0;
+	top: 100px;
+}
+.side-nav ul{
+	list-style: none;
+}
+.footer-blessing {
+	padding: 50px;
+}
+
+
+
