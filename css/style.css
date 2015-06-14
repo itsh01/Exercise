@@ -40,7 +40,7 @@ ul.link-list li:before {
 	letter-spacing: -3px;
 }
 
-/*	galery	*/
+/*	gallery	*/
 
 img.gallery {
 	display: inline-block;
@@ -59,14 +59,14 @@ div.gallery-wrapper {
 	height: 200px;
 }
 q:before {
-	content: '"';
+	content: "\0022";
 }
 q:after {
-	content: '"';
+	content: "\0022";
 }
 
 /*	menu	*/
-#menu {
+.main-menu {
 	margin: 0;
 	padding: 0;
 	background: rgba(255, 255, 255, 0.94);
@@ -74,21 +74,21 @@ q:after {
 	border: #333333 1px solid;
 	text-align: center;
 }
-#menu a:hover {
+.main-menu a:hover {
 	text-decoration: none;
 }
-#menu ul {
+.main-menu ul {
 	list-style: none;
     padding: 0;
     margin: 0;
 }
-#menu ul li {
+.main-menu ul li {
 	display: inline-block;
 	margin: 0;
 	padding: 1em 3em;
 	height: 100%;
 }
-#menu ul li:hover {
+.main-menu ul li:hover {
 	background: rgba(0, 0, 0, 0.1);
 	transition: all 0.3s linear;
 }

@@ -57,10 +57,10 @@ div.gallery-wrapper {
 	height: 200px;
 }
 q:before {
-	content: '"';
+	content: "\0022";
 }
 q:after {
-	content: '"';
+	content: "\0022";
 }
 .side-nav {
 	position: fixed;
