@@ -55,13 +55,13 @@
 				<fieldset>		
 					<label for="text">
 						Message:
-						<textarea type="text" name="text" id="text" placeholder="What would you like to say">
+						<textarea name="text" id="text" placeholder="What would you like to say">
 						</textarea>
 					</label>
 				</fieldset>
 				<fieldset>
 					<legend>Contact Info</legend>
-					<label for="email">E-Mail:&nbsp;
+					<label for="email">E-Mail:
 						<input type="email" name="email" id="email" placeholder="E.G.: me@example.com"/>
 					</label>
 				</fieldset>
@@ -83,12 +83,12 @@
 			<form action="/stam" id="etcForm">
 				<fieldset>
 					<legend>Color stuff</legend>
-					<label for="color">Color:&nbsp;
+					<label for="color">Color:
 						<input id="color" type="color" />
 					</label>
 				</fieldset>
 				<fieldset>
-					<label for="food">Food:&nbsp;
+					<label for="food">Food:
 						<select name="food" id="food">
 							<option value="pizza">Pizza</option>
 							<option value="hamburger">Hamburger</option>
@@ -96,8 +96,8 @@
 					</label>
 				</fieldset>
 				<fieldset>
-					<label for="objects">Objects:&nbsp;
-						<input list="objects">
+					<label for="chosenObject">Object:
+						<input type="text" list="objects" name="object" id="chosenObject">
 						<datalist id="objects">
 							<option value="chair">
 							<option value="table">
@@ -105,12 +105,12 @@
 					</label>
 				</fieldset>
 				<fieldset>
-					<label for="happy">Happiness:&nbsp;
+					<label for="happy">Happiness:
 						<input type="range" id="happy">
 					</label>
 				</fieldset>
 				<fieldset>
-					<label for="meter">Meter:&nbsp;
+					<label for="meter">Meter:
 						<meter id="meter" min="200" max="500" value="450">450</meter>
 					</label>
 				</fieldset>
