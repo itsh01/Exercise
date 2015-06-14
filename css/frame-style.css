@@ -73,6 +73,11 @@ q:after {
 .footer-blessing {
 	padding: 50px;
 }
+/* Simple (naive) hide from sighted users */
+.visuallyhidden {
+	position: absolute;
+	visibility: hidden;
+}
 
 
 
