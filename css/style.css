@@ -102,4 +102,9 @@ footer span {
 	color: #ffffff;
 	padding: 20px;
 }
+/* Simple (naive) hide from sighted users */
+.visuallyhidden {
+	position: absolute;
+	visibility: hidden;
+}
 
