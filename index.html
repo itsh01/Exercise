@@ -24,7 +24,7 @@
 			<iframe src="content/homepage.html" name="content"></iframe>
 			
 			<!-- google form -->
-			<form action="http://google.com/">
+			<form action="http://google.com/" id="googleForm">
 				<h3>Search Google:</h3>
 				<label for="query">
 					Enter Query:
@@ -33,8 +33,8 @@
 				<button id="submitGoogleSearch" class="google-ui submit-button" type="submit">Submit</button>
 			</form>
 			
-			<!-- enroll form -->
-			<form action="enroll" method="POST">
+			<!-- contact form -->
+			<form action="contact" method="POST" id="contactForm">
 				<h3>Contact Us:</h3>
 				<fieldset>
 					<label for="maleGender">
@@ -55,7 +55,8 @@
 				<fieldset>		
 					<label for="text">
 						Message:
-						<textarea type="text" name="text" id="text" placeholder="What would you like to say"></textarea>
+						<textarea type="text" name="text" id="text" placeholder="What would you like to say">
+						</textarea>
 					</label>
 				</fieldset>
 				<fieldset>
@@ -64,24 +65,24 @@
 						<input type="email" name="email" id="email" placeholder="E.G.: me@example.com"/>
 					</label>
 				</fieldset>
-				<button id="submitEnroll" class="enroll-ui submit-button" type="submit">Submit</button>
+				<button id="submitcontact" class="contact-ui submit-button" type="submit">Submit</button>
 			</form>
 
 			<!-- search form -->
-			<form>
+			<form id="searchForm">
 			  <h3>Search:</h3>
 				<label for="searchInput">
 					Search:
 					<input type="search" name="q" id="searchInput" />
 				</label>
-				<button id="submitEnroll" class="search-ui submit-button" type="submit">Submit</button>
+				<button id="submitcontact" class="search-ui submit-button" type="submit">Submit</button>
 			</form>
 
 
 			<!-- ETC form -->
-			<form action="/stam">
-				<legend>Sheker Form</legend>
+			<form action="/stam" id="etcForm">
 				<fieldset>
+					<legend>Color stuff</legend>
 					<label for="color">Color:&nbsp;
 						<input id="color" type="color" />
 					</label>
@@ -113,7 +114,7 @@
 						<meter id="meter" min="200" max="500" value="450">450</meter>
 					</label>
 				</fieldset>
-				<button id="submitEnroll" class="etc-ui submit-button" type="submit">Submit</button>
+				<button id="submitcontact" class="etc-ui submit-button" type="submit">Submit</button>
 			</form>
 		</div>
 	</main>
