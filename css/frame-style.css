@@ -74,7 +74,7 @@ q:after {
 	padding: 50px;
 }
 /* Simple (naive) hide from sighted users */
-.visuallyhidden {
+.visually-hidden {
 	position: absolute;
 	visibility: hidden;
 }
