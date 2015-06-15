@@ -14,3 +14,9 @@ form {
 form h3 {
     margin-left: 20px;
 }
+
+.special-input {
+    /*background: rgba(0,0,0,0);*/
+    /*border: none;*/
+    /*border-bottom: #999999 1px solid;*/
+}

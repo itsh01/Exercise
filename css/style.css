@@ -7,31 +7,3 @@
 @import url("forms.css");
 
 
-/*	link list */
-ul.link-list {
-	list-style: none;
-    padding-left: 0;
-}
-ul.link-list li {
-	display: inline-block;
-	background: rgba(0,0,0,0.1);
-	border-radius: 10px;
-	padding: 10px;
-}
-ul.link-list li:before {
-	content: ">>";
-	letter-spacing: -3px;
-}
-
-
-footer span {
-	color: #ffffff;
-	padding: 20px;
-}
-
-
-.special-input {
-	/*background: rgba(0,0,0,0);*/
-	/*border: none;*/
-	/*border-bottom: #999999 1px solid;*/
-}
