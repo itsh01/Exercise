@@ -14,11 +14,29 @@ a:hover {
 }
 
     /*    Quotes    */
-.quote:before {
-    content: "\0022";
+.quote-block {
+    background: #86D6ED;
+    border-left: 8px solid #749BFF;
+    margin: 0.3em;
+    padding: 1em;
+    display: inline-block;
+    box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
+}
+.quote {
+    quotes: "\201C" "\201D" "\2018" "\2019";
+}
+.quote:before,.quote:after {
+    font-size: 30px;
+    color: #749BFF;
 }
 .quote:after {
-    content: "\0022";
+    position: relative;
+    top: 20px;
+}
+.quoter {
+    display: block;
+    text-align: right;
+    margin-top: 0.8em;
 }
 
     /*    headings    */
