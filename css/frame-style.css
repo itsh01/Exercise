@@ -1,5 +1,7 @@
 
 @import url("typography.css");
+@import url("semantics.css");
+@import url("gallery.css");
 
 body {
 	margin: 0;
@@ -33,24 +35,6 @@ ul.link-list li:before {
 	letter-spacing: -3px;
 }
 
-/*	galery	*/
-
-img.gallery {
-	display: inline-block;
-	border-radius: 20px;
-	opacity: .8;
-	height: 200px;
-}
-img.gallery:hover {
-	opacity: 1;
-	transition: all 0.3s linear;
-}
-div.gallery-wrapper {
-	display: inline-block;
-	background: #000000;
-	border-radius: 20px;
-	height: 200px;
-}
 .side-nav {
 	position: fixed;
 	right: 0;
@@ -62,11 +46,7 @@ div.gallery-wrapper {
 .footer-blessing {
 	padding: 50px;
 }
-/* Simple (naive) hide from sighted users */
-.visually-hidden {
-	position: absolute;
-	visibility: hidden;
-}
+
 
 
 

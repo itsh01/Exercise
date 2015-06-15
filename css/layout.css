@@ -11,3 +11,8 @@ body {
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
     border: #333333 1px solid;
 }
+iframe {
+    width: 100%;
+    min-height: 600px;
+    border: none;
+}
