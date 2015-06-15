@@ -1,5 +1,8 @@
+
+@import url("typography.css");
+@import url("navigator.css");
+
 body {
-	font-family: Tahoma, sans-serif;
 	background: url("http://hdwallpaperd.com/wp-content/uploads/1685318.jpg");
 	margin: 0;
 }
@@ -7,13 +10,7 @@ body {
 h1 {
 	text-align: center;
 }
-a {
-	text-decoration: none;
-	font-weight: bold;
-}
-a:hover {
-	text-decoration: underline;
-}
+
 .container {
 	margin: 2em 8em;
 	padding: 1em;
@@ -57,40 +54,6 @@ div.gallery-wrapper {
 	background: #000000;
 	border-radius: 20px;
 	height: 200px;
-}
-q:before {
-	content: "\0022";
-}
-q:after {
-	content: "\0022";
-}
-
-/*	menu	*/
-.main-menu {
-	margin: 0;
-	padding: 0;
-	background: rgba(255, 255, 255, 0.94);
-	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
-	border: #333333 1px solid;
-	text-align: center;
-}
-.main-menu a:hover {
-	text-decoration: none;
-}
-.main-menu ul {
-	list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.main-menu ul li {
-	display: inline-block;
-	margin: 0;
-	padding: 1em 3em;
-	height: 100%;
-}
-.main-menu ul li:hover {
-	background: rgba(0, 0, 0, 0.1);
-	transition: all 0.3s linear;
 }
 
 iframe {
