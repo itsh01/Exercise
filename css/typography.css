@@ -1,10 +1,10 @@
 
-    /*  General Typography  */
+    /*    General Typography    */
 body {
     font-family: Tahoma, sans-serif;
 }
 
-    /*  Anchor Tags */
+    /*    Anchor Tags    */
 a {
     text-decoration: none;
     font-weight: bold;
@@ -12,10 +12,16 @@ a {
 a:hover {
     text-decoration: underline;
 }
-    /*  Quotes  */
+    /*    Quotes    */
 q:before {
     content: "\0022";
 }
 q:after {
     content: "\0022";
+}
+
+    /*    headings    */
+
+h1 {
+    text-align: center;
 }
