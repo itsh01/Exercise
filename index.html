@@ -28,7 +28,7 @@
 				<h3>Search Google:</h3>
 				<label for="query">
 					Enter Query:
-					<input class="special-input" type="text" name="q" id="query" placeholder="E.G.: Cats"/>
+					<input class="basic-input-text" type="text" name="q" id="query" placeholder="E.G.: Cats"/>
 				</label>
 				<button id="submitGoogleSearch" class="google-ui submit-button" type="submit">Submit</button>
 			</form>
@@ -49,20 +49,20 @@
 				<fieldset>
 					<label for="user">
 						Username:
-						<input type="text" name="username" pattern="/\D+/" id="user" placeholder="E.G.: Me"/>
+						<input class="basic-input-text" type="text" name="username" pattern="/\D+/" id="user" placeholder="E.G.: Me"/>
 					</label>
 				</fieldset>
 				<fieldset>		
 					<label for="text">
 						Message:
-						<textarea class="no-resize gray-border" name="text" id="text" placeholder="What would you like to say">
+						<textarea class="no-resize gray-border basic-textarea" name="text" id="text" placeholder="What would you like to say">
 						</textarea>
 					</label>
 				</fieldset>
 				<fieldset>
 					<legend>Contact Info</legend>
 					<label for="email">E-Mail:
-						<input type="email" name="email" id="email" placeholder="E.G.: me@example.com"/>
+						<input class="basic-input-text" type="email" name="email" id="email" placeholder="E.G.: me@example.com"/>
 					</label>
 				</fieldset>
 				<button id="submitContact" class="contact-ui submit-button" type="submit">Submit</button>
@@ -73,7 +73,7 @@
 			  <h3>Search:</h3>
 				<label for="searchInput">
 					Search:
-					<input type="search" name="q" id="searchInput" />
+					<input class="basic-input-text" type="search" name="q" id="searchInput" />
 				</label>
 				<button id="submitSearch" class="search-ui submit-button" type="submit">Submit</button>
 			</form>
@@ -97,7 +97,7 @@
 				</fieldset>
 				<fieldset>
 					<label for="chosenObject">Object:
-						<input type="text" list="objects" name="object" id="chosenObject">
+						<input type="text" list="objects" name="object" id="chosenObject" class="basic-input-text">
 						<datalist id="objects">
 							<option value="chair">
 							<option value="table">

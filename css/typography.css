@@ -20,7 +20,7 @@ a:hover {
     background: #86D6ED;
     border-left: 8px solid #749BFF;
     margin: 0.3em;
-    padding: 1em;
+    padding: 0.5em 1.5em;
     display: inline-block;
     box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
     border-radius: 10px;
@@ -29,12 +29,13 @@ a:hover {
     quotes: "\201C" "\201D" "\2018" "\2019";
 }
 .quote:before,.quote:after {
-    font-size: 30px;
+    font-size: 50px;
     color: #749BFF;
+    position: relative;
+    top: 17px;
 }
 .quote:after {
-    position: relative;
-    top: 20px;
+    top: 32px;
 }
 .quoter {
     display: block;

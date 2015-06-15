@@ -22,3 +22,10 @@ fieldset {
     /*border: none;*/
     /*border-bottom: #999999 1px solid;*/
 }
+.basic-input-text,.basic-textarea {
+    -webkit-appearance:none;
+    border: #cccccc 1px solid;
+    margin: 0 0.5em;font-family: Raleway, sans-serif;
+    font-size: 18px;
+    padding: 0.4em;
+}
