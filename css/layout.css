@@ -1,0 +1,13 @@
+body {
+    background: url("http://hdwallpaperd.com/wp-content/uploads/1685318.jpg");
+    margin: 0;
+}
+.container {
+    margin: 2em 8em;
+    padding: 1em;
+    min-height: 800px;
+    background: rgba(255, 255, 255, 0.94);
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
+    border: #333333 1px solid;
+}

@@ -1,25 +1,16 @@
 
 @import url("typography.css");
 @import url("navigator.css");
+@import url("layout.css");
+@import url("buttons.css");
 
-body {
-	background: url("http://hdwallpaperd.com/wp-content/uploads/1685318.jpg");
-	margin: 0;
-}
+
 
 h1 {
 	text-align: center;
 }
 
-.container {
-	margin: 2em 8em;
-	padding: 1em;
-	min-height: 800px;
-	background: rgba(255, 255, 255, 0.94);
-	border-radius: 10px;
-	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
-	border: #333333 1px solid;
-}
+
 
 /*	link list */
 ul.link-list {
@@ -76,14 +67,6 @@ fieldset {
 textarea {
 	resize: none;
 	border: #cccccc 1px solid;
-}
-
-.submit-button {
-	background: #666666;
-	color: #ffffff;
-	border: none;
-	cursor: pointer;
-
 }
 
 .special-input {
