@@ -1,19 +1,19 @@
 
 /*    gallery    */
 
-img.gallery {
+.gallery {
     display: inline-block;
     border-radius: 20px;
     opacity: .8;
     height: 200px;
 }
-img.gallery:hover {
+.gallery:hover {
     opacity: 1;
     transition: all 0.3s linear;
 }
 
     /*    wrapper    */
-div.gallery-wrapper {
+.gallery-wrapper {
     display: inline-block;
     background: #000000;
     border-radius: 20px;
