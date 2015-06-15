@@ -1,7 +1,13 @@
 .submit-button {
-    background: #666666;
+    background: #53B0FD;
     color: #ffffff;
     border: none;
     cursor: pointer;
-
+    font-size: 18px;
+    padding: 0.5em;
+    letter-spacing: 0.07em;
+}
+.submit-button:hover {
+    background: #4090D2;
+    transition: all 0.3s linear;
 }
