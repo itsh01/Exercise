@@ -14,38 +14,43 @@ a:hover {
 }
 
     /*    Quotes    */
-q:before {
+.quote:before {
     content: "\0022";
 }
-q:after {
+.quote:after {
     content: "\0022";
 }
 
     /*    headings    */
-h1 {
+.centered-text {
     text-align: center;
 }
 
     /*    link list    */
-ul.link-list {
+.link-list {
     list-style: none;
     padding-left: 0;
 }
-ul.link-list li {
+.link-list-item {
     display: inline-block;
     background: rgba(0,0,0,0.1);
     border-radius: 10px;
     padding: 10px;
 }
-ul.link-list li:before {
+.link-list-item:before {
     content: ">>";
     letter-spacing: -3px;
 }
 
     /*    footer    */
-footer span {
+
+.site-footer {
+    border-top: #fff 1px solid;
+    padding: 1em;
+}
+.site-footer-message {
     color: #ffffff;
-    padding: 20px;
+    padding: 2em;
 }
 .footer-blessing {
     padding: 50px;

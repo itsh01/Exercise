@@ -1,17 +1,19 @@
 fieldset {
     border: none;
 }
-textarea {
+.no-resize {
     resize: none;
+}
+.gray-border {
     border: #cccccc 1px solid;
 }
-form {
+.basic-form {
     margin: 3px;
     padding: 5px;
     border: rgba(0,0,0,0.1) 1px dashed;
 }
 
-form h3 {
+.basic-form h3 {
     margin-left: 20px;
 }
 

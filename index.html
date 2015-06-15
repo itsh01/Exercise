@@ -24,7 +24,7 @@
 			<iframe src="content/homepage.html" name="content"></iframe>
 			
 			<!-- google form -->
-			<form action="http://google.com/" id="googleForm">
+			<form action="http://google.com/" id="googleForm" class="basic-form">
 				<h3>Search Google:</h3>
 				<label for="query">
 					Enter Query:
@@ -34,7 +34,7 @@
 			</form>
 			
 			<!-- contact form -->
-			<form action="contact" method="POST" id="contactForm">
+			<form action="contact" method="POST" id="contactForm" class="basic-form">
 				<h3>Contact Us:</h3>
 				<fieldset>
 					<label for="maleGender">
@@ -55,7 +55,7 @@
 				<fieldset>		
 					<label for="text">
 						Message:
-						<textarea name="text" id="text" placeholder="What would you like to say">
+						<textarea class="no-resize gray-border" name="text" id="text" placeholder="What would you like to say">
 						</textarea>
 					</label>
 				</fieldset>
@@ -69,7 +69,7 @@
 			</form>
 
 			<!-- search form -->
-			<form id="searchForm">
+			<form id="searchForm" class="basic-form">
 			  <h3>Search:</h3>
 				<label for="searchInput">
 					Search:
@@ -80,7 +80,7 @@
 
 
 			<!-- ETC form -->
-			<form action="/stam" id="etcForm">
+			<form action="/stam" id="etcForm" class="basic-form">
 				<fieldset>
 					<legend>Color stuff</legend>
 					<label for="color">Color:
@@ -118,9 +118,8 @@
 			</form>
 		</div>
 	</main>
-	<footer>
-		<hr />
-		<span>
+	<footer class="site-footer">
+		<span class="site-footer-message">
 			&copy; IS
 		</span>
 	</footer>
