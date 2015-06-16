@@ -42,11 +42,16 @@
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.7);
 }
 .social-media-list li {
+    opacity: 0.8;
     display: block;
     height: 64px;
     width: 64px;
     padding: 5px;
     cursor: pointer;
+}
+.social-media-list li:hover {
+    opacity: 1;
+    transition: all 0.3s linear;
 }
 .social-media-list li img {
     width: 64px;
