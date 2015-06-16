@@ -1,0 +1,44 @@
+body {
+    background: lightblue;
+}
+.eye {
+    height: 100px;
+    width: 100px;
+    margin: 30px;
+    background: #fff;
+    /* border: solid 1px gray; */
+    border-radius: 90% 10%;
+    transform: rotate(45deg);
+    display: inline-block;
+}
+.eye:after {
+    content: '';
+    height: 10px;
+    width: 10px;
+    background: white;
+    display: inline-block;
+    border: solid 13px lightblue;
+    border-right-color: white;
+    transform: rotate(140deg);
+    top: 32px;
+    left: 32px;
+    border-radius: 50%;
+    position: relative;
+}
+.brow {
+    position: relative;
+    top: 150px;
+    height: 100px;
+    width: 100px;
+    margin: 27px;
+    transform: rotate(45deg);
+    border: solid 3px transparent;
+    border-radius: 90% 10%;
+    display: inline-block;
+}
+.brow-left {
+    border-top-color: gray;
+}
+.brow-right {
+    border-left-color: gray;
+}
