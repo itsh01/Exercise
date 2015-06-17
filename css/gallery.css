@@ -32,4 +32,13 @@
 }
 .gallery-list li figure {
     margin: 10px;
+    cursor: pointer;
+}
+.gallery-list li:hover figcaption {
+    color: #4A6EA9;
+    transition: all 0.3s linear;
+}
+.gallery-list li:hover figcaption:after {
+    content: "\00bb";
+    margin: 0 3px;
 }
