@@ -1,12 +1,16 @@
 
+    /*    font    */
+
 @import url(http://fonts.googleapis.com/css?family=Arvo:400,700,400italic,700italic|Raleway);
 
     /*    General Typography    */
+
 body {
     font-family: Raleway, sans-serif;
 }
 
     /*    Anchor Tags    */
+
 a {
     text-decoration: none;
     font-weight: bold;
@@ -16,6 +20,7 @@ a:hover {
 }
 
     /*    Quotes    */
+
 .quote-block {
     background: #86D6ED;
     border-left: 8px solid #749BFF;
@@ -44,11 +49,22 @@ a:hover {
 }
 
     /*    headings    */
+
 .centered-text {
     text-align: center;
 }
 
+    /*    paragraph    */
+
+.paragraph::first-letter {
+    font-size: 2em;
+    margin: 0 0.07em;
+    vertical-align: bottom;
+    font-weight: bold;
+}
+
     /*    link list    */
+
 .link-list {
     list-style: none;
     padding-left: 0;
@@ -67,6 +83,7 @@ a:hover {
 }
 
     /*    tooltips    */
+
 .tooltip-wrapper {
     position: relative;
 }
