@@ -13,9 +13,23 @@
 }
 
     /*    wrapper    */
+
 .gallery-wrapper {
     display: inline-block;
     background: #000000;
     border-radius: 20px;
     height: 200px;
+}
+
+    /*    gallery list    */
+
+.gallery-list {
+    list-style: none;
+}
+
+.gallery-list li {
+    float: left;
+}
+.gallery-list li figure {
+    margin: 10px;
 }

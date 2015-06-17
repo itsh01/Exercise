@@ -48,6 +48,7 @@
     width: 64px;
     padding: 5px;
     cursor: pointer;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.66);
 }
 .social-media-list li:hover {
     opacity: 1;
