@@ -13,5 +13,9 @@
     transition: background 0.3s linear;
 }
 .submit-button:focus {
+    position: relative;
+    top: 2px;
+    left: 2px;
+    box-shadow: none;
     outline: none;
 }
