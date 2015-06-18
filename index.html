@@ -11,19 +11,18 @@
 	<nav class="main-menu">
 		<h2 class="visually-hidden">Main Navigation</h2>
 		<ul>
-			<li><a href="content/homepage.html" target="content">Homepage</a></li>
-			<li><a href="content/gallery.html" target="content">Gallery</a></li>
-			<li><a href="content/work.html" target="content">Work</a></li>
-			<li><a href="content/blog.html" target="content">Blog</a></li>
-			<li><a href="content/about.html" target="content">About</a></li>
+			<li><a href="..">Homepage</a></li>
+			<li><a href="content/gallery.html">Gallery</a></li>
+			<li><a href="content/work.html">Work</a></li>
+			<li><a href="content/blog.html">Blog</a></li>
+			<li><a href="content/about.html">About</a></li>
+			<li><a href="content/forms.html">Forms</a></li>
 		</ul>
 	</nav>
 	<main>
 		<div class="container">
 
-			<!--main content-->
-			<iframe src="content/homepage.html" name="content" class="main-frame"></iframe>
-
+			<!-- social media bar -->
 			<section class="social-media-bar">
 				<h2 class="visually-hidden">Social Media</h2>
 				<ul class="social-media-list">
@@ -34,97 +33,42 @@
 				</ul>
 			</section>
 
-			<!-- google form -->
-			<form action="http://google.com/" id="googleForm" class="basic-form">
-				<h3>Search Google:</h3>
-				<label for="query">
-					Enter Query:
-					<input class="basic-input-text" type="text" name="q" id="query" placeholder="E.G.: Cats"/>
-				</label>
-				<button id="submitGoogleSearch" class="google-ui submit-button" type="submit">Submit</button>
-			</form>
-			
-			<!-- contact form -->
-			<form action="contact" method="POST" id="contactForm" class="basic-form">
-				<h3>Contact Us:</h3>
-				<fieldset>
-					<label for="maleGender">
-						<input type="radio" name="gender" id="maleGender" value="male">
-						Mr.
-					</label>
-					<label for="femaleGender">
-						<input type="radio" name="gender" id="femaleGender" value="female">
-						Ms.
-					</label>
-				</fieldset>
-				<fieldset>
-					<label for="user">
-						Username:
-						<input class="basic-input-text" type="text" name="username" pattern="/\D+/" id="user" placeholder="E.G.: Me"/>
-					</label>
-				</fieldset>
-				<fieldset>		
-					<label for="text" class="textarea-label">
-						Message:
-						<textarea class="no-resize gray-border basic-textarea" name="text" id="text" placeholder="What would you like to say"></textarea>
-					</label>
-				</fieldset>
-				<fieldset>
-					<legend>Contact Info</legend>
-					<label for="email">E-Mail:
-						<input class="basic-input-text" type="email" name="email" id="email" placeholder="E.G.: me@example.com"/>
-					</label>
-				</fieldset>
-				<button id="submitContact" class="contact-ui submit-button" type="submit">Submit</button>
-			</form>
+			<!--main content-->
+			<h1 class="centered-text">Dummy Biography</h1>
 
-			<!-- search form -->
-			<form id="searchForm" class="basic-form">
-			  <h3>Search:</h3>
-				<label for="searchInput">
-					Search:
-					<input class="basic-input-text" type="search" name="q" id="searchInput" />
-				</label>
-				<button id="submitSearch" class="search-ui submit-button" type="submit">Submit</button>
-			</form>
+			<h2>Short Bio</h2>
 
+			<article>
+				<section>
+					<p class="paragraph">This is a short decription on nothing at all and it doens't say anything even though there is text in it.</p>
+				</section>
+				<section>
+					<p class="paragraph">I am a <em>paragraph</em>. How can the shareholder overlook a greater alarm? The warehouse schools the cry. My shared narrative lathers the polynomial identifier. How can a rose try underneath a descending cliff? The fiscal throat advances without the guideline. Can a trouble observe the cookie?</p>
+				</section>
+				<section>
+					<p class="paragraph">I am a <em>paragraph</em> too. Within the handbook lusts the penguin. Can the reign file the sales terrorist? The amazing corridor strays next to the stuffed tennis. The bold country folds an appendix beside the superficial publisher. Does each hypocrisy surface? Why won't a damned smile under the successful carrier?</p>
+				</section>
+			</article>
 
-			<!-- ETC form -->
-			<form action="/stam" id="etcForm" class="basic-form">
-				<fieldset>
-					<legend>Color stuff</legend>
-					<label for="color">Color:
-						<input id="color" type="color" />
-					</label>
-				</fieldset>
-				<fieldset>
-					<label for="food">Food:
-						<select name="food" id="food">
-							<option value="pizza">Pizza</option>
-							<option value="hamburger">Hamburger</option>
-						</select>
-					</label>
-				</fieldset>
-				<fieldset>
-					<label for="chosenObject">Object:
-						<input type="text" list="objects" name="object" id="chosenObject" class="basic-input-text">
-						<datalist id="objects">
-							<option value="chair">chair</option>
-							<option value="table">table</option>
-						</datalist>
-					</label>
-				</fieldset>
-				<fieldset>
-					<label for="happy">Happiness:
-						<input type="range" id="happy">
-					</label>
-				</fieldset>
-				<fieldset>
-					<span>Meter:</span>
-					<meter id="meter" min="200" max="500" value="450">450</meter>
-				</fieldset>
-				<button id="submitEtc" class="etc-ui submit-button" type="submit">Submit</button>
-			</form>
+			<h2>My Favourite Quote</h2>
+			<blockquote class="quote-block">
+				<q class="quote">Pain is inevitable, suffering is optional.</q>
+				<cite class="quoter">Anonymous</cite>
+			</blockquote>
+
+			<section>
+				<h2>Some Websites I Like</h2>
+				<ul class="link-list">
+					<li class="link-list-item tooltip-wrapper">
+						<a href="http://9gag.com/"><span class="link-blue">9GAG</span> - Ha ha very funny</a>
+						<div class="tooltip">Click Me!</div>
+					</li>
+					<li class="link-list-item tooltip-wrapper">
+						<a href="http://flickr.com/"><span class="link-blue">Flickr</span> - Awesome photography</a>
+						<div class="tooltip">Click Me!</div>
+					</li>
+				</ul>
+			</section>
 		</div>
 	</main>
 	<footer class="site-footer">

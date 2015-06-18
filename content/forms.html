@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html lang="en" dir="ltr">
+<head>
+    <title>Biography Dummy</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="shortcut icon" href="http://www.iconarchive.com/download/i57391/richd/terebi-ojisan/Terebi-Finder-Flat.ico" />
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1 class="visually-hidden">My Biography</h1>
+<nav class="main-menu">
+    <h2 class="visually-hidden">Main Navigation</h2>
+    <ul>
+        <li><a href="..">Homepage</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="forms.html">Forms</a></li>
+    </ul>
+</nav>
+<main>
+    <div class="container">
+
+        <!-- social media bar -->
+        <section class="social-media-bar">
+            <h2 class="visually-hidden">Social Media</h2>
+            <ul class="social-media-list">
+                <li class="facebook-share"><img src="../img/social-media/simpleicon-social-media/png/facebook31.png" alt="facebook"/></li>
+                <li class="twitter-share"><img src="../img/social-media/simpleicon-social-media/png/twitter21.png" alt="twitter"/></li>
+                <li class="googleplus-share"><img src="../img/social-media/simpleicon-social-media/png/google29.png" alt="google plus"/></li>
+                <li class="pinterest-share"><img src="../img/social-media/simpleicon-social-media/png/pin28.png" alt="pinterest"/></li>
+            </ul>
+        </section>
+
+        <!-- google form -->
+        <form action="http://google.com/" id="googleForm" class="basic-form">
+            <h3>Search Google:</h3>
+            <label for="query">
+                Enter Query:
+                <input class="basic-input-text" type="text" name="q" id="query" placeholder="E.G.: Cats"/>
+            </label>
+            <button id="submitGoogleSearch" class="google-ui submit-button" type="submit">Submit</button>
+        </form>
+
+        <!-- contact form -->
+        <form action="contact" method="POST" id="contactForm" class="basic-form">
+            <h3>Contact Us:</h3>
+            <fieldset>
+                <label for="maleGender">
+                    <input type="radio" name="gender" id="maleGender" value="male">
+                    Mr.
+                </label>
+                <label for="femaleGender">
+                    <input type="radio" name="gender" id="femaleGender" value="female">
+                    Ms.
+                </label>
+            </fieldset>
+            <fieldset>
+                <label for="user">
+                    Username:
+                    <input class="basic-input-text" type="text" name="username" pattern="/\D+/" id="user" placeholder="E.G.: Me"/>
+                </label>
+            </fieldset>
+            <fieldset>
+                <label for="text" class="textarea-label">
+                    Message:
+                    <textarea class="no-resize gray-border basic-textarea" name="text" id="text" placeholder="What would you like to say"></textarea>
+                </label>
+            </fieldset>
+            <fieldset>
+                <legend>Contact Info</legend>
+                <label for="email">E-Mail:
+                    <input class="basic-input-text" type="email" name="email" id="email" placeholder="E.G.: me@example.com"/>
+                </label>
+            </fieldset>
+            <button id="submitContact" class="contact-ui submit-button" type="submit">Submit</button>
+        </form>
+
+        <!-- search form -->
+        <form id="searchForm" class="basic-form">
+            <h3>Search:</h3>
+            <label for="searchInput">
+                Search:
+                <input class="basic-input-text" type="search" name="q" id="searchInput" />
+            </label>
+            <button id="submitSearch" class="search-ui submit-button" type="submit">Submit</button>
+        </form>
+
+
+        <!-- ETC form -->
+        <form action="/stam" id="etcForm" class="basic-form">
+            <fieldset>
+                <legend>Color stuff</legend>
+                <label for="color">Color:
+                    <input id="color" type="color" />
+                </label>
+            </fieldset>
+            <fieldset>
+                <label for="food">Food:
+                    <select name="food" id="food">
+                        <option value="pizza">Pizza</option>
+                        <option value="hamburger">Hamburger</option>
+                    </select>
+                </label>
+            </fieldset>
+            <fieldset>
+                <label for="chosenObject">Object:
+                    <input type="text" list="objects" name="object" id="chosenObject" class="basic-input-text">
+                    <datalist id="objects">
+                        <option value="chair">chair</option>
+                        <option value="table">table</option>
+                    </datalist>
+                </label>
+            </fieldset>
+            <fieldset>
+                <label for="happy">Happiness:
+                    <input type="range" id="happy">
+                </label>
+            </fieldset>
+            <fieldset>
+                <span>Meter:</span>
+                <meter id="meter" min="200" max="500" value="450">450</meter>
+            </fieldset>
+            <button id="submitEtc" class="etc-ui submit-button" type="submit">Submit</button>
+        </form>
+    </div>
+</main>
+<footer class="site-footer">
+		<span class="site-footer-message">
+			&copy; IS
+		</span>
+</footer>
+</body>
+</html>

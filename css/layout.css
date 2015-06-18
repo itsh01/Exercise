@@ -1,3 +1,6 @@
+
+    /*    base layout    */
+
 body {
     background: url("http://hdwallpaperd.com/wp-content/uploads/1685318.jpg");
     margin: 0;
@@ -15,4 +18,13 @@ body {
     width: 100%;
     min-height: 750px;
     border: none;
+}
+
+    /*    side nav    */
+
+.side-nav {
+    float: right;
+}
+.side-nav ul{
+    list-style: none;
 }
