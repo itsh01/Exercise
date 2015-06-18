@@ -10,6 +10,7 @@
 }
 .submit-button:hover {
     background: #4090D2;
+    -webkit-transition: background 0.3s linear;
     transition: background 0.3s linear;
 }
 .submit-button:focus {
