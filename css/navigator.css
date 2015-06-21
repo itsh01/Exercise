@@ -15,8 +15,11 @@
     list-style: none;
     padding: 0;
     margin: 0;
+    margin-bottom: -4px;
+    display: inline-block;
 }
 .main-menu ul li {
+    float: left;
     display: inline-block;
     margin: 0;
     padding: 1em 3em;
