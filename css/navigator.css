@@ -20,7 +20,6 @@
 }
 .main-menu ul li {
     float: left;
-    display: inline-block;
     margin: 0;
     padding: 1em 3em;
     height: 100%;
