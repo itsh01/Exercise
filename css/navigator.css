@@ -6,7 +6,6 @@
     background: rgba(255, 255, 255, 0.94);
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
     border: #333333 1px solid;
-    text-align: center;
 }
 .main-menu a:hover {
     text-decoration: none;
@@ -15,14 +14,18 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    margin-bottom: -4px;
+    text-align: center;
+}
+.main-menu li {
     display: inline-block;
 }
-.main-menu ul li {
-    float: left;
-    margin: 0;
-    padding: 1em 3em;
-    height: 100%;
+.main-menu a{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 0 2em;
+    display: block;
+    line-height: 57px;
 }
 .main-menu ul li:hover {
     background: rgba(0, 0, 0, 0.1);

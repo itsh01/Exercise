@@ -98,11 +98,12 @@ a:hover {
     position: relative;
 }
 .tooltip-wrapper:hover .tooltip{
-    display: inline-block;
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
 }
 .tooltip {
     background: #4090D2;
-    display: none;
     margin: 4px;
     padding: 5px 10px;
     top: 50px;
@@ -111,6 +112,9 @@ a:hover {
     color: white;
     font-size: 16px;
     position: absolute;
+    visibility:hidden;
+    opacity:0;
+    transition:visibility 0s linear 0.5s,opacity 0.5s linear;
 }
 .tooltip:before {
     background: #4090D2;
