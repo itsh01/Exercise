@@ -61,14 +61,12 @@
 
 /*    social media    */
 .social-media-bar {
-    background: #fff;
     position: fixed;
-    top: 100px;
-    right: 0;
+    background: #fff;
+    z-index: 100;
 }
 .social-media-list {
     list-style: none;
-    text-indent: 0;
     padding: 0;
     margin: 0;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.7);
@@ -76,10 +74,8 @@
 .social-media-list li {
     opacity: 0.8;
     filter: alpha(opacity=80);
-    display: block;
     height: 64px;
     width: 64px;
-    padding: 5px;
     cursor: pointer;
     box-shadow: 0 3px 4px rgba(0, 0, 0, 0.66);
 }
@@ -93,6 +89,31 @@
     width: 64px;
     -webkit-filter: invert(100%);
 }
+
+@media screen and (max-width: 499px) {
+    .social-media-bar {
+        font-size: 0;
+        bottom: 0;
+        left: 0;
+    }
+    .social-media-list li {
+        display: inline-block;
+        padding: 5px;
+    }
+}
+@media screen and (min-width: 500px) {
+    .social-media-bar {
+        top: 100px;
+        right: 0;
+    }
+    .social-media-list li {
+        display: block;
+
+        padding: 5px;
+    }
+}
+
+
 .facebook-share {
     background-color: #4A6EA9;
 }
