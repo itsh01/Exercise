@@ -45,16 +45,28 @@
     }
 }
 
+.main-menu .active {
+    -webkit-transform: rotate(-8deg);
+    -moz-transform: rotate(-8deg);
+    -ms-transform: rotate(-8deg);
+    -o-transform: rotate(-8deg);
+    transform: rotate(-8deg);
+}
+
 .main-menu a{
     text-decoration: none;
     font-weight: bold;
     font-size: 20px;
-
     display: block;
     line-height: 57px;
 }
 .main-menu ul li:hover {
     background: rgba(0, 0, 0, 0.1);
+    -webkit-transform: skewX(10deg);
+    -moz-transform: skewX(10deg);
+    -ms-transform: skewX(10deg);
+    -o-transform: skewX(10deg);
+    transform: skewX(10deg);
     -webkit-transition: all 0.3s linear;
     transition: all 0.3s linear;
 }
