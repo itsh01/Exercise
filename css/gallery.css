@@ -26,10 +26,6 @@
 
 /*    gallery list    */
 
-.gallery-list {
-    list-style: none;
-}
-
 .gallery-list li {
     float: left;
 }

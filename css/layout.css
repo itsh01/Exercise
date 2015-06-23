@@ -1,5 +1,6 @@
 
     /*    general    */
+
 .no-spacing {
     margin: 0;
     padding: 0;
@@ -15,6 +16,9 @@ body {
     background: rgba(255, 255, 255, 0.94);
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
     border: #333333 1px solid;
+}
+.no-bullets {
+    list-style: none;
 }
 .container {
     padding: 2em;
@@ -42,7 +46,4 @@ body {
 
 .side-nav {
     float: right;
-}
-.side-nav ul{
-    list-style: none;
 }
