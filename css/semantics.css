@@ -1,5 +1,0 @@
-/* Simple (naive) hide from sighted users */
-.visually-hidden {
-    position: absolute;
-    visibility: hidden;
-}
