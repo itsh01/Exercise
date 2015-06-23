@@ -139,6 +139,11 @@ a:hover {
     position: absolute;
     font-size: 1rem;
 }
+@media screen and (min-width: 886px) and (max-width: 950px) {
+    .logo {
+        top: 57px;
+    }
+}
 @media screen and (min-width: 500px) and (max-width: 620px) {
     .logo {
         top: 40px;
