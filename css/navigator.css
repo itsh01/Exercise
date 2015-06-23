@@ -2,8 +2,6 @@
 /*    menu    */
 
 .main-menu {
-    margin: 0;
-    padding: 0;
     background: rgba(255, 255, 255, 0.94);
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
     border: #333333 1px solid;
@@ -13,8 +11,6 @@
 }
 .main-menu ul {
     list-style: none;
-    padding: 0;
-    margin: 0;
     text-align: center;
 }
 @media screen and (max-width: 499px) {
@@ -79,8 +75,6 @@
 }
 .social-media-list {
     list-style: none;
-    padding: 0;
-    margin: 0;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.7);
 }
 .social-media-list li {
