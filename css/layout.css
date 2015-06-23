@@ -21,7 +21,13 @@ body {
     margin: 0;
 }
 .background {
-    background: radial-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3))
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(rgba(199, 199, 255, 0.48), rgba(0, 0, 74, 0.87));
 }
 .styled-box {
     background: rgba(255, 255, 255, 0.7);
