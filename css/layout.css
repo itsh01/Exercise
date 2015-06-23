@@ -30,7 +30,7 @@ body {
     background: radial-gradient(rgba(199, 199, 255, 0.48), rgba(0, 0, 74, 0.87));
 }
 .styled-box {
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.5);
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
     border: #333333 1px solid;
 }

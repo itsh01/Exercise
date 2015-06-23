@@ -34,7 +34,13 @@
 .gallery-list li:hover figcaption {
     color: #4A6EA9;
 }
-.gallery-list li:hover figcaption:after {
+.gallery-list li figcaption:after {
     content: "\00bb";
     margin: 0 3px;
+    opacity: 0;
+    -webkit-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+}
+.gallery-list li:hover figcaption:after {
+    opacity: 1;
 }
