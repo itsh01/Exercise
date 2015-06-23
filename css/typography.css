@@ -129,6 +129,32 @@ a:hover {
     position: absolute;
 }
 
+/*    logo    */
+
+.logo {
+    width: 40px;
+    height: 20px;
+    padding: 10px;
+    border-radius: 10%;
+    /*display: inline-block;*/
+    position: absolute;
+    font-size: 1rem;
+}
+.logo-blue {
+    color: #fff;
+    background: rgba(145, 150, 205, 0.83);
+    border: rgba(155, 202, 255, 0.81) 3px solid;
+}
+.logo:hover {
+    width: 50px;
+    height: 25px;
+    font-size: 1.3rem;
+}
+.logo-blue:hover {
+    background: rgba(175, 175, 224, 0.72);
+    border: rgba(195, 195, 237, 0.84) 8px solid;
+}
+
 /*    footer    */
 
 .site-footer {

@@ -5,3 +5,10 @@
     -webkit-transition: all 0.3s linear;
     transition: all 0.3s linear;
 }
+
+.logo-spin {
+    transition: all 0.5s cubic-bezier(.52,-0.81,.29,1.86);
+}
+.logo-spin:hover {
+    transform: rotate(360deg);
+}
