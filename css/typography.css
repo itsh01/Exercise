@@ -22,8 +22,6 @@ a:hover {
 /*    Quotes    */
 
 .quote-block {
-    background: #86D6ED;
-    border-left: 8px solid #749BFF;
     margin: 0.3em;
     padding: 0.5em 1.5em;
     display: inline-block;
@@ -35,13 +33,21 @@ a:hover {
 }
 .quote:before,.quote:after {
     font-size: 50px;
-    color: #749BFF;
     position: relative;
     top: 17px;
 }
 .quote:after {
     top: 32px;
 }
+.quote-block-blue {
+    background: #86D6ED;
+    border-left: 8px solid #749BFF;
+}
+.quote-block-blue .quote:before,
+.quote-block-blue .quote:after {
+    color: #749BFF;
+}
+
 .quoter {
     display: block;
     text-align: right;
