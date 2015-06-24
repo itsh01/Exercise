@@ -102,21 +102,17 @@ a:hover {
     transition-delay: 0s;
 }
 .tooltip {
-    background: #4090D2;
     margin: 4px;
     padding: 5px 10px;
     top: 50px;
-    box-sizing: border-box;
     border-radius: 10px;
-    color: white;
     font-size: 16px;
+    box-sizing: border-box;
     position: absolute;
-    visibility:hidden;
-    opacity:0;
-    transition:visibility 0s linear 0.5s,opacity 0.5s linear;
+    visibility: hidden;
+    opacity: 0;
 }
 .tooltip:before {
-    background: #4090D2;
     display: inline-block;
     height: 10px;
     width: 10px;
@@ -127,6 +123,10 @@ a:hover {
     bottom: 24px;
     left: 20px;
     position: absolute;
+}
+.tooltip-blue, .tooltip-blue:before {
+    background: #4090D2;
+    color: white;
 }
 
 /*    logo    */

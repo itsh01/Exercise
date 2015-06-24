@@ -1,4 +1,6 @@
 
+    /*    general animation    */
+
 .animated,
 .animated li,
 .animated a {
@@ -6,9 +8,17 @@
     transition: all 0.3s linear;
 }
 
+    /*    logo animation    */
+
 .logo-spin {
     transition: all 0.5s cubic-bezier(.52,-0.81,.29,1.86);
 }
 .logo-spin:hover {
     transform: rotate(360deg);
+}
+
+    /*    tooltip animation    */
+
+.tooltip-animated {
+    transition: visibility 0s linear 0.3s, opacity 0.3s linear;
 }
