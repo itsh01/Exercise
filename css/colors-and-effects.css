@@ -22,3 +22,53 @@
 .tooltip-animated {
     transition: visibility 0s linear 0.3s, opacity 0.3s linear;
 }
+
+
+.gallery-wrapper{
+    position: relative;
+}
+
+li:nth-child(1) .gallery-wrapper,
+li:nth-child(4) .gallery-wrapper{
+    -webkit-animation: from-bottom 0.5s linear;
+    -moz-animation: from-bottom 0.5s linear;
+    -o-animation: from-bottom 0.5s linear;
+    animation: from-bottom 0.5s linear;
+}
+
+li:nth-child(2) .gallery-wrapper,
+li:nth-child(3) .gallery-wrapper{
+    -webkit-animation: from-bottom 0.5s 0.5s linear;
+    -moz-animation: from-bottom 0.5s 0.5s linear;
+    -o-animation: from-bottom 0.5s 0.5s linear;
+    animation: from-bottom 0.5s 0.5s linear;
+}
+
+@keyframes from-bottom {
+    0% {
+        top: 0;
+    }
+    25% {
+        top: 20px;
+    }
+    75% {
+        top: -20px;
+    }
+    100% {
+        top: 0;
+    }
+}
+@-webkit-keyframes from-bottom {
+    0% {
+        top: 0;
+    }
+    25% {
+        top: 20px;
+    }
+    75% {
+        top: -20px;
+    }
+    100% {
+        top: 0;
+    }
+}
