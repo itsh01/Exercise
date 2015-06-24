@@ -41,7 +41,7 @@
                 <h3>Search Google:</h3>
                 <label for="query">
                     Enter Query:
-                    <input class="basic-input-text" type="text" name="q" id="query" placeholder="E.G.: Cats"/>
+                    <input class="basic-input-text input-large gray-border" type="text" name="q" id="query" placeholder="E.G.: Cats"/>
                 </label>
                 <button id="submitGoogleSearch" class="google-ui button button-medium button-blue animated" type="submit">Submit</button>
             </form>
@@ -49,7 +49,7 @@
             <!-- contact form -->
             <form action="contact" method="POST" id="contactForm" class="basic-form">
                 <h3>Contact Us:</h3>
-                <fieldset>
+                <fieldset class="no-border">
                     <label for="maleGender">
                         <input type="radio" name="gender" id="maleGender" value="male">
                         Mr.
@@ -59,22 +59,22 @@
                         Ms.
                     </label>
                 </fieldset>
-                <fieldset>
+                <fieldset class="no-border">
                     <label for="user">
                         Username:
-                        <input class="basic-input-text" type="text" name="username" pattern="/\D+/" id="user" placeholder="E.G.: Me"/>
+                        <input class="basic-input-text input-large gray-border" type="text" name="username" pattern="/\D+/" id="user" placeholder="E.G.: Me"/>
                     </label>
                 </fieldset>
-                <fieldset>
+                <fieldset class="no-border">
                     <label for="text" class="textarea-label">
                         Message:
-                        <textarea class="no-resize gray-border basic-textarea" name="text" id="text" placeholder="What would you like to say"></textarea>
+                        <textarea class="no-resize gray-border basic-textarea input-large" name="text" id="text" placeholder="What would you like to say"></textarea>
                     </label>
                 </fieldset>
-                <fieldset>
+                <fieldset class="no-border">
                     <legend>Contact Info</legend>
                     <label for="email">E-Mail:
-                        <input class="basic-input-text" type="email" name="email" id="email" placeholder="E.G.: me@example.com"/>
+                        <input class="basic-input-text input-large gray-border" type="email" name="email" id="email" placeholder="E.G.: me@example.com"/>
                     </label>
                 </fieldset>
                 <button id="submitContact" class="contact-ui button button-medium button-blue animated" type="submit">Submit</button>
@@ -85,7 +85,7 @@
                 <h3>Search:</h3>
                 <label for="searchInput">
                     Search:
-                    <input class="basic-input-text" type="search" name="q" id="searchInput" />
+                    <input class="basic-input-text input-large gray-border" type="search" name="q" id="searchInput" />
                 </label>
                 <button id="submitSearch" class="search-ui button button-medium button-blue animated" type="submit">Submit</button>
             </form>
@@ -93,13 +93,13 @@
 
             <!-- ETC form -->
             <form action="/stam" id="etcForm" class="basic-form">
-                <fieldset>
+                <fieldset class="no-border">
                     <legend>Color stuff</legend>
                     <label for="color">Color:
                         <input id="color" type="color" />
                     </label>
                 </fieldset>
-                <fieldset>
+                <fieldset class="no-border">
                     <label for="food">Food:
                         <select name="food" id="food">
                             <option value="pizza">Pizza</option>
@@ -107,21 +107,21 @@
                         </select>
                     </label>
                 </fieldset>
-                <fieldset>
+                <fieldset class="no-border">
                     <label for="chosenObject">Object:
-                        <input type="text" list="objects" name="object" id="chosenObject" class="basic-input-text">
+                        <input type="text" list="objects" name="object" id="chosenObject" class="basic-input-text input-large gray-border">
                         <datalist id="objects">
                             <option value="chair">chair</option>
                             <option value="table">table</option>
                         </datalist>
                     </label>
                 </fieldset>
-                <fieldset>
+                <fieldset class="no-border">
                     <label for="happy">Happiness:
                         <input type="range" id="happy">
                     </label>
                 </fieldset>
-                <fieldset>
+                <fieldset class="no-border">
                     <span>Meter:</span>
                     <meter id="meter" min="200" max="500" value="450">450</meter>
                 </fieldset>

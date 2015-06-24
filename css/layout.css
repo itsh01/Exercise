@@ -12,6 +12,12 @@
 .no-bullets {
     list-style: none;
 }
+.no-border {
+    border: none;
+}
+.gray-border {
+    border: #cccccc 1px solid;
+}
 .clearfix:after {
     clear: both;
     content: '';

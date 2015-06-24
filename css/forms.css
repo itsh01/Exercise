@@ -1,12 +1,12 @@
-fieldset {
-    border: none;
-}
+
+    /*    general    */
+
 .no-resize {
     resize: none;
 }
-.gray-border {
-    border: #cccccc 1px solid;
-}
+
+    /*    basic form    */
+
 .basic-form {
     margin: 3px;
     padding: 5px;
@@ -20,13 +20,17 @@ fieldset {
 .basic-input-text, .basic-textarea {
     -webkit-appearance:none;
     outline: 0;
-    border: #cccccc 1px solid;
-    margin: 0 0.5em;
     font-family: Raleway, sans-serif;
-    font-size: 18px;
-    padding: 0.4em;
 }
 .textarea-label {
     vertical-align: top;
     padding: 0.3em;
+}
+
+    /*    input skin    */
+
+.input-large {
+    font-size: 18px;
+    margin: 0 0.5em;
+    padding: 0.4em;
 }
