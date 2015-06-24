@@ -1,20 +1,31 @@
-.submit-button {
-    background: #53B0FD;
-    color: #ffffff;
+
+    /*    button    */
+
+.button {
     border: none;
     cursor: pointer;
-    font-size: 18px;
-    padding: 0.5em;
-    letter-spacing: 0.07em;
     box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
 }
-.submit-button:hover {
-    background: #4090D2;
-}
-.submit-button:focus {
+.button:focus {
     position: relative;
     top: 2px;
     left: 2px;
     box-shadow: none;
     outline: none;
+}
+
+    /*    skins    */
+
+.button-medium {
+    font-size: 18px;
+    padding: 0.5em;
+    letter-spacing: 0.07em;
+}
+
+.button-blue {
+    background: #53B0FD;
+    color: #ffffff;
+}
+.button-blue:hover {
+    background: #4090D2;
 }
