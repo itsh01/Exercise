@@ -8,13 +8,9 @@
     /*    basic form    */
 
 .basic-form {
-    margin: 3px;
-    padding: 5px;
+    margin: 0.3rem;
+    padding: 0.5rem;
     border: rgba(0,0,0,0.1) 1px dashed;
-}
-
-.basic-form h3 {
-    margin-left: 20px;
 }
 
 .basic-input-text, .basic-textarea {
@@ -24,13 +20,13 @@
 }
 .textarea-label {
     vertical-align: top;
-    padding: 0.3em;
+    padding: 0.3rem;
 }
 
     /*    input skin    */
 
 .input-large {
-    font-size: 18px;
-    margin: 0 0.5em;
-    padding: 0.4em;
+    font-size: 2rem;
+    margin: 0 0.5rem;
+    padding: 0.7rem;
 }

@@ -9,22 +9,22 @@
 }
 @media screen and (max-width: 499px) {
     .main-menu li a{
-        font-size: 17px;
-        line-height: 33px;
+        font-size: 1.7rem;
+        line-height: 3.3rem;
     }
 }
-@media screen and (min-width: 500px) and (max-width: 885px) {
+@media screen and (min-width: 500px) and (max-width: 887px) {
     .main-menu li a{
-        font-size: 17px;
-        line-height: 40px;
-        padding: 0 0.7em;
+        font-size: 1.7rem;
+        line-height: 4rem;
+        padding: 0 1.1rem;
     }
 }
-@media screen and (min-width: 886px) {
+@media screen and (min-width: 888px) {
     .main-menu li a{
-        font-size: 20px;
-        line-height: 57px;
-        padding: 0 2em;
+        font-size: 2rem;
+        line-height: 5.7rem;
+        padding: 0 4rem;
     }
 }
 @media screen and (min-width: 500px) {
@@ -44,9 +44,9 @@
 .main-menu a{
     text-decoration: none;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 2rem;
     display: block;
-    line-height: 57px;
+    line-height: 5.7rem;
 }
 .main-menu ul li:hover {
     background: rgba(0, 0, 0, 0.1);
@@ -92,17 +92,17 @@
     }
     .social-media-list li {
         display: inline-block;
-        padding: 5px;
+        padding: 0.5rem;
     }
 }
 @media screen and (min-width: 500px) {
     .social-media-bar {
-        top: 100px;
+        top: 10rem;
         right: 0;
     }
     .social-media-list li {
         display: block;
-        padding: 5px;
+        padding: 0.5rem;
     }
 }
 

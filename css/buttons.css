@@ -17,9 +17,9 @@
     /*    skins    */
 
 .button-medium {
-    font-size: 18px;
-    padding: 0.5em;
-    letter-spacing: 0.07em;
+    font-size: 2rem;
+    padding: 0.7rem;
+    letter-spacing: 0.07rem;
 }
 
 .button-blue {

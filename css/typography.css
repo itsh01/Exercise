@@ -8,6 +8,9 @@
 body {
     font-family: Raleway, sans-serif;
 }
+.text-medium {
+    font-size: 1.6rem;
+}
 
 /*    Anchor Tags    */
 
@@ -22,7 +25,7 @@ a:hover {
 /*    Quotes    */
 
 .quote-block {
-    margin: 0.3em;
+    margin: 0.3rem;
     padding: 0.5em 1.5em;
     display: inline-block;
     box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
@@ -32,16 +35,16 @@ a:hover {
     quotes: "\201C" "\201D" "\2018" "\2019";
 }
 .quote:before,.quote:after {
-    font-size: 50px;
+    font-size: 5rem;
     position: relative;
-    top: 17px;
+    top: 1.7rem;
 }
 .quote:after {
-    top: 32px;
+    top: 3.2rem;
 }
 .quote-block-blue {
     background: #86D6ED;
-    border-left: 8px solid #749BFF;
+    border-left: 0.8rem solid #749BFF;
 }
 .quote-block-blue .quote:before,
 .quote-block-blue .quote:after {
@@ -51,7 +54,7 @@ a:hover {
 .quoter {
     display: block;
     text-align: right;
-    margin-top: 0.8em;
+    margin-top: 0.8rem;
 }
 
 /*    headings    */
@@ -63,8 +66,8 @@ a:hover {
 /*    paragraph    */
 
 .paragraph:first-letter {
-    font-size: 2em;
-    margin: 0 0.07em;
+    font-size: 2rem;
+    margin: 0 0.07rem;
     vertical-align: bottom;
     font-weight: bold;
 }
@@ -76,14 +79,14 @@ a:hover {
 }
 .link-list-item {
     display: inline-block;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 0 0.3em;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 0 0.3rem;
 }
 .link-list-item a {
     text-decoration: none;
     font-weight: bold;
-    padding: 10px;
+    padding: 1rem;
 }
 .link-list-item-dark {
     background: rgba(0,0,0,0.1);
@@ -99,7 +102,7 @@ a:hover {
 }
 .link-list-item:before {
     content: ">>";
-    letter-spacing: -3px;
+    letter-spacing: -0.3rem;
 }
 
 /*    tooltips    */
@@ -113,11 +116,11 @@ a:hover {
     transition-delay: 0s;
 }
 .tooltip {
-    margin: 4px;
-    padding: 5px 10px;
-    top: 50px;
-    border-radius: 10px;
-    font-size: 16px;
+    margin: 0.4rem;
+    padding: 0.5rem 1rem;
+    top: 5rem;
+    border-radius: 1rem;
+    font-size: 1.6rem;
     box-sizing: border-box;
     position: absolute;
     visibility: hidden;
@@ -125,14 +128,14 @@ a:hover {
 }
 .tooltip:before {
     display: inline-block;
-    height: 10px;
-    width: 10px;
+    height: 1rem;
+    width: 1rem;
     content: '';
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-    bottom: 24px;
-    left: 20px;
+    bottom: 2.4rem;
+    left: 2rem;
     position: absolute;
 }
 .tooltip-blue, .tooltip-blue:before {
@@ -143,22 +146,22 @@ a:hover {
 /*    logo    */
 
 .logo {
-    width: 40px;
-    height: 20px;
-    padding: 10px;
+    width: 4rem;
+    height: 2rem;
+    padding: 1rem;
     border-radius: 10%;
     position: absolute;
     top: 0;
-    font-size: 1rem;
+    font-size: 1.6rem;
 }
 @media screen and (min-width: 886px) and (max-width: 950px) {
     .logo {
-        top: 57px;
+        top: 5.7rem;
     }
 }
 @media screen and (min-width: 500px) and (max-width: 620px) {
     .logo {
-        top: 40px;
+        top: 4rem;
     }
 }
 .logo-blue {
@@ -167,9 +170,9 @@ a:hover {
     border: rgba(155, 202, 255, 0.81) 3px solid;
 }
 .logo:hover {
-    width: 50px;
-    height: 25px;
-    font-size: 1.3rem;
+    width: 5rem;
+    height: 2.5rem;
+    font-size: 2rem;
 }
 .logo-blue:hover {
     background: rgba(175, 175, 224, 0.72);
@@ -180,12 +183,9 @@ a:hover {
 
 .site-footer {
     border-top: #fff 1px solid;
-    padding: 1em;
+    padding: 1rem;
 }
 .site-footer-message {
     color: #ffffff;
-    padding: 2em;
-}
-.footer-blessing {
-    padding: 50px;
+    padding: 2rem;
 }
