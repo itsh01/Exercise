@@ -34,20 +34,20 @@ a:hover {
 .quote {
     quotes: "\201C" "\201D" "\2018" "\2019";
 }
-.quote:before,.quote:after {
+.quote::before,.quote::after {
     font-size: 5rem;
     position: relative;
     top: 1.7rem;
 }
-.quote:after {
+.quote::after {
     top: 3.2rem;
 }
 .quote-block-blue {
     background: #86D6ED;
     border-left: 0.8rem solid #749BFF;
 }
-.quote-block-blue .quote:before,
-.quote-block-blue .quote:after {
+.quote-block-blue .quote::before,
+.quote-block-blue .quote::after {
     color: #749BFF;
 }
 
@@ -100,7 +100,7 @@ a:hover {
     color: #4A6EA9;
     font-weight: bold;
 }
-.link-list-item:before {
+.link-list-item::before {
     content: ">>";
     letter-spacing: -0.3rem;
 }
@@ -126,7 +126,7 @@ a:hover {
     visibility: hidden;
     opacity: 0;
 }
-.tooltip:before {
+.tooltip::before {
     display: inline-block;
     height: 1rem;
     width: 1rem;
@@ -138,7 +138,7 @@ a:hover {
     left: 2rem;
     position: absolute;
 }
-.tooltip-blue, .tooltip-blue:before {
+.tooltip-blue, .tooltip-blue::before {
     background: #4090D2;
     color: white;
 }
