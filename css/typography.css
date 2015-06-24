@@ -76,18 +76,23 @@ a:hover {
 }
 .link-list-item {
     display: inline-block;
-    background: rgba(0,0,0,0.1);
     border-radius: 10px;
     padding: 10px;
     margin: 0 0.3em;
-    box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
 }
 .link-list-item a {
     text-decoration: none;
     font-weight: bold;
     padding: 10px;
+}
+.link-list-item-dark {
+    background: rgba(0,0,0,0.1);
+    box-shadow: 3px 3px 3px rgba(0,0,0,0.2);
+}
+.link-list-item-dark a {
     color: #000000;
 }
+
 .link-blue {
     color: #4A6EA9;
     font-weight: bold;
