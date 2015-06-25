@@ -88,6 +88,7 @@
 
 @media screen and (max-width: 499px) {
     .social-media-bar {
+        border-radius: 0 10px 0 0;
         font-size: 0;
         bottom: 0;
         left: 0;
