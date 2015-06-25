@@ -11,15 +11,18 @@
     /*    logo animation    */
 
 .logo-spin {
+    -webkit-transition: all 0.5s cubic-bezier(.52,-0.81,.29,1.86);
     transition: all 0.5s cubic-bezier(.52,-0.81,.29,1.86);
 }
 .logo-spin:hover {
+    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
 }
 
     /*    tooltip animation    */
 
 .tooltip-animated {
+    -webkit-transition: visibility 0s linear 0.3s, opacity 0.3s linear;
     transition: visibility 0s linear 0.3s, opacity 0.3s linear;
 }
 
