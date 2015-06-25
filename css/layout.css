@@ -77,6 +77,9 @@ body {
 .side-nav {
     text-align: center;
 }
+.side-nav li {
+    padding: 0.2rem 0;
+}
 @media screen and (min-width: 501px) and (max-width: 535px) {
     .side-nav {
         float: none;
@@ -98,6 +101,7 @@ body {
 @media screen and (min-width: 801px) {
     .side-nav {
         float: right;
+        width: 15%;
     }
 }
 
