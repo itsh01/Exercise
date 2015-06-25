@@ -16,11 +16,42 @@
 .basic-input-text, .basic-textarea {
     -webkit-appearance:none;
     outline: 0;
+    float: right;
     font-family: Raleway, sans-serif;
 }
 .textarea-label {
     vertical-align: top;
     padding: 0.3rem;
+}
+
+.basic-label {
+    display: block;
+    margin: 0 auto;
+}
+@media screen and (max-width: 699px) {
+    .basic-label {
+        width: 100%;
+    }
+}
+@media screen and (min-width: 700px) and (max-width: 1100px) {
+    .basic-label {
+        width: 80%;
+    }
+}
+@media screen and (min-width: 1101px) and (max-width: 1250px) {
+    .basic-label {
+        width: 60%;
+    }
+}
+@media screen and (min-width: 1251px) {
+    .basic-label {
+        width: 25%;
+    }
+}
+
+
+.input-special-type {
+    float: right;
 }
 
     /*    input skin    */

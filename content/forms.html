@@ -39,7 +39,7 @@
             <!-- google form -->
             <form action="http://google.com/" id="googleForm" class="basic-form">
                 <h3 class="centered-text">Search Google:</h3>
-                <label for="query">
+                <label class="basic-label clearfix animated" for="query">
                     Enter Query:
                     <input class="basic-input-text input-large gray-border" type="text" name="q" id="query" placeholder="E.G.: Cats"/>
                 </label>
@@ -50,30 +50,30 @@
             <form action="contact" method="POST" id="contactForm" class="basic-form">
                 <h3 class="centered-text">Contact Us:</h3>
                 <fieldset class="no-border">
-                    <label for="maleGender">
+                    <label class="basic-label clearfix animated" for="maleGender">
                         <input type="radio" name="gender" id="maleGender" value="male">
                         Mr.
                     </label>
-                    <label for="femaleGender">
+                    <label class="basic-label clearfix animated" for="femaleGender">
                         <input type="radio" name="gender" id="femaleGender" value="female">
                         Ms.
                     </label>
                 </fieldset>
                 <fieldset class="no-border">
-                    <label for="user">
+                    <label class="basic-label clearfix animated" for="user">
                         Username:
                         <input class="basic-input-text input-large gray-border" type="text" name="username" pattern="/\D+/" id="user" placeholder="E.G.: Me"/>
                     </label>
                 </fieldset>
                 <fieldset class="no-border">
-                    <label for="text" class="textarea-label">
+                    <label class="basic-label clearfix animated" for="text" class="textarea-label">
                         Message:
                         <textarea class="no-resize gray-border basic-textarea input-large" name="text" id="text" placeholder="What would you like to say"></textarea>
                     </label>
                 </fieldset>
                 <fieldset class="no-border">
-                    <legend>Contact Info</legend>
-                    <label for="email">E-Mail:
+                    <!--<legend>Contact Info</legend>-->
+                    <label class="basic-label clearfix animated" for="email">E-Mail:
                         <input class="basic-input-text input-large gray-border" type="email" name="email" id="email" placeholder="E.G.: me@example.com"/>
                     </label>
                 </fieldset>
@@ -83,7 +83,7 @@
             <!-- search form -->
             <form id="searchForm" class="basic-form">
                 <h3 class="centered-text">Search:</h3>
-                <label for="searchInput">
+                <label class="basic-label clearfix animated" for="searchInput">
                     Search:
                     <input class="basic-input-text input-large gray-border" type="search" name="q" id="searchInput" />
                 </label>
@@ -94,21 +94,21 @@
             <!-- ETC form -->
             <form action="/stam" id="etcForm" class="basic-form">
                 <fieldset class="no-border">
-                    <legend>Color stuff</legend>
-                    <label for="color">Color:
-                        <input id="color" type="color" />
+                    <!--<legend>Color stuff</legend>-->
+                    <label class="basic-label clearfix animated" for="color">Color:
+                        <input id="color" type="color" class="input-special-type" />
                     </label>
                 </fieldset>
                 <fieldset class="no-border">
-                    <label for="food">Food:
-                        <select name="food" id="food">
+                    <label class="basic-label clearfix animated" for="food">Food:
+                        <select name="food" id="food" class="input-special-type">
                             <option value="pizza">Pizza</option>
                             <option value="hamburger">Hamburger</option>
                         </select>
                     </label>
                 </fieldset>
                 <fieldset class="no-border">
-                    <label for="chosenObject">Object:
+                    <label class="basic-label clearfix animated" for="chosenObject">Object:
                         <input type="text" list="objects" name="object" id="chosenObject" class="basic-input-text input-large gray-border">
                         <datalist id="objects">
                             <option value="chair">chair</option>
@@ -117,14 +117,14 @@
                     </label>
                 </fieldset>
                 <fieldset class="no-border">
-                    <label for="happy">Happiness:
-                        <input type="range" id="happy">
+                    <label class="basic-label clearfix animated" for="happy">Happiness:
+                        <input type="range" id="happy" class="input-special-type">
                     </label>
                 </fieldset>
-                <fieldset class="no-border">
-                    <span>Meter:</span>
-                    <meter id="meter" min="200" max="500" value="450">450</meter>
-                </fieldset>
+                <!--<fieldset class="no-border">-->
+                    <!--<span>Meter:</span>-->
+                    <!--<meter id="meter" min="200" max="500" value="450">450</meter>-->
+                <!--</fieldset>-->
                 <button id="submitEtc" class="etc-ui button button-medium button-blue button-submit animated" type="submit">Submit</button>
             </form>
         </div>
