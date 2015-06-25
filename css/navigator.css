@@ -63,6 +63,8 @@
     position: fixed;
     background: #fff;
     z-index: 100;
+    border-radius: 10px 0 0 10px;
+    overflow: hidden;
 }
 .social-media-list {
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.7);
