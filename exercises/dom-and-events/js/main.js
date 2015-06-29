@@ -194,6 +194,9 @@ ProductList = (function(){
         fixRowSelections();
     }
 
+    /*
+     *  Fix Selects value according to row position
+     */
     function fixRowSelections(){
         var rows = document.getElementById("products").children,
             i = rows.length-1;
