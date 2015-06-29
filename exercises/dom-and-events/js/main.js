@@ -109,7 +109,7 @@ ProductList = (function(){
      *  Initialize table by products list
      *  items {Object}
      */
-    function init(table, items, order){
+    function init(table, items, order, isFirst){
         var i,
             x = (items.length > 5) ? 5 : items.length,
             elements = document.createDocumentFragment();
@@ -122,7 +122,10 @@ ProductList = (function(){
         }
 
         table.appendChild(elements);
-        createPager(items);
+
+        if (isFirst){
+            createPager(items);
+        }
     }
 
     /*
@@ -178,18 +181,26 @@ ProductList = (function(){
      */
     function createPager(items){
         var nav = document.createElement('nav'),
-            inner = '<ul class="pagination"><li><a href="#" aria-label="Previous">'+
-                    '<span aria-hidden="true">&laquo;</span></a> </li>',
+            inner = '<ul class="pagination">',
             pages = Math.ceil(items.length / 5),
             i;
 
         for(i = 0; i < pages; i++){
-            inner += '<li><a href="#">'+(i+1)+'</a></li>';
+            inner += '<li><a href="#" onclick="ProductList.moveToPage('+(i+1)+')">'+(i+1)+'</a></li>';
         }
-        inner += '<li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li></ul>';
+        inner += '</ul>';
 
         nav.innerHTML = inner;
         document.getElementsByClassName("container")[0].appendChild(nav);
+    }
+
+    /*
+     *  Move to another page
+     */
+    function moveToPage(page){
+        tbody.innerHTML = '';
+        init(tbody, products.slice(page * 5 - 5, page * 5), order);
+        fixRowSelections();
     }
 
     /*
@@ -226,10 +237,11 @@ ProductList = (function(){
         }
     }
 
-    init(tbody, products, order);
+    init(tbody, products, order, true);
 
     return {
-      handleChange: handleChange
+      handleChange: handleChange,
+      moveToPage: moveToPage
     };
 
 })();
