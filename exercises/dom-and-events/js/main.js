@@ -141,7 +141,7 @@ ProductList = (function(){
             tbody.appendChild(trToBeMoved);
         }
 
-        //fixRowSelections();
+        fixRowSelections();
     }
 
     function fixRowSelections(){
@@ -149,7 +149,7 @@ ProductList = (function(){
             i = rows.length-1;
 
         for( i; i >= 0; i-- ){
-           rows[i].querySelector(".selectOrder select").selectedIndex = rows[i].sectionRowIndex + 1;
+           rows[i].querySelector(".selectOrder select").selectedIndex = rows[i].sectionRowIndex;
         }
     }
 
