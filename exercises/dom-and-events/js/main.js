@@ -126,11 +126,31 @@ ProductList = (function(){
      *  Handling a change in a select
      */
     function handleChange(select){
-        var selectedOption = select.selectedOptions[0].value,
-            trToBeMoved = select.parentElement.parentElement,
-            toBeReplacedWith = document.querySelector('tr:nth-child('+selectedOption+')');
 
-        toBeReplacedWith.parentElement.insertBefore(trToBeMoved,toBeReplacedWith.nextElementSibling);
+        var selectedOption = parseInt(select.selectedOptions[0].value),
+            tbody = document.getElementById("products"),
+            trToBeMoved = tbody.removeChild(select.parentElement.parentElement),
+            toBeReplacedWith;
+
+        toBeReplacedWith = document.querySelector('tbody tr:nth-child('+(selectedOption)+')');
+
+        if (toBeReplacedWith){
+            tbody.insertBefore(trToBeMoved,toBeReplacedWith);
+        }
+        else {
+            tbody.appendChild(trToBeMoved);
+        }
+
+        //fixRowSelections();
+    }
+
+    function fixRowSelections(){
+        var rows = document.getElementById("products").children,
+            i = rows.length-1;
+
+        for( i; i >= 0; i-- ){
+           rows[i].querySelector(".selectOrder select").selectedIndex = rows[i].sectionRowIndex + 1;
+        }
     }
 
     init(tbody, products, order);
