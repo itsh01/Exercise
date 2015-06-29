@@ -34,23 +34,60 @@ ProductList = (function(){
         }
     ];
 
+    ///////
+
+    var table = document.getElementById('main-table'),
+        order = getOrder(table);
+
+    function getOrder(table){
+        var tableHeaders = table.querySelectorAll('th'),
+            tableHeaderLength = tableHeaders.length,
+            order = [],
+            i;
+
+        for (i = 0; i < tableHeaderLength; i++){
+            order[i] = tableHeaders[i].dataset['header'];
+        }
+        return order;
+    }
+
     /*
      * items {Object}
      */
-    function init(items){
+    function init(table, items, order){
         var i,
             x = items.length,
-            elements = [];
+            elements = document.createDocumentFragment();
+
         for (i = 0; i < x; i++){
+            elements.appendChild(
+                createTrByItem( items[i], order)
+            );
 
         }
+        console.log(items);
+        table.appendChild(elements);
+    }
+
+    function createTrByItem(item, order){
+        var tr = document.createElement('tr'),
+            td,
+            i;
+
+        for (i in order){
+            td = document.createElement('td');
+            td.innerHTML = item[ order[i] ];
+            tr.appendChild(td);
+        }
+
+        return tr;
     }
 
     function handleChange(){
 
     }
 
-    init(products);
+    init(table, products, order);
 
     return {
       handleChange: handleChange
