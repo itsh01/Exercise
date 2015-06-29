@@ -111,7 +111,7 @@ ProductList = (function(){
      */
     function init(table, items, order){
         var i,
-            x = items.length,
+            x = (items.length > 5) ? 5 : items.length,
             elements = document.createDocumentFragment();
 
         for (i = 0; i < x; i++){
@@ -122,6 +122,7 @@ ProductList = (function(){
         }
 
         table.appendChild(elements);
+        createPager(items);
     }
 
     /*
@@ -170,6 +171,25 @@ ProductList = (function(){
         newTd.appendChild(select);
 
         tr.insertBefore(newTd, idTd);
+    }
+
+    /*
+     *  Create a page navigation
+     */
+    function createPager(items){
+        var nav = document.createElement('nav'),
+            inner = '<ul class="pagination"><li><a href="#" aria-label="Previous">'+
+                    '<span aria-hidden="true">&laquo;</span></a> </li>',
+            pages = Math.ceil(items.length / 5),
+            i;
+
+        for(i = 0; i < pages; i++){
+            inner += '<li><a href="#">'+(i+1)+'</a></li>';
+        }
+        inner += '<li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li></ul>';
+
+        nav.innerHTML = inner;
+        document.getElementsByClassName("container")[0].appendChild(nav);
     }
 
     /*
