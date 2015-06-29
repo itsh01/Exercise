@@ -9,28 +9,78 @@ ProductList = (function(){
     var products = [
         {
             "id": 1,
-            "name": "tv",
-            "price": 200
+            "name": "velit",
+            "price": 494
         },
         {
             "id": 2,
-            "name": "computer",
-            "price": 100
+            "name": "veniam",
+            "price": 628
         },
         {
             "id": 3,
-            "name": "phone",
-            "price": 50
+            "name": "est",
+            "price": 322
         },
         {
             "id": 4,
-            "name": "slave",
-            "price": 1000
+            "name": "sunt",
+            "price": 403
         },
         {
             "id": 5,
-            "name": "shoko",
-            "price": 5
+            "name": "in",
+            "price": 970
+        },
+        {
+            "id": 6,
+            "name": "eiusmod",
+            "price": 364
+        },
+        {
+            "id": 7,
+            "name": "ea",
+            "price": 796
+        },
+        {
+            "id": 8,
+            "name": "consequat",
+            "price": 191
+        },
+        {
+            "id": 9,
+            "name": "deserunt",
+            "price": 469
+        },
+        {
+            "id": 10,
+            "name": "elit",
+            "price": 868
+        },
+        {
+            "id": 11,
+            "name": "duis",
+            "price": 700
+        },
+        {
+            "id": 12,
+            "name": "ex",
+            "price": 662
+        },
+        {
+            "id": 13,
+            "name": "tempor",
+            "price": 623
+        },
+        {
+            "id": 14,
+            "name": "consequat",
+            "price": 222
+        },
+        {
+            "id": 15,
+            "name": "fugiat",
+            "price": 573
         }
     ];
 
