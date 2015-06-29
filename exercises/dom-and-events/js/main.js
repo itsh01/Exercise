@@ -114,6 +114,8 @@ ProductList = (function(){
             select.appendChild(option);
         }
 
+        select.setAttribute("onchange", "ProductList.handleChange(this)");
+
         newTd.className = "selectOrder";
         newTd.appendChild(select);
 
@@ -123,8 +125,12 @@ ProductList = (function(){
     /*
      *  Handling a change in a select
      */
-    function handleChange(event){
+    function handleChange(select){
+        var selectedOption = select.selectedOptions[0].value,
+            trToBeMoved = select.parentElement.parentElement,
+            toBeReplacedWith = document.querySelector('tr:nth-child('+selectedOption+')');
 
+        toBeReplacedWith.parentElement.insertBefore(trToBeMoved,toBeReplacedWith.nextElementSibling);
     }
 
     init(tbody, products, order);
