@@ -40,6 +40,9 @@ ProductList = (function(){
         tbody = document.getElementById('products'),
         order = getOrder(table);
 
+    /*
+     *  Get items' properties order by table header
+     */
     function getOrder(table){
         var tableHeaders = table.querySelectorAll('th'),
             tableHeaderLength = tableHeaders.length,
@@ -53,7 +56,8 @@ ProductList = (function(){
     }
 
     /*
-     * items {Object}
+     *  Initialize table by products list
+     *  items {Object}
      */
     function init(table, items, order){
         var i,
@@ -70,6 +74,9 @@ ProductList = (function(){
         table.appendChild(elements);
     }
 
+    /*
+     *  Create a single row by sigle item
+     */
     function createTrByItem(item, order, numOfItems){
         var tr = document.createElement('tr'),
             td,
@@ -87,6 +94,9 @@ ProductList = (function(){
         return tr;
     }
 
+    /*
+     *  Create an html select on a row
+     */
     function createSelect(tr, numOfItems){
         var idTd = tr.querySelector('.item-id'),
             select = document.createElement('select'),
@@ -103,7 +113,10 @@ ProductList = (function(){
         idTd.innerHTML = select.outerHTML;
     }
 
-    function handleChange(){
+    /*
+     *  Handling a change in a select
+     */
+    function handleChange(event){
 
     }
 
