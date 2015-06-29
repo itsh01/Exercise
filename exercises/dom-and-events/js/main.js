@@ -44,7 +44,7 @@ ProductList = (function(){
      *  Get items' properties order by table header
      */
     function getOrder(table){
-        var tableHeaders = table.querySelectorAll('th'),
+        var tableHeaders = table.querySelectorAll('th[data-header]'),
             tableHeaderLength = tableHeaders.length,
             order = [],
             i;
@@ -75,10 +75,11 @@ ProductList = (function(){
     }
 
     /*
-     *  Create a single row by sigle item
+     *  Create a single row by single item
      */
     function createTrByItem(item, order, numOfItems){
         var tr = document.createElement('tr'),
+            select,
             td,
             i;
 
@@ -90,7 +91,9 @@ ProductList = (function(){
         }
 
         createSelect(tr, numOfItems);
-        tr.querySelector('select').selectedIndex = item['id'] -1;
+
+        select = tr.querySelector('select');
+        select.selectedIndex = item['id'] - 1;
         return tr;
     }
 
@@ -99,6 +102,7 @@ ProductList = (function(){
      */
     function createSelect(tr, numOfItems){
         var idTd = tr.querySelector('.item-id'),
+            newTd = document.createElement('td'),
             select = document.createElement('select'),
             option,
             i;
@@ -110,7 +114,10 @@ ProductList = (function(){
             select.appendChild(option);
         }
 
-        idTd.innerHTML = select.outerHTML;
+        newTd.className = "selectOrder";
+        newTd.appendChild(select);
+
+        tr.insertBefore(newTd, idTd);
     }
 
     /*
