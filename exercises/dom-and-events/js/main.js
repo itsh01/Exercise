@@ -183,10 +183,12 @@ ProductList = (function(){
         var nav = document.createElement('nav'),
             inner = '<ul class="pagination">',
             pages = Math.ceil(items.length / 5),
-            i;
+            i = 0,
+            page = 0;
 
-        for(i = 0; i < pages; i++){
-            inner += '<li><a href="#" onclick="ProductList.moveToPage('+(i+1)+')">'+(i+1)+'</a></li>';
+        for(i ; i < pages; i++){
+            page = i + 1;
+            inner += '<li><a href="#" onclick="ProductList.moveToPage('+page+')">'+page+'</a></li>';
         }
         inner += '</ul>';
 
