@@ -37,6 +37,7 @@ ProductList = (function(){
     ///////
 
     var table = document.getElementById('main-table'),
+        tbody = document.getElementById('products'),
         order = getOrder(table);
 
     function getOrder(table){
@@ -61,15 +62,15 @@ ProductList = (function(){
 
         for (i = 0; i < x; i++){
             elements.appendChild(
-                createTrByItem( items[i], order)
+                createTrByItem( items[i], order, x)
             );
 
         }
-        console.log(items);
+
         table.appendChild(elements);
     }
 
-    function createTrByItem(item, order){
+    function createTrByItem(item, order, numOfItems){
         var tr = document.createElement('tr'),
             td,
             i;
@@ -77,17 +78,36 @@ ProductList = (function(){
         for (i in order){
             td = document.createElement('td');
             td.innerHTML = item[ order[i] ];
+            td.className = "item-" + order[i];
             tr.appendChild(td);
         }
 
+        createSelect(tr, numOfItems);
+        tr.querySelector('select').selectedIndex = item['id'] -1;
         return tr;
+    }
+
+    function createSelect(tr, numOfItems){
+        var idTd = tr.querySelector('.item-id'),
+            select = document.createElement('select'),
+            option,
+            i;
+
+        for (i = 0; i < numOfItems; i++){
+            option = document.createElement('option');
+            option.value = i+1;
+            option.innerHTML = i+1;
+            select.appendChild(option);
+        }
+
+        idTd.innerHTML = select.outerHTML;
     }
 
     function handleChange(){
 
     }
 
-    init(table, products, order);
+    init(tbody, products, order);
 
     return {
       handleChange: handleChange
