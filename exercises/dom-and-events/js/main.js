@@ -281,6 +281,7 @@ ProductList.Main = (function(){
         }
 
         fixRowSelections();
+        fixImages();
     }
 
     /*
@@ -387,6 +388,15 @@ ProductList.Main = (function(){
 
         for( i; i >= 0; i-- ){
            rows[i].querySelector(".selectOrder select").selectedIndex = rows[i].sectionRowIndex;
+        }
+    }
+
+    function fixImages(){
+        var imageTds = document.querySelectorAll('.item-image'),
+            i = imageTds.length-1;
+        
+        for (i ; i>=0 ; i--){
+            imageTds[i].innerHTML = '<img src="'+imageTds[i].innerHTML+'" />';
         }
     }
 

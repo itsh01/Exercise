@@ -4,3 +4,6 @@
 /*.item-price::after{*/
     /*content: '\0024';*/
 /*}*/
+.item-description {
+    font-size: 1rem;
+}
