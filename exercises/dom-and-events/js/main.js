@@ -310,9 +310,9 @@ ProductList.Main = (function(){
     function getOrderButtonTd(itemId){
         var td = document.createElement('td');
 
-        td.innerHTML = '<input type="number" disabled="disabled" data-itemid="'+itemId+'" />';
-        td.innerHTML += '<button class="btn btn-primary btn-xs" data-action="1">-</button>';
-        td.innerHTML += '<button class="btn btn-primary btn-xs" data-action="-1">+</button>';
+        td.innerHTML = '<input type="number" disabled="disabled" data-itemid="' + itemId + '" />';
+        td.innerHTML += '<button class="btn btn-primary btn-xs change-amount" data-action="-1">-</button>';
+        td.innerHTML += '<button class="btn btn-primary btn-xs change-amount" data-action="1">+</button>';
 
         return td;
     }
@@ -422,6 +422,35 @@ ProductList.Main = (function(){
             imageTds[i].innerHTML = '<img src="'+imageTds[i].innerHTML+'" />';
         }
     }
+
+    function publishEvents(){
+        table.onclick = function(e){
+            var targetButtonElement = e.target,
+                inputElement = null,
+                item = null,
+                valueToAdd = 0;
+
+
+            if (targetButtonElement.className.match('change-amount')){
+
+                inputElement = targetButtonElement.parentElement.querySelector('[data-itemid]');
+                item = products.filter(function(item){
+                    return item.id == inputElement.dataset['itemid'];
+                }).pop();
+                valueToAdd = parseInt(item.price) * parseInt(targetButtonElement.dataset['action']);
+                ProductList.PubSub.publish("itemAdded", [item.id, valueToAdd]);
+            }
+
+        }
+    }
+
+    function subscribeToPubSub(){
+        //ProductList.PubSub.subscribe('itemAdded', addItem);
+        //ProductList.PubSub.subscribe('itemRemoved', removeItem);
+    }
+
+    subscribeToPubSub();
+    publishEvents();
 
     init(tbody, products, order, true);
 
