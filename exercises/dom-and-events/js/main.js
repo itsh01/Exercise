@@ -365,7 +365,7 @@ ProductList.Main = (function(){
 
         cart.className = "cart";
 
-        cart.innerHTML = '<input type="number" disabled="disabled" />';
+        cart.innerHTML = '<input type="number" disabled="disabled" id="cart-input" />';
 
         document.getElementsByClassName("container")[0].appendChild(cart);
     }

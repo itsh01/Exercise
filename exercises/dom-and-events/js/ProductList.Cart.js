@@ -9,5 +9,42 @@ var ProductList = ProductList || {};
 ProductList.Cart = (function() {
     'use strict';
 
+    var cash = 0,
+        items = {};
 
-}
+    function addItem(id, price){
+        items[id] = items[id] || 0;
+        items[id] += price;
+        addCash(price);
+    }
+
+    function removeItem(id, price){
+        items[id] = items[id] || 0;
+        items[id] -= price;
+        removeCash(price);
+    }
+
+    function addCash(moreCash){
+        cash += moreCash;
+        updateCart();
+    }
+
+    function removeCash(moreCash){
+        cash -= moreCash;
+        updateCart();
+    }
+
+    function updateCart(){
+        var cartInput = document.getElementById('cart-input');
+
+        cartInput.value = cash;
+    }
+
+    return {
+        updateCart: updateCart,
+        addCash: addCash,
+        removeCash: removeCash,
+        addItem: addItem,
+        removeItem: removeItem
+    }
+})();
