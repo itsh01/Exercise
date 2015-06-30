@@ -343,6 +343,8 @@ var ProductList = (function(){
         if (isFirst){
             createPager(items);
         }
+        
+        fixRowSelections();
     }
 
     /*
@@ -363,8 +365,8 @@ var ProductList = (function(){
 
         createSelect(tr, numOfItems);
 
-        select = tr.querySelector('select');
-        select.selectedIndex = item['id'] - 1;
+        //select = tr.querySelector('select');
+        //select.selectedIndex = item['id'] - 1;
         return tr;
     }
 
@@ -419,7 +421,7 @@ var ProductList = (function(){
     function moveToPage(page){
         tbody.innerHTML = '';
         init(tbody, products.slice(page * 5 - 5, page * 5), order);
-        fixRowSelections();
+        //fixRowSelections();
     }
 
     /*
