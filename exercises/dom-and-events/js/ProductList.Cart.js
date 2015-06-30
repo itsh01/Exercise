@@ -40,6 +40,13 @@ ProductList.Cart = (function() {
         cartInput.value = cash;
     }
 
+    function subscribeToPubSub(){
+        ProductList.PubSub.subscribe('itemAdded', addItem);
+        ProductList.PubSub.subscribe('itemRemoved', removeItem);
+    }
+
+    subscribeToPubSub();
+
     return {
         updateCart: updateCart,
         addCash: addCash,

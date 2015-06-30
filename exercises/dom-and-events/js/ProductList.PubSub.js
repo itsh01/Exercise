@@ -44,7 +44,7 @@ ProductList.PubSub = (function(){
 
         for (key in event){
             if (event.hasOwnProperty(key)){
-                event[key](data);
+                event[key].apply(this, data);
             }
         }
     }
