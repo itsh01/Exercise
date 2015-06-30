@@ -1,6 +1,6 @@
 .page-header {
     text-align: center;
 }
-.item-price::after{
-    content: '\0024';
-}
+/*.item-price::after{*/
+    /*content: '\0024';*/
+/*}*/
