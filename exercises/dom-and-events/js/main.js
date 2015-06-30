@@ -2,75 +2,11 @@
  * Created by itaysh on 6/29/15.
  */
 
-
-// Publish Subscribe Event Manager
-
-var PubSub = (function(){
-    'use strict';
-
-    var counter = 1,
-        events = {};
-
-    /**
-     * Add an event to PubSub
-     *
-     * @param {String} name - the event name
-     * @param {Function} cb - callback to execute when event is fired
-     * @returns {number} - subscription id
-     */
-    function subscribe(name, cb){
-        events[name] = events[name] || {};
-
-        counter += 1;
-        events[name][counter] = cb;
-
-        return counter;
-    }
-
-    /**
-     * Launch an event
-     *
-     * @param {String} name - the event name
-     * @param {Object} data - data for callback execution
-     */
-    function publish(name, data){
-        var key,
-            event = events[name];
-
-        if (!event){
-            return;
-        }
-
-        for (key in event){
-            if (event.hasOwnProperty(key)){
-                event[key](data);
-            }
-        }
-    }
-
-    /**
-     * Remove an event from PubSub
-     *
-     * @param {String} name - the event name
-     * @param {number} id - subscription id
-     */
-    function unSubscribe(name, id){
-        if(events[name]){
-            delete events[name][id];
-        }
-    }
-
-    return {
-        subscribe: subscribe,
-        publish: publish,
-        unSubscribe: unSubscribe
-    };
-
-})();
+var ProductList = ProductList || {};
 
 // Product List Namespace
 
-var ProductList = (function(){
+ProductList.Main = (function(){
     'use strict';
 
     // mock items
@@ -343,7 +279,7 @@ var ProductList = (function(){
         if (isFirst){
             createPager(items);
         }
-        
+
         fixRowSelections();
     }
 
@@ -352,7 +288,6 @@ var ProductList = (function(){
      */
     function createTrByItem(item, order, numOfItems){
         var tr = document.createElement('tr'),
-            select,
             td,
             i;
 
@@ -365,8 +300,6 @@ var ProductList = (function(){
 
         createSelect(tr, numOfItems);
 
-        //select = tr.querySelector('select');
-        //select.selectedIndex = item['id'] - 1;
         return tr;
     }
 
@@ -387,7 +320,7 @@ var ProductList = (function(){
             select.appendChild(option);
         }
 
-        select.setAttribute("onchange", "ProductList.handleChange(this)");
+        select.setAttribute("onchange", "ProductList.Main.handleChange(this)");
 
         newTd.className = "selectOrder";
         newTd.appendChild(select);
@@ -407,7 +340,7 @@ var ProductList = (function(){
 
         for(i ; i < pages; i++){
             page = i + 1;
-            inner += '<li><a href="#" onclick="ProductList.moveToPage('+page+')">'+page+'</a></li>';
+            inner += '<li><a href="#" onclick="ProductList.Main.moveToPage('+page+')">'+page+'</a></li>';
         }
         inner += '</ul>';
 
@@ -421,7 +354,6 @@ var ProductList = (function(){
     function moveToPage(page){
         tbody.innerHTML = '';
         init(tbody, products.slice(page * 5 - 5, page * 5), order);
-        //fixRowSelections();
     }
 
     /*
