@@ -13,3 +13,7 @@ nav {
 .cart {
     float: right;
 }
+[data-itemid]{
+    width: 35px;
+    /*display: inline-block;*/
+}

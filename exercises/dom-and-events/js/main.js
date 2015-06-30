@@ -310,7 +310,9 @@ ProductList.Main = (function(){
     function getOrderButtonTd(itemId){
         var td = document.createElement('td');
 
-        td.innerHTML = '<input type="number" data-itemid="'+itemId+'" />';
+        td.innerHTML = '<input type="number" disabled="disabled" data-itemid="'+itemId+'" />';
+        td.innerHTML += '<button class="btn btn-primary btn-xs" data-action="1">-</button>';
+        td.innerHTML += '<button class="btn btn-primary btn-xs" data-action="-1">+</button>';
 
         return td;
     }
