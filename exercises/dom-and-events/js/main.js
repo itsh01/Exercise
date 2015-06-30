@@ -278,6 +278,7 @@ ProductList.Main = (function(){
 
         if (isFirst){
             createPager(items);
+            createCart();
         }
 
         fixRowSelections();
@@ -299,9 +300,19 @@ ProductList.Main = (function(){
             tr.appendChild(td);
         }
 
+        tr.appendChild(getOrderButtonTd(item['id']));
+
         createSelect(tr, numOfItems);
 
         return tr;
+    }
+
+    function getOrderButtonTd(itemId){
+        var td = document.createElement('td');
+
+        td.innerHTML = '<input type="number" data-itemid="'+itemId+'" />';
+
+        return td;
     }
 
     /*
@@ -349,6 +360,16 @@ ProductList.Main = (function(){
         document.getElementsByClassName("container")[0].appendChild(nav);
     }
 
+    function createCart(){
+        var cart = document.createElement('div');
+
+        cart.className = "cart";
+
+        cart.innerHTML = '<input type="number" disabled="disabled">';
+
+        document.getElementsByClassName("container")[0].appendChild(cart);
+    }
+
     /*
      *  Move to another page
      */
@@ -394,7 +415,7 @@ ProductList.Main = (function(){
     function fixImages(){
         var imageTds = document.querySelectorAll('.item-image'),
             i = imageTds.length-1;
-        
+
         for (i ; i>=0 ; i--){
             imageTds[i].innerHTML = '<img src="'+imageTds[i].innerHTML+'" />';
         }

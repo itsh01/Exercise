@@ -7,3 +7,9 @@
 .item-description {
     font-size: 1rem;
 }
+nav {
+    float: left;
+}
+.cart {
+    float: right;
+}
