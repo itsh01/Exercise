@@ -52,6 +52,10 @@ ProductList.Cart = (function() {
         ProductList.PubSub.subscribe('itemRemoved', removeItem);
     }
 
+    function getItemCount(itemId){
+        return items[itemId];
+    }
+
     subscribeToPubSub();
 
     return {
@@ -60,6 +64,7 @@ ProductList.Cart = (function() {
         removeCash: removeCash,
         addItem: addItem,
         removeItem: removeItem,
-        updateItem: updateItem
+        updateItem: updateItem,
+        getItemCount: getItemCount
     }
 })();

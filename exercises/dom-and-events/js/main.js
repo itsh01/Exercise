@@ -283,6 +283,7 @@ ProductList.Main = (function(){
 
         fixRowSelections();
         fixImages();
+        updateOrderInputs();
     }
 
     /*
@@ -421,6 +422,20 @@ ProductList.Main = (function(){
         for (i ; i>=0 ; i--){
             imageTds[i].innerHTML = '<img src="'+imageTds[i].innerHTML+'" />';
         }
+    }
+
+    function updateOrderInputs(){
+        var inputElements = document.querySelectorAll('[data-itemid]'),
+            inputIndex = inputElements.length - 1,
+            itemId = "",
+            itemCount = 0;
+
+        for (inputIndex; inputIndex >= 0; inputIndex--){
+            itemId = inputElements[inputIndex].dataset['itemid'];
+            itemCount = parseInt( ProductList.Cart.getItemCount(itemId) );
+            inputElements[inputIndex].value = itemCount;
+        }
+
     }
 
     function exceedingItemLimit(addOrRemove, inputElement, item) {
