@@ -242,7 +242,7 @@ ProductList.Main = (function(){
     var table = document.getElementById('main-table'),
         tbody = document.getElementById('products'),
         order = getOrder(table),
-        moveToPageEvent = new CustomEvent('moveToPageEvent');;
+        moveToPageEvent = new CustomEvent('moveToPageEvent');
 
     /*
      *  Get items' properties display order by table header
