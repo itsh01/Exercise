@@ -438,7 +438,7 @@ ProductList.Main = (function(){
                     return item.id == inputElement.dataset['itemid'];
                 }).pop();
                 valueToAdd = parseInt(item.price) * parseInt(targetButtonElement.dataset['action']);
-                ProductList.PubSub.publish("itemAdded", [item.id, valueToAdd]);
+                ProductList.PubSub.publish("itemUpdated", [item.id, valueToAdd]);
             }
 
         }

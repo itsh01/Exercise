@@ -14,14 +14,20 @@ ProductList.Cart = (function() {
 
     function addItem(id, price){
         items[id] = items[id] || 0;
-        items[id] += price;
+        items[id] += 1;
         addCash(price);
     }
 
     function removeItem(id, price){
         items[id] = items[id] || 0;
-        items[id] -= price;
-        removeCash(price);
+        if (items[id] > 0){
+            items[id] -= 1;
+            removeCash(price);
+        }
+    }
+
+    function updateItem(id, price){
+        (price > 0) ? addItem(id, price) : removeItem(id, -price);
     }
 
     function addCash(moreCash){
@@ -41,6 +47,7 @@ ProductList.Cart = (function() {
     }
 
     function subscribeToPubSub(){
+        ProductList.PubSub.subscribe('itemUpdated', updateItem);
         ProductList.PubSub.subscribe('itemAdded', addItem);
         ProductList.PubSub.subscribe('itemRemoved', removeItem);
     }
@@ -52,6 +59,7 @@ ProductList.Cart = (function() {
         addCash: addCash,
         removeCash: removeCash,
         addItem: addItem,
-        removeItem: removeItem
+        removeItem: removeItem,
+        updateItem: updateItem
     }
 })();
