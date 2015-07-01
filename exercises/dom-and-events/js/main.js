@@ -423,6 +423,13 @@ ProductList.Main = (function(){
         }
     }
 
+    function exceedingItemLimit(addOrRemove, inputElement, item) {
+        var exceedingTopLimit = (addOrRemove > 0 && parseInt(inputElement.value) === item.limit),
+            exceedingBottomLimit = (addOrRemove < 0 && parseInt(inputElement.value) === 0);
+
+        return exceedingBottomLimit || exceedingTopLimit;
+    }
+
     function publishEvents(){
         table.onclick = function(e){
             var targetButtonElement = e.target,
@@ -438,13 +445,14 @@ ProductList.Main = (function(){
                 item = products.filter(function(item){
                     return item.id == inputElement.dataset['itemid'];
                 }).pop();
-                addOrRemove = parseInt(targetButtonElement.dataset['action'])
+                addOrRemove = parseInt(targetButtonElement.dataset['action']);
                 valueToAdd = parseInt(item.price) * addOrRemove;
                 inputElement.value = inputElement.value || 0;
 
-                if ((addOrRemove < 0 && parseInt(inputElement.value) === 0) || (addOrRemove > 0 && parseInt(inputElement.value) === item.limit)){
+                if (exceedingItemLimit(addOrRemove, inputElement, item)){
                     return;
                 }
+
                 ProductList.PubSub.publish("itemUpdated", [item.id, valueToAdd]);
                 inputElement.value = parseInt(inputElement.value) + addOrRemove;
             }
