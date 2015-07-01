@@ -244,18 +244,18 @@ ProductList.Main = (function(){
         order = getOrder(table);
 
     /*
-     *  Get items' properties order by table header
+     *  Get items' properties display order by table header
      */
     function getOrder(table){
         var tableHeaders = table.querySelectorAll('th[data-header]'),
             tableHeaderLength = tableHeaders.length,
-            order = [],
+            itemAttributesDisplayOrder = [],
             i;
 
         for (i = 0; i < tableHeaderLength; i++){
-            order[i] = tableHeaders[i].dataset['header'];
+            itemAttributesDisplayOrder[i] = tableHeaders[i].dataset['header'];
         }
-        return order;
+        return itemAttributesDisplayOrder;
     }
 
     /*
@@ -264,12 +264,12 @@ ProductList.Main = (function(){
      */
     function init(table, items, order, isFirst){
         var i,
-            x = (items.length > 5) ? 5 : items.length,
+            numOfItemInPage = (items.length > 5) ? 5 : items.length,
             elements = document.createDocumentFragment();
 
-        for (i = 0; i < x; i++){
+        for (i = 0; i < numOfItemInPage; i++){
             elements.appendChild(
-                createTrByItem( items[i], order, x)
+                createRowByItem( items[i], order, numOfItemInPage)
             );
 
         }
@@ -289,26 +289,26 @@ ProductList.Main = (function(){
     /*
      *  Create a single row by single item
      */
-    function createTrByItem(item, order, numOfItems){
-        var tr = document.createElement('tr'),
-            td,
+    function createRowByItem(item, order, numOfItems){
+        var row = document.createElement('tr'),
+            cell,
             i;
 
         for (i in order){
-            td = document.createElement('td');
-            td.innerHTML = item[ order[i] ];
-            td.className = "item-" + order[i];
-            tr.appendChild(td);
+            cell = document.createElement('td');
+            cell.innerHTML = item[ order[i] ];
+            cell.className = "item-" + order[i];
+            row.appendChild(cell);
         }
 
-        tr.appendChild(getOrderButtonTd(item['id']));
+        row.appendChild(getOrderButtonCell(item['id']));
 
-        createSelect(tr, numOfItems);
+        createSelect(row, numOfItems);
 
-        return tr;
+        return row;
     }
 
-    function getOrderButtonTd(itemId){
+    function getOrderButtonCell(itemId){
         var td = document.createElement('td');
 
         td.innerHTML = '<input type="number" disabled="disabled" data-itemid="' + itemId + '" />';
@@ -321,26 +321,26 @@ ProductList.Main = (function(){
     /*
      *  Create an html select on a row
      */
-    function createSelect(tr, numOfItems){
-        var idTd = tr.querySelector('.item-id'),
-            newTd = document.createElement('td'),
-            select = document.createElement('select'),
-            option,
+    function createSelect(row, numOfItems){
+        var idCellElement = row.querySelector('.item-id'),
+            newCellElement = document.createElement('td'),
+            selectElement = document.createElement('select'),
+            optionElement,
             i;
 
         for (i = 0; i < numOfItems; i++){
-            option = document.createElement('option');
-            option.value = i+1;
-            option.innerHTML = i+1;
-            select.appendChild(option);
+            optionElement = document.createElement('option');
+            optionElement.value = i+1;
+            optionElement.innerHTML = i+1;
+            selectElement.appendChild(optionElement);
         }
 
-        select.setAttribute("onchange", "ProductList.Main.handleChange(this)");
+        selectElement.setAttribute("onchange", "ProductList.Main.handleChange(this)");
 
-        newTd.className = "selectOrder";
-        newTd.appendChild(select);
+        newCellElement.className = "selectOrder";
+        newCellElement.appendChild(selectElement);
 
-        tr.insertBefore(newTd, idTd);
+        row.insertBefore(newCellElement, idCellElement);
     }
 
     /*
