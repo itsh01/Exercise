@@ -303,25 +303,25 @@ ProductList.Main = (function(){
 
         row.appendChild(getOrderButtonCell(item['id']));
 
-        createSelect(row, numOfItems);
+        createSelectInRow(row, numOfItems);
 
         return row;
     }
 
     function getOrderButtonCell(itemId){
-        var td = document.createElement('td');
+        var cellElement = document.createElement('td');
 
-        td.innerHTML = '<input type="number" disabled="disabled" data-itemid="' + itemId + '" />';
-        td.innerHTML += '<button class="btn btn-primary btn-xs change-amount" data-action="-1">-</button>';
-        td.innerHTML += '<button class="btn btn-primary btn-xs change-amount" data-action="1">+</button>';
+        cellElement.innerHTML = '<input type="number" disabled="disabled" data-itemid="' + itemId + '" />';
+        cellElement.innerHTML += '<button class="btn btn-primary btn-xs change-amount" data-action="-1">-</button>';
+        cellElement.innerHTML += '<button class="btn btn-primary btn-xs change-amount" data-action="1">+</button>';
 
-        return td;
+        return cellElement;
     }
 
     /*
      *  Create an html select on a row
      */
-    function createSelect(row, numOfItems){
+    function createSelectInRow(row, numOfItems){
         var idCellElement = row.querySelector('.item-id'),
             newCellElement = document.createElement('td'),
             selectElement = document.createElement('select'),
@@ -347,7 +347,7 @@ ProductList.Main = (function(){
      *  Create a page navigation
      */
     function createPager(items){
-        var nav = document.createElement('nav'),
+        var navElement = document.createElement('nav'),
             inner = '<ul class="pagination">',
             pages = Math.ceil(items.length / 5),
             i = 0,
@@ -359,18 +359,18 @@ ProductList.Main = (function(){
         }
         inner += '</ul>';
 
-        nav.innerHTML = inner;
-        document.getElementsByClassName("container")[0].appendChild(nav);
+        navElement.innerHTML = inner;
+        document.getElementsByClassName("container")[0].appendChild(navElement);
     }
 
     function createCart(){
-        var cart = document.createElement('div');
+        var cartElement = document.createElement('div');
 
-        cart.className = "cart";
+        cartElement.className = "cart";
 
-        cart.innerHTML = '<input type="number" disabled="disabled" id="cart-input" />';
+        cartElement.innerHTML = '<input type="number" disabled="disabled" id="cart-input" />';
 
-        document.getElementsByClassName("container")[0].appendChild(cart);
+        document.getElementsByClassName("container")[0].appendChild(cartElement);
     }
 
     /*
@@ -384,20 +384,20 @@ ProductList.Main = (function(){
     /*
      *  Handling a change in a select
      */
-    function handleChange(select){
+    function handleChange(selectElement){
 
-        var selectedOption = parseInt(select.selectedOptions[0].value),
+        var selectedOption = parseInt(selectElement.selectedOptions[0].value),
             tbody = document.getElementById("products"),
-            trToBeMoved = tbody.removeChild(select.parentElement.parentElement),
+            rowToBeMoved = tbody.removeChild(selectElement.parentElement.parentElement),
             toBeReplacedWith;
 
         toBeReplacedWith = document.querySelector('tbody tr:nth-child('+(selectedOption)+')');
 
         if (toBeReplacedWith){
-            tbody.insertBefore(trToBeMoved,toBeReplacedWith);
+            tbody.insertBefore(rowToBeMoved,toBeReplacedWith);
         }
         else {
-            tbody.appendChild(trToBeMoved);
+            tbody.appendChild(rowToBeMoved);
         }
 
         fixRowSelections();
@@ -416,11 +416,11 @@ ProductList.Main = (function(){
     }
 
     function fixImages(){
-        var imageTds = document.querySelectorAll('.item-image'),
-            i = imageTds.length-1;
+        var imageCells = document.querySelectorAll('.item-image'),
+            i = imageCells.length-1;
 
         for (i ; i>=0 ; i--){
-            imageTds[i].innerHTML = '<img src="'+imageTds[i].innerHTML+'" />';
+            imageCells[i].innerHTML = '<img src="'+imageCells[i].innerHTML+'" />';
         }
     }
 
