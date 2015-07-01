@@ -440,12 +440,12 @@ ProductList.Main = (function(){
                 }).pop();
                 addOrRemove = parseInt(targetButtonElement.dataset['action'])
                 valueToAdd = parseInt(item.price) * addOrRemove;
-                ProductList.PubSub.publish("itemUpdated", [item.id, valueToAdd]);
-
                 inputElement.value = inputElement.value || 0;
-                if (addOrRemove < 0 && parseInt(inputElement.value) === 0){
+
+                if ((addOrRemove < 0 && parseInt(inputElement.value) === 0) || (addOrRemove > 0 && parseInt(inputElement.value) === item.limit)){
                     return;
                 }
+                ProductList.PubSub.publish("itemUpdated", [item.id, valueToAdd]);
                 inputElement.value = parseInt(inputElement.value) + addOrRemove;
             }
 
