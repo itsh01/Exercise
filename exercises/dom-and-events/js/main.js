@@ -428,6 +428,7 @@ ProductList.Main = (function(){
             var targetButtonElement = e.target,
                 inputElement = null,
                 item = null,
+                addOrRemove = null,
                 valueToAdd = 0;
 
 
@@ -437,8 +438,15 @@ ProductList.Main = (function(){
                 item = products.filter(function(item){
                     return item.id == inputElement.dataset['itemid'];
                 }).pop();
-                valueToAdd = parseInt(item.price) * parseInt(targetButtonElement.dataset['action']);
+                addOrRemove = parseInt(targetButtonElement.dataset['action'])
+                valueToAdd = parseInt(item.price) * addOrRemove;
                 ProductList.PubSub.publish("itemUpdated", [item.id, valueToAdd]);
+
+                inputElement.value = inputElement.value || 0;
+                if (addOrRemove < 0 && parseInt(inputElement.value) === 0){
+                    return;
+                }
+                inputElement.value = parseInt(inputElement.value) + addOrRemove;
             }
 
         }
