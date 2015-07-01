@@ -20,3 +20,6 @@ nav {
     width: 35px;
     /*display: inline-block;*/
 }
+[data-header]{
+    cursor: pointer;
+}

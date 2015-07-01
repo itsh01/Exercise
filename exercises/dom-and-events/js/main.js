@@ -263,7 +263,7 @@ ProductList.Main = (function(){
      *  Initialize table by products list
      *  items {Object}
      */
-    function init(table, items, order, isFirst){
+    function drawTable(table, items, order, isFirst){
         var i,
             numOfItemInPage = (items.length > 5) ? 5 : items.length,
             elements = document.createDocumentFragment();
@@ -394,7 +394,7 @@ ProductList.Main = (function(){
      */
     function moveToPage(page){
         tbody.innerHTML = '';
-        init(tbody, products.slice(page * 5 - 5, page * 5), order);
+        drawTable(tbody, products.slice(page * 5 - 5, page * 5), order);
     }
 
     /*
@@ -472,8 +472,8 @@ ProductList.Main = (function(){
         }).pop();
     }
 
-    function publishEvents(){
-        table.onclick = function(e){
+    function attachOrderAddRemoveEvent() {
+        table.onclick = function (e) {
             var targetButtonElement = e.target,
                 inputElement = null,
                 item = null,
@@ -481,7 +481,7 @@ ProductList.Main = (function(){
                 valueToAdd = 0;
 
 
-            if (isChangeButton(targetButtonElement)){
+            if (isChangeButton(targetButtonElement)) {
 
                 inputElement = targetButtonElement.parentElement.querySelector('[data-itemid]');
                 item = getItemById(inputElement.dataset['itemid']);
@@ -489,7 +489,7 @@ ProductList.Main = (function(){
                 valueToAdd = parseInt(item.price) * addOrRemove;
                 inputElement.value = inputElement.value || 0;
 
-                if (exceedingItemLimit(addOrRemove, inputElement, item)){
+                if (exceedingItemLimit(addOrRemove, inputElement, item)) {
                     return;
                 }
 
@@ -500,15 +500,43 @@ ProductList.Main = (function(){
         }
     }
 
+    function attachSortEvent(){
+        var thead = document.getElementById('table-header');
+
+        thead.onclick = function(e){
+            var targetHeaderElement = e.target,
+                columnHeader = targetHeaderElement.dataset["header"];
+
+            if (columnHeader){
+                ProductList.PubSub.publish('itemsSorted', [columnHeader]);
+            }
+        }
+    }
+
+    function publishEvents(){
+        attachOrderAddRemoveEvent();
+        attachSortEvent();
+    }
+
+    function sortItemsByProperty(items, propertyName){
+        return items.sort(function(a,b){
+            return (a[propertyName] > b[propertyName]) ? 1 : -1;
+        });
+    }
+
+    function drawSortedItems(property){
+        tbody.innerHTML = '';
+        drawTable(tbody, sortItemsByProperty(products, property), order);
+    }
+
     function subscribeToPubSub(){
-        //ProductList.PubSub.subscribe('itemAdded', addItem);
-        //ProductList.PubSub.subscribe('itemRemoved', removeItem);
+        ProductList.PubSub.subscribe('itemsSorted', drawSortedItems);
     }
 
     subscribeToPubSub();
     publishEvents();
 
-    init(tbody, products, order, true);
+    drawTable(tbody, products, order, true);
 
     return {
       handleChange: handleChange,
