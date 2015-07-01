@@ -244,8 +244,11 @@ ProductList.Main = (function(){
         order = getOrder(table),
         moveToPageEvent = new CustomEvent('moveToPageEvent');
 
-    /*
+    /**
      *  Get items' properties display order by table header
+     *
+     * @param table {Element} - DOMElement table read the display from
+     * @returns {Array} - display order
      */
     function getOrder(table){
         var tableHeaders = table.querySelectorAll('th[data-header]'),
@@ -259,36 +262,51 @@ ProductList.Main = (function(){
         return itemAttributesDisplayOrder;
     }
 
-    /*
+    /**
+     *  Update Fields on the DOM by the suitable objects
+     */
+    function fixTableState() {
+        fixRowSelections();
+        fixImages();
+        updateOrderInputs();
+    }
+
+    /**
      *  Initialize table by products list
-     *  items {Object}
+     *
+     * @param table {Element} - DOMElement table to add to
+     * @param items {Array} - Items to display
+     * @param order {Array} - Item's properties display order
+     * @param isFirst {Boolean} - Is initial draw
      */
     function drawTable(table, items, order, isFirst){
         var i,
             numOfItemInPage = (items.length > 5) ? 5 : items.length,
-            elements = document.createDocumentFragment();
+            tableRowElements = document.createDocumentFragment();
 
         for (i = 0; i < numOfItemInPage; i++){
-            elements.appendChild(
+            tableRowElements.appendChild(
                 createRowByItem( items[i], order, numOfItemInPage)
             );
-
         }
 
-        table.appendChild(elements);
+        table.appendChild(tableRowElements);
 
         if (isFirst){
             createPager(items);
             createCart();
         }
 
-        fixRowSelections();
-        fixImages();
-        updateOrderInputs();
+        fixTableState();
     }
 
-    /*
+    /**
      *  Create a single row by single item
+     *
+     * @param item {Object} - item to create row by
+     * @param order {Array} - item's properties display oreder
+     * @param numOfItems {Number} - number if items
+     * @returns {Element} - DOMElement row of item
      */
     function createRowByItem(item, order, numOfItems){
         var row = document.createElement('tr'),
@@ -309,6 +327,12 @@ ProductList.Main = (function(){
         return row;
     }
 
+    /**
+     *  Create an order button with add/remove options
+     *
+     * @param itemId {String} - item identifier
+     * @returns {Element} - DOMElement button
+     */
     function getOrderButtonCell(itemId){
         var cellElement = document.createElement('td');
 
@@ -319,8 +343,11 @@ ProductList.Main = (function(){
         return cellElement;
     }
 
-    /*
+    /**
      *  Create an html select on a row
+     *
+     * @param row {Element} - DOMElement row to add select element to
+     * @param numOfItems {Number} - number of options where to move
      */
     function createSelectInRow(row, numOfItems){
         var idCellElement = row.querySelector('.item-id'),
@@ -344,10 +371,10 @@ ProductList.Main = (function(){
         row.insertBefore(newCellElement, idCellElement);
     }
 
-
-
-    /*
+    /**
      *  Create a page navigation
+     *
+     * @param items {Array} - items to create pager by
      */
     function createPager(items){
         var navElement = document.createElement('nav'),
@@ -356,7 +383,7 @@ ProductList.Main = (function(){
             i = 0,
             j = 0,
             page = 0,
-            anchorElements = [],
+            anchorElements,
             anchorsLength;
 
         for(i ; i < pages; i++){
@@ -379,6 +406,9 @@ ProductList.Main = (function(){
         document.getElementsByClassName("container")[0].appendChild(navElement);
     }
 
+    /**
+     *  Create cart total display
+     */
     function createCart(){
         var cartElement = document.createElement('div');
 
@@ -389,16 +419,20 @@ ProductList.Main = (function(){
         document.getElementsByClassName("container")[0].appendChild(cartElement);
     }
 
-    /*
+    /**
      *  Move to another page
+     *
+     * @param page {Number} - Page to switch to
      */
     function moveToPage(page){
         tbody.innerHTML = '';
-        drawTable(tbody, products.slice(page * 5 - 5, page * 5), order);
+        drawTable(tbody, products.slice(page * 5 - 5, page * 5), order, false);
     }
 
-    /*
+    /**
      *  Handling a change in a select
+     *
+     * @param selectElement {Object} - select input to handle its value change
      */
     function handleChange(selectElement){
 
@@ -419,7 +453,7 @@ ProductList.Main = (function(){
         fixRowSelections();
     }
 
-    /*
+    /**
      *  Fix Selects value according to row position
      */
     function fixRowSelections(){
@@ -431,6 +465,9 @@ ProductList.Main = (function(){
         }
     }
 
+    /**
+     *  Fix images display from path string to <img> tag
+     */
     function fixImages(){
         var imageCells = document.querySelectorAll('.item-image'),
             i = imageCells.length-1;
@@ -440,6 +477,9 @@ ProductList.Main = (function(){
         }
     }
 
+    /**
+     *  Update order input elements according to cart
+     */
     function updateOrderInputs(){
         var inputElements = document.querySelectorAll('[data-itemid]'),
             inputIndex = inputElements.length - 1,
@@ -454,6 +494,16 @@ ProductList.Main = (function(){
 
     }
 
+    /**
+     *  Check if items' order is exceeding the limit,
+     *  bottom limit is 0
+     *  top limit is according to item object
+     *
+     * @param addOrRemove {Number} - 1 -> add flag, -1 -> remove flag
+     * @param inputElement {Element} - DOMElement input to check its value
+     * @param item {Object} - item object to check its limit
+     * @returns {boolean} - is exceeding limit
+     */
     function exceedingItemLimit(addOrRemove, inputElement, item) {
         var inputElementValue = parseInt(inputElement.value),
             exceedingTopLimit = (addOrRemove > 0 && inputElementValue === item.limit),
@@ -462,16 +512,31 @@ ProductList.Main = (function(){
         return exceedingBottomLimit || exceedingTopLimit;
     }
 
+    /**
+     *  Check if element is a change button
+     *
+     * @param targetButtonElement {Element} - DOMElement to check
+     * @returns {Array|{index: number, input: string}} - is a change button
+     */
     function isChangeButton(targetButtonElement) {
         return targetButtonElement.className.match('change-amount');
     }
 
+    /**
+     *  Get specific product by its ID
+     *
+     * @param itemId {String} - item identified
+     * @returns {Object} - matching item from products
+     */
     function getItemById(itemId) {
         return products.filter(function (item) {
             return item.id == itemId;
         }).pop();
     }
 
+    /**
+     *  Publish itemUpdate event when add/remove to cart
+     */
     function attachOrderAddRemoveEvent() {
         table.onclick = function (e) {
             var targetButtonElement = e.target,
@@ -500,6 +565,9 @@ ProductList.Main = (function(){
         }
     }
 
+    /**
+     *  Publish sort event when header is clicked
+     */
     function attachSortEvent(){
         var thead = document.getElementById('table-header');
 
@@ -513,30 +581,55 @@ ProductList.Main = (function(){
         }
     }
 
-    function publishEvents(){
-        attachOrderAddRemoveEvent();
-        attachSortEvent();
-    }
 
+    /**
+     *  Sort array of items by requested property
+     *
+     * @param items {Array} - items to be sorted
+     * @param propertyName {String} - property name to sort by
+     * @returns {Array} - array sorted by requested property
+     */
     function sortItemsByProperty(items, propertyName){
         return items.sort(function(a,b){
             return (a[propertyName] > b[propertyName]) ? 1 : -1;
         });
     }
 
+    /**
+     *  Draw table with sorted items by requested property
+     *
+     * @param property {String} - property to order by
+     */
     function drawSortedItems(property){
         tbody.innerHTML = '';
-        drawTable(tbody, sortItemsByProperty(products, property), order);
+        drawTable(tbody, sortItemsByProperty(products, property), order, false);
     }
 
+    /**
+     *  Subscribe events to suitable functions
+     */
     function subscribeToPubSub(){
         ProductList.PubSub.subscribe('itemsSorted', drawSortedItems);
     }
 
-    subscribeToPubSub();
-    publishEvents();
+    /**
+     *  Attach events to suitable items
+     */
+    function publishEvents(){
+        attachOrderAddRemoveEvent();
+        attachSortEvent();
+    }
 
-    drawTable(tbody, products, order, true);
+    /**
+     *  Initialize state
+     */
+    function init(){
+        subscribeToPubSub();
+        publishEvents();
+        drawTable(tbody, products, order, true);
+    }
+
+    init();
 
     return {
       handleChange: handleChange,
