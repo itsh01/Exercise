@@ -241,7 +241,8 @@ ProductList.Main = (function(){
 
     var table = document.getElementById('main-table'),
         tbody = document.getElementById('products'),
-        order = getOrder(table);
+        order = getOrder(table),
+        moveToPageEvent = new CustomEvent('moveToPageEvent');;
 
     /*
      *  Get items' properties display order by table header
@@ -343,6 +344,8 @@ ProductList.Main = (function(){
         row.insertBefore(newCellElement, idCellElement);
     }
 
+
+
     /*
      *  Create a page navigation
      */
@@ -351,15 +354,28 @@ ProductList.Main = (function(){
             inner = '<ul class="pagination">',
             pages = Math.ceil(items.length / 5),
             i = 0,
-            page = 0;
+            j = 0,
+            page = 0,
+            anchorElements = [],
+            anchorsLength;
 
         for(i ; i < pages; i++){
             page = i + 1;
-            inner += '<li><a href="#" onclick="ProductList.Main.moveToPage('+page+')">'+page+'</a></li>';
+            inner += '<li><a href="#" data-pagenum="'+page+'">'+page+'</a></li>';
         }
         inner += '</ul>';
 
         navElement.innerHTML = inner;
+
+        anchorElements = Array.prototype.slice.call(navElement.querySelectorAll('[data-pagenum]'));
+        anchorsLength = anchorElements.length;
+
+        for( j; j < anchorsLength; j++ ){
+            anchorElements[j].addEventListener('moveToPageEvent', moveToPage.bind(anchorElements[j],anchorElements[j].dataset['pagenum']));
+            anchorElements[j].onclick = function(){ this.dispatchEvent(moveToPageEvent); }
+        }
+
+
         document.getElementsByClassName("container")[0].appendChild(navElement);
     }
 
