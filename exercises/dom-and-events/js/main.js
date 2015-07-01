@@ -424,10 +424,21 @@ ProductList.Main = (function(){
     }
 
     function exceedingItemLimit(addOrRemove, inputElement, item) {
-        var exceedingTopLimit = (addOrRemove > 0 && parseInt(inputElement.value) === item.limit),
-            exceedingBottomLimit = (addOrRemove < 0 && parseInt(inputElement.value) === 0);
+        var inputElementValue = parseInt(inputElement.value),
+            exceedingTopLimit = (addOrRemove > 0 && inputElementValue === item.limit),
+            exceedingBottomLimit = (addOrRemove < 0 && inputElementValue === 0);
 
         return exceedingBottomLimit || exceedingTopLimit;
+    }
+
+    function isChangeButton(targetButtonElement) {
+        return targetButtonElement.className.match('change-amount');
+    }
+
+    function getItemById(itemId) {
+        return products.filter(function (item) {
+            return item.id == itemId;
+        }).pop();
     }
 
     function publishEvents(){
@@ -439,12 +450,10 @@ ProductList.Main = (function(){
                 valueToAdd = 0;
 
 
-            if (targetButtonElement.className.match('change-amount')){
+            if (isChangeButton(targetButtonElement)){
 
                 inputElement = targetButtonElement.parentElement.querySelector('[data-itemid]');
-                item = products.filter(function(item){
-                    return item.id == inputElement.dataset['itemid'];
-                }).pop();
+                item = getItemById(inputElement.dataset['itemid']);
                 addOrRemove = parseInt(targetButtonElement.dataset['action']);
                 valueToAdd = parseInt(item.price) * addOrRemove;
                 inputElement.value = inputElement.value || 0;
