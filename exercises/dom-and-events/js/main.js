@@ -243,7 +243,7 @@ ProductList.Main = (function(){
         tbody = document.getElementById('products'),
         order = getOrder(table),
         moveToPageEvent = new CustomEvent('moveToPageEvent'),
-        itemsPerPage = 6,
+        itemsPerPage = 5,
         currentPage = 1;
 
     /**
@@ -348,16 +348,9 @@ ProductList.Main = (function(){
     function createSelectInRow(row, numOfItems){
         var idCellElement = row.querySelector('.item-id'),
             newCellElement = document.createElement('td'),
-            selectElement = document.createElement('select'),
-            optionElement,
-            i;
+            selectElement = document.createElement('select');
 
-        for (i = 0; i < numOfItems; i++){
-            optionElement = document.createElement('option');
-            optionElement.value = i+1;
-            optionElement.innerHTML = i+1;
-            selectElement.appendChild(optionElement);
-        }
+        selectElement.innerHTML = createNumberOptions(1,numOfItems+1);
 
         selectElement.setAttribute("onchange", "ProductList.Main.handleChange(this)");
 
@@ -365,6 +358,71 @@ ProductList.Main = (function(){
         newCellElement.appendChild(selectElement);
 
         row.insertBefore(newCellElement, idCellElement);
+    }
+
+    /**
+     *  Create options html string
+     *
+     * @param from {Number} - starting option
+     * @param to {Number} - ending option
+     * @returns {String} - html options string
+     */
+    function createNumberOptions(from, to) {
+        var htmlString = '';
+
+        for (from; from < to; from++) {
+            htmlString += '<option value="' + from + '">' + from + '</option>';
+        }
+
+        return htmlString;
+    }
+
+    /**
+     *  Convert a collection of items to array
+     *
+     * @param collection {Object} - collection
+     * @returns {Array} - array of items
+     */
+    function convertToArray(collection){
+        return Array.prototype.slice.call(collection);
+    }
+
+    /**
+     *  Attach moving to another page when clicked on pager
+     *
+     * @param navElement {Element} - pager nav element
+     */
+    function attachPagerEvent(navElement) {
+        var i = 0,
+            pageNum = 0,
+            anchorElements = convertToArray(navElement.querySelectorAll('[data-pagenum]')),
+            anchorsLength = anchorElements.length;
+
+        for (i; i < anchorsLength; i++) {
+            pageNum = anchorElements[i].dataset['pagenum'];
+            anchorElements[i].addEventListener('moveToPageEvent', moveToPage.bind(anchorElements[i], pageNum));
+            anchorElements[i].onclick = function () {
+                this.dispatchEvent(moveToPageEvent);
+            }
+        }
+    }
+
+    /**
+     *  set num per page element state
+     */
+    function setNumPerPageElementState() {
+        var numPerPageElement = document.getElementById('items-per-page');
+        numPerPageElement.onchange = changeItemsPerPage;
+        numPerPageElement.value = itemsPerPage;
+    }
+
+    /**
+     *  append an element to container main element
+     *
+     * @param childElement {Element} - child to append
+     */
+    function appendToContainerElement(childElement) {
+        document.getElementsByClassName("container")[0].appendChild(childElement);
     }
 
     /**
@@ -378,43 +436,26 @@ ProductList.Main = (function(){
             inner = '<ul class="pagination">',
             pages = Math.ceil(items.length / itemsPerPage),
             i = 0,
-            j = 0,
-            k = 5,
-            numPerPageSelectElement,
-            page = 0,
-            anchorElements,
-            anchorsLength;
+            page = 0;
 
         for(i ; i < pages; i++){
             page = i + 1;
             inner += '<li><a href="#" data-pagenum="' + page + '">' + page + '</a></li>';
         }
         inner += '</ul><select id="items-per-page">';
-
-        for(k ; k < 11; k++){
-            inner += '<option value="' + k + '">' + k + '</option>';
-        }
-
+        inner += createNumberOptions(5, 11);
         inner += '</select>';
 
         navElement.innerHTML = inner;
 
-        anchorElements = Array.prototype.slice.call(navElement.querySelectorAll('[data-pagenum]'));
-        anchorsLength = anchorElements.length;
-
-        for( j; j < anchorsLength; j++ ){
-            anchorElements[j].addEventListener('moveToPageEvent', moveToPage.bind(anchorElements[j],anchorElements[j].dataset['pagenum']));
-            anchorElements[j].onclick = function(){ this.dispatchEvent(moveToPageEvent); }
-        }
+        attachPagerEvent(navElement);
 
         lastNav = document.querySelector('nav');
         if (lastNav){
             lastNav.remove();
         }
-        document.getElementsByClassName("container")[0].appendChild(navElement);
-        numPerPageSelectElement = document.getElementById('items-per-page');
-        numPerPageSelectElement.onchange = changeItemsPerPage;
-        numPerPageSelectElement.value = itemsPerPage;
+        appendToContainerElement(navElement);
+        setNumPerPageElementState();
     }
 
     /**
@@ -427,7 +468,7 @@ ProductList.Main = (function(){
 
         cartElement.innerHTML = '<input type="number" disabled="disabled" id="cart-input" />';
 
-        document.getElementsByClassName("container")[0].appendChild(cartElement);
+        appendToContainerElement(cartElement);
     }
 
     /**
@@ -469,7 +510,7 @@ ProductList.Main = (function(){
         cartSummaryElement.innerHTML = inner;
         cartSummaryElement.setAttribute('id','cart-summery');
         cartSummaryElement.className = "items-summery";
-        document.getElementsByClassName("container")[0].appendChild(cartSummaryElement);
+        appendToContainerElement(cartSummaryElement);
     }
 
     /**
