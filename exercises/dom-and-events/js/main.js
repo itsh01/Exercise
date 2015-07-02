@@ -374,6 +374,7 @@ ProductList.Main = (function(){
      */
     function createPager(items){
         var navElement = document.createElement('nav'),
+            lastNav = null,
             inner = '<ul class="pagination">',
             pages = Math.ceil(items.length / itemsPerPage),
             i = 0,
@@ -398,7 +399,10 @@ ProductList.Main = (function(){
             anchorElements[j].onclick = function(){ this.dispatchEvent(moveToPageEvent); }
         }
 
-
+        lastNav = document.querySelector('nav');
+        if (lastNav){
+            lastNav.remove();
+        }
         document.getElementsByClassName("container")[0].appendChild(navElement);
     }
 
@@ -600,6 +604,7 @@ ProductList.Main = (function(){
     function drawSortedItems(property){
         tbody.innerHTML = '';
         drawTable(tbody, sortItemsByProperty(products, property), order);
+        moveToPage(currentPage);
     }
 
     /**
