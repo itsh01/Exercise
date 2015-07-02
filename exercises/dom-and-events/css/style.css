@@ -10,8 +10,9 @@
     overflow: hidden;
     display: block;
 }
-nav {
+nav .pagination{
     float: left;
+    margin-top: 0;
 }
 .cart {
     float: right;

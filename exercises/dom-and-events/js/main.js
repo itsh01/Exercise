@@ -374,20 +374,28 @@ ProductList.Main = (function(){
      */
     function createPager(items){
         var navElement = document.createElement('nav'),
-            lastNav = null,
+            lastNav,
             inner = '<ul class="pagination">',
             pages = Math.ceil(items.length / itemsPerPage),
             i = 0,
             j = 0,
+            k = 5,
+            numPerPageSelectElement,
             page = 0,
             anchorElements,
             anchorsLength;
 
         for(i ; i < pages; i++){
             page = i + 1;
-            inner += '<li><a href="#" data-pagenum="'+page+'">'+page+'</a></li>';
+            inner += '<li><a href="#" data-pagenum="' + page + '">' + page + '</a></li>';
         }
-        inner += '</ul>';
+        inner += '</ul><select id="items-per-page">';
+
+        for(k ; k < 11; k++){
+            inner += '<option value="' + k + '">' + k + '</option>';
+        }
+
+        inner += '</select>';
 
         navElement.innerHTML = inner;
 
@@ -404,6 +412,9 @@ ProductList.Main = (function(){
             lastNav.remove();
         }
         document.getElementsByClassName("container")[0].appendChild(navElement);
+        numPerPageSelectElement = document.getElementById('items-per-page');
+        numPerPageSelectElement.onchange = changeItemsPerPage;
+        numPerPageSelectElement.value = itemsPerPage;
     }
 
     /**
@@ -417,6 +428,12 @@ ProductList.Main = (function(){
         cartElement.innerHTML = '<input type="number" disabled="disabled" id="cart-input" />';
 
         document.getElementsByClassName("container")[0].appendChild(cartElement);
+    }
+
+    function changeItemsPerPage(){
+        itemsPerPage = parseInt(this.value);
+        createPager(products);
+        moveToPage(1);
     }
 
     /**
