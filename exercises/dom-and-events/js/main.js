@@ -242,7 +242,9 @@ ProductList.Main = (function(){
     var table = document.getElementById('main-table'),
         tbody = document.getElementById('products'),
         order = getOrder(table),
-        moveToPageEvent = new CustomEvent('moveToPageEvent');
+        moveToPageEvent = new CustomEvent('moveToPageEvent'),
+        itemsPerPage = 6,
+        currentPage = 1;
 
     /**
      *  Get items' properties display order by table header
@@ -277,11 +279,10 @@ ProductList.Main = (function(){
      * @param table {Element} - DOMElement table to add to
      * @param items {Array} - Items to display
      * @param order {Array} - Item's properties display order
-     * @param isFirst {Boolean} - Is initial draw
      */
-    function drawTable(table, items, order, isFirst){
+    function drawTable(table, items, order){
         var i,
-            numOfItemInPage = (items.length > 5) ? 5 : items.length,
+            numOfItemInPage = (items.length > itemsPerPage) ? itemsPerPage : items.length,
             tableRowElements = document.createDocumentFragment();
 
         for (i = 0; i < numOfItemInPage; i++){
@@ -291,11 +292,6 @@ ProductList.Main = (function(){
         }
 
         table.appendChild(tableRowElements);
-
-        if (isFirst){
-            createPager(items);
-            createCart();
-        }
 
         fixTableState();
     }
@@ -379,7 +375,7 @@ ProductList.Main = (function(){
     function createPager(items){
         var navElement = document.createElement('nav'),
             inner = '<ul class="pagination">',
-            pages = Math.ceil(items.length / 5),
+            pages = Math.ceil(items.length / itemsPerPage),
             i = 0,
             j = 0,
             page = 0,
@@ -426,7 +422,8 @@ ProductList.Main = (function(){
      */
     function moveToPage(page){
         tbody.innerHTML = '';
-        drawTable(tbody, products.slice(page * 5 - 5, page * 5), order, false);
+        drawTable(tbody, products.slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage), order);
+        currentPage = page;
     }
 
     /**
@@ -602,7 +599,7 @@ ProductList.Main = (function(){
      */
     function drawSortedItems(property){
         tbody.innerHTML = '';
-        drawTable(tbody, sortItemsByProperty(products, property), order, false);
+        drawTable(tbody, sortItemsByProperty(products, property), order);
     }
 
     /**
@@ -626,7 +623,9 @@ ProductList.Main = (function(){
     function init(){
         subscribeToPubSub();
         publishEvents();
-        drawTable(tbody, products, order, true);
+        moveToPage(1);
+        createPager(products);
+        createCart();
     }
 
     init();
