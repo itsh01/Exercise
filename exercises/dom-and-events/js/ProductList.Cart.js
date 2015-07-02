@@ -46,15 +46,22 @@ ProductList.Cart = (function() {
         cartInput.value = cash;
     }
 
+    function getItemCount(itemId){
+        return items[itemId];
+    }
+
+    function getItemsSummary(){
+        return items;
+    }
+
     function subscribeToPubSub(){
         ProductList.PubSub.subscribe('itemUpdated', updateItem);
         ProductList.PubSub.subscribe('itemAdded', addItem);
         ProductList.PubSub.subscribe('itemRemoved', removeItem);
     }
 
-    function getItemCount(itemId){
-        return items[itemId];
-    }
+
+
 
     subscribeToPubSub();
 
@@ -65,6 +72,7 @@ ProductList.Cart = (function() {
         addItem: addItem,
         removeItem: removeItem,
         updateItem: updateItem,
-        getItemCount: getItemCount
+        getItemCount: getItemCount,
+        getItemsSummary: getItemsSummary
     }
 })();

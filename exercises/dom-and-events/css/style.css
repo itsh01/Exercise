@@ -10,17 +10,27 @@
     overflow: hidden;
     display: block;
 }
-nav .pagination{
+nav .pagination {
     float: left;
     margin-top: 0;
 }
 .cart {
     float: right;
 }
-[data-itemid]{
+[data-itemid] {
     width: 35px;
     /*display: inline-block;*/
 }
-[data-header]{
+[data-header] {
     cursor: pointer;
+}
+.items-summery {
+    position: fixed;
+    top: 20rem;
+    right: 0;
+}
+.items-summery ul {
+    list-style: none;
+    margin: 1rem;
+    padding: 1rem;
 }

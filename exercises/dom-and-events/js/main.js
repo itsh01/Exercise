@@ -430,10 +430,46 @@ ProductList.Main = (function(){
         document.getElementsByClassName("container")[0].appendChild(cartElement);
     }
 
+    /**
+     *  Change num of items per page
+     */
     function changeItemsPerPage(){
         itemsPerPage = parseInt(this.value);
         createPager(products);
         moveToPage(1);
+    }
+
+    /**
+     *  Update cart items summary display
+     */
+    function updateCart(){
+        var cartSummaryElement = document.createElement('div'),
+            lastCart,
+            itemsSummary,
+            inner = '',
+            item,
+            id;
+
+
+        itemsSummary = ProductList.Cart.getItemsSummary();
+
+        inner += '<ul>';
+        for (id in itemsSummary){
+            if (itemsSummary.hasOwnProperty(id) && itemsSummary[id] !== 0){
+                item = getItemById(id);
+                inner += '<li>' + itemsSummary[id] + ' - ' + item.name + '</li>';
+            }
+        }
+        inner += '</ul>';
+
+        lastCart = document.getElementById('cart-summery');
+        if(lastCart){
+          lastCart.remove();
+        }
+        cartSummaryElement.innerHTML = inner;
+        cartSummaryElement.setAttribute('id','cart-summery');
+        cartSummaryElement.className = "items-summery";
+        document.getElementsByClassName("container")[0].appendChild(cartSummaryElement);
     }
 
     /**
@@ -629,6 +665,7 @@ ProductList.Main = (function(){
      */
     function subscribeToPubSub(){
         ProductList.PubSub.subscribe('itemsSorted', drawSortedItems);
+        ProductList.PubSub.subscribe('itemUpdated', updateCart);
     }
 
     /**
