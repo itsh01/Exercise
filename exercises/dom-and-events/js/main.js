@@ -442,7 +442,7 @@ ProductList.Main = (function(){
             page = i + 1;
             inner += '<li><a href="#" data-pagenum="' + page + '">' + page + '</a></li>';
         }
-        inner += '</ul><select id="items-per-page">';
+        inner += '</ul><select id="items-per-page" class="per-page-selection">';
         inner += createNumberOptions(5, 11);
         inner += '</select>';
 
