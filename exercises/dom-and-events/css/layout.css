@@ -1,0 +1,31 @@
+
+
+.page-header {
+    text-align: center;
+}
+
+.cart {
+    float: right;
+}
+
+.items-summery {
+    position: fixed;
+    top: 20rem;
+    right: 0;
+    background-color: #F9F9F9;
+}
+.items-summery ul {
+    list-style: none;
+    margin: 1rem;
+    padding: 1rem;
+}
+
+
+nav .pagination {
+    float: left;
+    margin-top: 0;
+}
+
+.per-page-selection {
+    margin: 0.6rem;
+}

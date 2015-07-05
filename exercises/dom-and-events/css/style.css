@@ -1,40 +1,6 @@
-.page-header {
-    text-align: center;
-}
-/*.item-price::after{*/
-    /*content: '\0024';*/
-/*}*/
-.item-description {
-    font-size: 1rem;
-    height: 5rem;
-    overflow: hidden;
-    display: block;
-}
-nav .pagination {
-    float: left;
-    margin-top: 0;
-}
-.cart {
-    float: right;
-}
-[data-itemid] {
-    width: 35px;
-    /*display: inline-block;*/
-}
-[data-header] {
-    cursor: pointer;
-}
-.items-summery {
-    position: fixed;
-    top: 20rem;
-    right: 0;
-    background-color: #F9F9F9;
-}
-.items-summery ul {
-    list-style: none;
-    margin: 1rem;
-    padding: 1rem;
-}
-.per-page-selection {
-    margin: 0.6rem;
-}
+
+@import "layout.css";
+@import "table.css";
+@import "theme.css";
+@import "general.css";
+
