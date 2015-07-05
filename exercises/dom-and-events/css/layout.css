@@ -1,12 +1,18 @@
 
 
+/*page header*/
+
 .page-header {
     text-align: center;
 }
 
+/*cart*/
+
 .cart {
     float: right;
 }
+
+/*items summery*/
 
 .items-summery {
     position: fixed;
@@ -20,6 +26,7 @@
     padding: 1rem;
 }
 
+/*pagination*/
 
 nav .pagination {
     float: left;

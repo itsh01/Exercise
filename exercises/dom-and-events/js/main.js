@@ -253,7 +253,7 @@ ProductList.Main = (function(){
      * @returns {Array} - display order
      */
     function getOrder(table){
-        var tableHeaders = table.querySelectorAll('th[data-header]'),
+        var tableHeaders = table.querySelectorAll('[data-header]'),
             tableHeaderLength = tableHeaders.length,
             itemAttributesDisplayOrder = [],
             i;
@@ -305,14 +305,16 @@ ProductList.Main = (function(){
      * @returns {Element} - DOMElement row of item
      */
     function createRowByItem(item, order, numOfItems){
-        var row = document.createElement('tr'),
+        var row = document.createElement('div'),
             cell,
             i;
 
+        row.className = "table-row";
+
         for (i in order){
-            cell = document.createElement('td');
+            cell = document.createElement('div');
             cell.innerHTML = item[ order[i] ];
-            cell.className = "item-" + order[i];
+            cell.className = "table-cell item-" + order[i];
             row.appendChild(cell);
         }
 
@@ -330,7 +332,9 @@ ProductList.Main = (function(){
      * @returns {Element} - DOMElement button
      */
     function getOrderButtonCell(itemId){
-        var cellElement = document.createElement('td');
+        var cellElement = document.createElement('div');
+
+        cellElement.className = "table-cell";
 
         cellElement.innerHTML = '<input type="number" disabled="disabled" data-itemid="' + itemId + '" />';
         cellElement.innerHTML += '<button class="btn btn-primary btn-xs change-amount" data-action="-1">-</button>';
@@ -347,14 +351,14 @@ ProductList.Main = (function(){
      */
     function createSelectInRow(row, numOfItems){
         var idCellElement = row.querySelector('.item-id'),
-            newCellElement = document.createElement('td'),
+            newCellElement = document.createElement('div'),
             selectElement = document.createElement('select');
 
         selectElement.innerHTML = createNumberOptions(1,numOfItems+1);
 
         selectElement.setAttribute("onchange", "ProductList.Main.handleChange(this)");
 
-        newCellElement.className = "selectOrder";
+        newCellElement.className = "table-cell selectOrder";
         newCellElement.appendChild(selectElement);
 
         row.insertBefore(newCellElement, idCellElement);
@@ -536,7 +540,7 @@ ProductList.Main = (function(){
             rowToBeMoved = tbody.removeChild(selectElement.parentElement.parentElement),
             toBeReplacedWith;
 
-        toBeReplacedWith = document.querySelector('tbody tr:nth-child('+(selectedOption)+')');
+        toBeReplacedWith = document.querySelector('.tbody .table-row:nth-child('+(selectedOption)+')');
 
         if (toBeReplacedWith){
             tbody.insertBefore(rowToBeMoved,toBeReplacedWith);

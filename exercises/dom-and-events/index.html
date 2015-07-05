@@ -12,23 +12,23 @@
         <h1>DOM and Events</h1>
     </header>
     <main class="container">
-        <table class="table table-striped" id="main-table">
-            <thead id="table-header">
-                <tr>
-                    <th>#</th>
-                    <th data-header="id" class="clickable">Id</th>
-                    <th data-header="name" class="clickable">Product</th>
-                    <th data-header="image" class="clickable">Image</th>
-                    <th data-header="description" class="clickable">Description</th>
-                    <th data-header="price" class="clickable">Price</th>
-                    <th data-header="limit" class="clickable">In Stock</th>
-                    <th>Order</th>
-                </tr>
-            </thead>
-            <tbody id="products">
+        <div class="table-layout table-styled table-zebra" id="main-table">
+            <div class="thead">
+                <div class="table-heading" id="table-header">
+                        <div class="table-cell">#</div>
+                        <div data-header="id" class="clickable table-cell">Id</div>
+                        <div data-header="name" class="clickable table-cell">Product</div>
+                        <div data-header="image" class="clickable table-cell">Image</div>
+                        <div data-header="description" class="clickable table-cell">Description</div>
+                        <div data-header="price" class="clickable table-cell">Price</div>
+                        <div data-header="limit" class="clickable table-cell">In Stock</div>
+                        <div class="table-cell">Order</div>
+                </div>
+            </div>
+            <div id="products" class="tbody">
 
-            </tbody>
-        </table>
+            </div>
+        </div>
     </main>
     <footer>
 
