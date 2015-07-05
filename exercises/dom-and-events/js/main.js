@@ -442,6 +442,8 @@ ProductList.Main = (function(){
             i = 0,
             page = 0;
 
+        navElement.className = "pagination-container";
+
         for(i ; i < pages; i++){
             page = i + 1;
             inner += '<li><a href="#" data-pagenum="' + page + '">' + page + '</a></li>';
@@ -454,7 +456,7 @@ ProductList.Main = (function(){
 
         attachPagerEvent(navElement);
 
-        lastNav = document.querySelector('nav');
+        lastNav = document.querySelector('.pagination-container');
         if (lastNav){
             lastNav.remove();
         }

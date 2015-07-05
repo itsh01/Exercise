@@ -10,6 +10,7 @@
 
 .cart {
     float: right;
+    margin: 1rem;
 }
 
 /*items summery*/
@@ -19,20 +20,25 @@
     top: 20rem;
     right: 0;
     background-color: #F9F9F9;
+    font-size: 1rem;
 }
 .items-summery ul {
     list-style: none;
-    margin: 1rem;
-    padding: 1rem;
+    margin: 0.5rem;
+    padding: 0.5rem;
 }
 
 /*pagination*/
 
-nav .pagination {
+.pagination-container {
     float: left;
-    margin-top: 0;
+}
+
+.pagination-container .pagination {
+    margin: 1rem;
 }
 
 .per-page-selection {
-    margin: 0.6rem;
+    vertical-align: top;
+    margin: 1.6rem 0;
 }
