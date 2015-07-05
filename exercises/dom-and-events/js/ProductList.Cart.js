@@ -32,15 +32,15 @@ ProductList.Cart = (function() {
 
     function addCash(moreCash){
         cash += moreCash;
-        updateCart();
+        updateTotalPrice();
     }
 
     function removeCash(moreCash){
         cash -= moreCash;
-        updateCart();
+        updateTotalPrice();
     }
 
-    function updateCart(){
+    function updateTotalPrice(){
         var cartInput = document.getElementById('cart-input');
 
         cartInput.value = cash;
@@ -66,7 +66,7 @@ ProductList.Cart = (function() {
     subscribeToPubSub();
 
     return {
-        updateCart: updateCart,
+        updateCart: updateTotalPrice,
         addCash: addCash,
         removeCash: removeCash,
         addItem: addItem,

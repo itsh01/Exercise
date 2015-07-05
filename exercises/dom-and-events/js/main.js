@@ -273,25 +273,33 @@ ProductList.Main = (function(){
         updateOrderInputs();
     }
 
-    /**
-     *  Initialize table by products list
-     *
-     * @param table {Element} - DOMElement table to add to
-     * @param items {Array} - Items to display
-     * @param order {Array} - Item's properties display order
-     */
-    function drawTable(table, items, order){
-        var i,
+    function createTableRowElements(items, columnsOrder) {
+        var i = 0,
             numOfItemInPage = (items.length > itemsPerPage) ? itemsPerPage : items.length,
-            tableRowElements = document.createDocumentFragment();
+            tableRowsFragment = document.createDocumentFragment();
 
-        for (i = 0; i < numOfItemInPage; i++){
-            tableRowElements.appendChild(
-                createRowByItem( items[i], order, numOfItemInPage)
+        for (i; i < numOfItemInPage; i++) {
+            tableRowsFragment.appendChild(
+                createRowByItem(items[i], columnsOrder, numOfItemInPage)
             );
         }
 
-        table.appendChild(tableRowElements);
+        return tableRowsFragment;
+    }
+
+    /**
+     *  Initialize table by products list
+     *
+     * @param tableElement {Element} - DOMElement table to add to
+     * @param items {Array} - Items to display
+     * @param columnsOrder {Array} - Item's properties display order
+     */
+    function populateTableElement(tableElement, items, columnsOrder){
+        var i,
+            tableRowsFragment = null;
+
+        tableRowsFragment = createTableRowElements(items, columnsOrder);
+        tableElement.appendChild(tableRowsFragment);
 
         fixTableState();
     }
@@ -356,7 +364,9 @@ ProductList.Main = (function(){
 
         selectElement.innerHTML = createNumberOptions(1,numOfItems+1);
 
-        selectElement.setAttribute("onchange", "ProductList.Main.handleChange(this)");
+        selectElement.addEventListener('change', function(){
+            handleChange(this);
+        });
 
         newCellElement.className = "table-cell selectOrder";
         newCellElement.appendChild(selectElement);
@@ -372,10 +382,11 @@ ProductList.Main = (function(){
      * @returns {String} - html options string
      */
     function createNumberOptions(from, to) {
-        var htmlString = '';
+        var htmlString = '',
+            i = from;
 
-        for (from; from < to; from++) {
-            htmlString += '<option value="' + from + '">' + from + '</option>';
+        for (i; i < to; i++) {
+            htmlString += '<option value="' + i + '">' + i + '</option>';
         }
 
         return htmlString;
@@ -388,7 +399,7 @@ ProductList.Main = (function(){
      * @returns {Array} - array of items
      */
     function convertToArray(collection){
-        return Array.prototype.slice.call(collection);
+        return [].slice.call(collection);
     }
 
     /**
@@ -399,15 +410,15 @@ ProductList.Main = (function(){
     function attachPagerEvent(navElement) {
         var i = 0,
             pageNum = 0,
-            anchorElements = convertToArray(navElement.querySelectorAll('[data-pagenum]')),
-            anchorsLength = anchorElements.length;
+            pageLinks = convertToArray(navElement.querySelectorAll('[data-pagenum]')),
+            anchorsLength = pageLinks.length;
 
         for (i; i < anchorsLength; i++) {
-            pageNum = anchorElements[i].dataset['pagenum'];
-            anchorElements[i].addEventListener('moveToPageEvent', moveToPage.bind(anchorElements[i], pageNum));
-            anchorElements[i].onclick = function () {
+            pageNum = pageLinks[i].dataset['pagenum'];
+            pageLinks[i].addEventListener('moveToPageEvent', moveToPage.bind(null, pageNum));
+            pageLinks[i].addEventListener('click', function(){
                 this.dispatchEvent(moveToPageEvent);
-            }
+            });
         }
     }
 
@@ -416,7 +427,7 @@ ProductList.Main = (function(){
      */
     function setNumPerPageElementState() {
         var numPerPageElement = document.getElementById('items-per-page');
-        numPerPageElement.onchange = changeItemsPerPage;
+        numPerPageElement.addEventListener('change', changeItemsPerPage);
         numPerPageElement.value = itemsPerPage;
     }
 
@@ -481,7 +492,7 @@ ProductList.Main = (function(){
      *  Change num of items per page
      */
     function changeItemsPerPage(){
-        itemsPerPage = parseInt(this.value);
+        itemsPerPage = parseInt(this.value, 10);
         createPager(products);
         moveToPage(1);
     }
@@ -525,9 +536,18 @@ ProductList.Main = (function(){
      * @param page {Number} - Page to switch to
      */
     function moveToPage(page){
-        tbody.innerHTML = '';
-        drawTable(tbody, products.slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage), order);
+        deleteElementContent(tbody);
+        populateTableElement(tbody, products.slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage), order);
         currentPage = page;
+    }
+
+    /**
+     *  set innerHTML of an element to ''
+     *
+     * @param element {Element} - DOMElement to delete its content
+     */
+    function deleteElementContent(element){
+        element.innerHTML = '';
     }
 
     /**
@@ -537,7 +557,7 @@ ProductList.Main = (function(){
      */
     function handleChange(selectElement){
 
-        var selectedOption = parseInt(selectElement.selectedOptions[0].value),
+        var selectedOption = parseInt(selectElement.selectedOptions[0].value, 10),
             tbody = document.getElementById("products"),
             rowToBeMoved = tbody.removeChild(selectElement.parentElement.parentElement),
             toBeReplacedWith;
@@ -559,10 +579,11 @@ ProductList.Main = (function(){
      */
     function fixRowSelections(){
         var rows = document.getElementById("products").children,
-            i = rows.length-1;
+            rowsLength = rows.length,
+            i;
 
-        for( i; i >= 0; i-- ){
-           rows[i].querySelector(".selectOrder select").selectedIndex = rows[i].sectionRowIndex;
+        for( i = 0; i < rowsLength; i++ ){
+           rows[i].querySelector(".selectOrder select").selectedIndex = i;
         }
     }
 
@@ -589,7 +610,7 @@ ProductList.Main = (function(){
 
         for (inputIndex; inputIndex >= 0; inputIndex--){
             itemId = inputElements[inputIndex].dataset['itemid'];
-            itemCount = parseInt( ProductList.Cart.getItemCount(itemId) );
+            itemCount = parseInt( ProductList.Cart.getItemCount(itemId), 10 );
             inputElements[inputIndex].value = itemCount;
         }
 
@@ -606,7 +627,7 @@ ProductList.Main = (function(){
      * @returns {boolean} - is exceeding limit
      */
     function exceedingItemLimit(addOrRemove, inputElement, item) {
-        var inputElementValue = parseInt(inputElement.value),
+        var inputElementValue = parseInt(inputElement.value, 10),
             exceedingTopLimit = (addOrRemove > 0 && inputElementValue === item.limit),
             exceedingBottomLimit = (addOrRemove < 0 && inputElementValue === 0);
 
@@ -639,7 +660,8 @@ ProductList.Main = (function(){
      *  Publish itemUpdate event when add/remove to cart
      */
     function attachOrderAddRemoveEvent() {
-        table.onclick = function (e) {
+
+        table.addEventListener('click', function(e){
             var targetButtonElement = e.target,
                 inputElement = null,
                 item = null,
@@ -651,8 +673,8 @@ ProductList.Main = (function(){
 
                 inputElement = targetButtonElement.parentElement.querySelector('[data-itemid]');
                 item = getItemById(inputElement.dataset['itemid']);
-                addOrRemove = parseInt(targetButtonElement.dataset['action']);
-                valueToAdd = parseInt(item.price) * addOrRemove;
+                addOrRemove = parseInt(targetButtonElement.dataset['action'], 10);
+                valueToAdd = parseInt(item.price, 10) * addOrRemove;
                 inputElement.value = inputElement.value || 0;
 
                 if (exceedingItemLimit(addOrRemove, inputElement, item)) {
@@ -660,10 +682,10 @@ ProductList.Main = (function(){
                 }
 
                 ProductList.PubSub.publish("itemUpdated", [item.id, valueToAdd]);
-                inputElement.value = parseInt(inputElement.value) + addOrRemove;
+                inputElement.value = parseInt(inputElement.value, 10) + addOrRemove;
             }
 
-        }
+        });
     }
 
     /**
@@ -672,14 +694,14 @@ ProductList.Main = (function(){
     function attachSortEvent(){
         var thead = document.getElementById('table-header');
 
-        thead.onclick = function(e){
+        thead.addEventListener('click', function(e){
             var targetHeaderElement = e.target,
                 columnHeader = targetHeaderElement.dataset["header"];
 
             if (columnHeader){
                 ProductList.PubSub.publish('itemsSorted', [columnHeader]);
             }
-        }
+        });
     }
 
 
@@ -702,23 +724,34 @@ ProductList.Main = (function(){
      * @param property {String} - property to order by
      */
     function drawSortedItems(property){
-        tbody.innerHTML = '';
-        drawTable(tbody, sortItemsByProperty(products, property), order);
+        deleteElementContent(tbody);
+        populateTableElement(tbody, sortItemsByProperty(products, property), order);
         moveToPage(currentPage);
     }
 
     /**
      *  Subscribe events to suitable functions
      */
-    function subscribeToPubSub(){
-        ProductList.PubSub.subscribe('itemsSorted', drawSortedItems);
-        ProductList.PubSub.subscribe('itemUpdated', updateCart);
+    function subscribeToPubSub() {
+        var eventName = null,
+            eventFunction = null,
+            eventFunctions = {
+            'itemsSorted': drawSortedItems,
+            'itemUpdated': updateCart
+        };
+
+        for (eventName in eventFunctions){
+            if (eventFunctions.hasOwnProperty(eventName)){
+                eventFunction = eventFunctions[eventName];
+                ProductList.PubSub.subscribe(eventName, eventFunction);
+            }
+        }
     }
 
     /**
      *  Attach events to suitable items
      */
-    function publishEvents(){
+    function attachEvents(){
         attachOrderAddRemoveEvent();
         attachSortEvent();
     }
@@ -728,7 +761,7 @@ ProductList.Main = (function(){
      */
     function init(){
         subscribeToPubSub();
-        publishEvents();
+        attachEvents();
         moveToPage(1);
         createPager(products);
         createCart();
