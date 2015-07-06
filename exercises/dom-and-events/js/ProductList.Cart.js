@@ -10,40 +10,48 @@ ProductList.Cart = (function() {
     'use strict';
 
     var cash = 0,
-        items = {};
+        items = {},
+        products = ProductList.Mock;
 
-    function addItem(id, price){
+    function addItem(id){
         items[id] = items[id] || 0;
         items[id] += 1;
-        addCash(price);
+        updateTotalPrice();
     }
 
-    function removeItem(id, price){
+    function removeItem(id){
         items[id] = items[id] || 0;
         if (items[id] > 0){
             items[id] -= 1;
-            removeCash(price);
+            updateTotalPrice();
         }
     }
 
     function updateItem(id, price){
-        (price > 0) ? addItem(id, price) : removeItem(id, -price);
+        (price > 0) ? addItem(id) : removeItem(id);
     }
 
-    function addCash(moreCash){
-        cash += moreCash;
-        updateTotalPrice();
-    }
+    function getTotalPrice(){
+        var key = '',
+            totalPrice = 0,
+            item;
 
-    function removeCash(moreCash){
-        cash -= moreCash;
-        updateTotalPrice();
+        for (key in items){
+            if (items.hasOwnProperty(key)){
+                item = ProductList.Utils.getItemById(products, key);
+                totalPrice += parseInt(item.price, 10) * items[key];
+            }
+        }
+
+        return totalPrice;
     }
 
     function updateTotalPrice(){
-        var cartInput = document.getElementById('cart-input');
+        var cartInput = document.getElementById('cart-input'),
+            totalPrice = getTotalPrice();
 
-        cartInput.value = cash;
+        cash = totalPrice;
+        cartInput.value = totalPrice;
     }
 
     function getItemCount(itemId){
@@ -67,12 +75,11 @@ ProductList.Cart = (function() {
 
     return {
         updateCart: updateTotalPrice,
-        addCash: addCash,
-        removeCash: removeCash,
         addItem: addItem,
         removeItem: removeItem,
         updateItem: updateItem,
         getItemCount: getItemCount,
-        getItemsSummary: getItemsSummary
+        getItemsSummary: getItemsSummary,
+        getTotalPrice: getTotalPrice
     }
 })();
