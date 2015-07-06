@@ -441,8 +441,7 @@ ProductList.Main = (function(){
                     return;
                 }
 
-                ProductList.PubSub.publish("itemUpdated", [item.id, addOrRemove]);
-                //inputElement.value = parseInt(inputElement.value, 10) + addOrRemove;
+                ProductList.Cart.updateItem(item.id, addOrRemove);
             }
 
         });

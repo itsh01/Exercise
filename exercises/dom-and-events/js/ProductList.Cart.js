@@ -43,10 +43,8 @@ ProductList.Cart = (function() {
      * @param addOrRemove {Number} - 1/-1 either add or remove accordingly
      */
     function updateItem(id, addOrRemove){
-        if( addOrRemove === null ){
-            updateTotalPrice();
-        }
         (addOrRemove > 0) ? addItem(id) : removeItem(id);
+        ProductList.PubSub.publish('itemUpdated', [id]);
     }
 
     /**
@@ -101,17 +99,13 @@ ProductList.Cart = (function() {
      *  Subscribe events to run when changes happen in cart
      */
     function subscribeToPubSub(){
-        ProductList.PubSub.subscribe('itemUpdated', updateItem);
-        ProductList.PubSub.subscribe('itemAdded', addItem);
-        ProductList.PubSub.subscribe('itemRemoved', removeItem);
+        ProductList.PubSub.subscribe('itemUpdated', updateTotalPrice);
     }
 
     subscribeToPubSub();
 
     return {
         updateCart: updateTotalPrice,
-        addItem: addItem,
-        removeItem: removeItem,
         updateItem: updateItem,
         getItemCount: getItemCount,
         getItemsSummary: getItemsSummary,
