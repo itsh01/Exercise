@@ -241,7 +241,7 @@ ProductList.Main = (function(){
 
     var table = document.getElementById('main-table'),
         tbody = document.getElementById('products'),
-        order = getOrder(table),
+        columnsOrder = getColumnsOrder(table),
         moveToPageEvent = new CustomEvent('moveToPageEvent'),
         itemsPerPage = 5,
         currentPage = 1;
@@ -252,7 +252,7 @@ ProductList.Main = (function(){
      * @param table {Element} - DOMElement table read the display from
      * @returns {Array} - display order
      */
-    function getOrder(table){
+    function getColumnsOrder(table){
         var tableHeaders = table.querySelectorAll('[data-header]'),
             tableHeaderLength = tableHeaders.length,
             itemAttributesDisplayOrder = [],
@@ -295,8 +295,7 @@ ProductList.Main = (function(){
      * @param columnsOrder {Array} - Item's properties display order
      */
     function populateTableElement(tableElement, items, columnsOrder){
-        var i,
-            tableRowsFragment = null;
+        var tableRowsFragment = null;
 
         tableRowsFragment = createTableRowElements(items, columnsOrder);
         tableElement.appendChild(tableRowsFragment);
@@ -537,7 +536,7 @@ ProductList.Main = (function(){
      */
     function moveToPage(page){
         deleteElementContent(tbody);
-        populateTableElement(tbody, products.slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage), order);
+        populateTableElement(tbody, products.slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage), columnsOrder);
         currentPage = page;
     }
 
@@ -725,7 +724,7 @@ ProductList.Main = (function(){
      */
     function drawSortedItems(property){
         deleteElementContent(tbody);
-        populateTableElement(tbody, sortItemsByProperty(products, property), order);
+        populateTableElement(tbody, sortItemsByProperty(products, property), columnsOrder);
         moveToPage(currentPage);
     }
 
