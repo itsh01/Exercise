@@ -32,9 +32,23 @@ ProductList.Utils = (function() {
         });
     }
 
+    /**
+     *  Get specific item by its ID from an array of items
+     *
+     * @param items {Array} - array of items to search in
+     * @param itemId {String} - item identified
+     * @returns {Object} - matching item from products
+     */
+    function getItemById(items, itemId) {
+        return items.filter(function (item) {
+            return item.id == itemId;
+        }).pop();
+    }
+
     return {
         convertToArray: convertToArray,
-        sortItemsByProperty: sortItemsByProperty
+        sortItemsByProperty: sortItemsByProperty,
+        getItemById: getItemById
     };
 
 })();

@@ -286,7 +286,7 @@ ProductList.Main = (function(){
         inner += '<ul>';
         for (id in itemsSummary){
             if (itemsSummary.hasOwnProperty(id) && itemsSummary[id] !== 0){
-                item = getItemById(id);
+                item = ProductList.Utils.getItemById(products, id);
                 inner += '<li>' + itemsSummary[id] + ' - ' + item.name + '</li>';
             }
         }
@@ -417,18 +417,6 @@ ProductList.Main = (function(){
     }
 
     /**
-     *  Get specific product by its ID
-     *
-     * @param itemId {String} - item identified
-     * @returns {Object} - matching item from products
-     */
-    function getItemById(itemId) {
-        return products.filter(function (item) {
-            return item.id == itemId;
-        }).pop();
-    }
-
-    /**
      *  Publish itemUpdate event when add/remove to cart
      */
     function attachOrderAddRemoveEvent() {
@@ -444,7 +432,7 @@ ProductList.Main = (function(){
             if (isChangeButton(targetButtonElement)) {
 
                 inputElement = targetButtonElement.parentElement.querySelector('[data-itemid]');
-                item = getItemById(inputElement.dataset['itemid']);
+                item = ProductList.Utils.getItemById(products, inputElement.dataset['itemid']);
                 addOrRemove = parseInt(targetButtonElement.dataset['action'], 10);
                 valueToAdd = parseInt(item.price, 10) * addOrRemove;
                 inputElement.value = inputElement.value || 0;
