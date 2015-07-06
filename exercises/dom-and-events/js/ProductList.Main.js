@@ -273,6 +273,13 @@ ProductList.Main = (function(){
         updateOrderInputs();
     }
 
+    /**
+     *  Create a fragment of rows elements by items
+     *
+     * @param items {Array} - items to create rows by
+     * @param columnsOrder {Array} - order of items' properties
+     * @returns {DocumentFragment} - fragment of rows
+     */
     function createTableRowElements(items, columnsOrder) {
         var i = 0,
             numOfItemInPage = (items.length > itemsPerPage) ? itemsPerPage : items.length,
@@ -392,16 +399,6 @@ ProductList.Main = (function(){
     }
 
     /**
-     *  Convert a collection of items to array
-     *
-     * @param collection {Object} - collection
-     * @returns {Array} - array of items
-     */
-    function convertToArray(collection){
-        return [].slice.call(collection);
-    }
-
-    /**
      *  Attach moving to another page when clicked on pager
      *
      * @param navElement {Element} - pager nav element
@@ -409,7 +406,7 @@ ProductList.Main = (function(){
     function attachPagerEvent(navElement) {
         var i = 0,
             pageNum = 0,
-            pageLinks = convertToArray(navElement.querySelectorAll('[data-pagenum]')),
+            pageLinks = ProductList.Utils.convertToArray(navElement.querySelectorAll('[data-pagenum]')),
             anchorsLength = pageLinks.length;
 
         for (i; i < anchorsLength; i++) {
@@ -703,28 +700,16 @@ ProductList.Main = (function(){
         });
     }
 
-
-    /**
-     *  Sort array of items by requested property
-     *
-     * @param items {Array} - items to be sorted
-     * @param propertyName {String} - property name to sort by
-     * @returns {Array} - array sorted by requested property
-     */
-    function sortItemsByProperty(items, propertyName){
-        return items.sort(function(a,b){
-            return (a[propertyName] > b[propertyName]) ? 1 : -1;
-        });
-    }
-
     /**
      *  Draw table with sorted items by requested property
      *
      * @param property {String} - property to order by
      */
     function drawSortedItems(property){
+        var sortedItems = ProductList.Utils.sortItemsByProperty(products, property);
+
         deleteElementContent(tbody);
-        populateTableElement(tbody, sortItemsByProperty(products, property), columnsOrder);
+        populateTableElement(tbody, sortedItems, columnsOrder);
         moveToPage(currentPage);
     }
 
