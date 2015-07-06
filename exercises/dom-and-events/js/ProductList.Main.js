@@ -511,6 +511,7 @@ ProductList.Main = (function(){
         moveToPage(1);
         createPager(products);
         createCart();
+        ProductList.Themes.createThemeChanger();
     }
 
     init();
