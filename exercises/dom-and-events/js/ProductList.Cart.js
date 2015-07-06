@@ -40,10 +40,13 @@ ProductList.Cart = (function() {
      *  Update items count
      *
      * @param id {String} - id of added/removed item
-     * @param price {Number} - price of item
+     * @param addOrRemove {Number} - 1/-1 either add or remove accordingly
      */
-    function updateItem(id, price){
-        (price > 0) ? addItem(id) : removeItem(id);
+    function updateItem(id, addOrRemove){
+        if( addOrRemove === null ){
+            updateTotalPrice();
+        }
+        (addOrRemove > 0) ? addItem(id) : removeItem(id);
     }
 
     /**

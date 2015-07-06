@@ -434,18 +434,29 @@ ProductList.Main = (function(){
                 inputElement = targetButtonElement.parentElement.querySelector('[data-itemid]');
                 item = ProductList.Utils.getItemById(products, inputElement.dataset['itemid']);
                 addOrRemove = parseInt(targetButtonElement.dataset['action'], 10);
-                valueToAdd = parseInt(item.price, 10) * addOrRemove;
+                //valueToAdd = parseInt(item.price, 10) * addOrRemove;
                 inputElement.value = inputElement.value || 0;
 
                 if (exceedingItemLimit(addOrRemove, inputElement, item)) {
                     return;
                 }
 
-                ProductList.PubSub.publish("itemUpdated", [item.id, valueToAdd]);
-                inputElement.value = parseInt(inputElement.value, 10) + addOrRemove;
+                ProductList.PubSub.publish("itemUpdated", [item.id, addOrRemove]);
+                //inputElement.value = parseInt(inputElement.value, 10) + addOrRemove;
             }
 
         });
+    }
+
+    /**
+     *  Update current amount of ordered item in the suitable input
+     *
+     * @param id {String} - item id to update its input
+     */
+    function updateItemAmountInput(id){
+        var itemAmountInputElement = document.querySelector('[data-itemid="'+id+'"]');
+
+        itemAmountInputElement.value = ProductList.Cart.getItemCount(id);
     }
 
     /**
@@ -480,16 +491,18 @@ ProductList.Main = (function(){
      */
     function subscribeToPubSub() {
         var eventName = null,
-            eventFunction = null,
+            i = 0,
+            eventFunctionList = [],
             eventFunctions = {
-            'itemsSorted': drawSortedItems,
-            'itemUpdated': updateCart
+            'itemsSorted': [drawSortedItems],
+            'itemUpdated': [updateCart, updateItemAmountInput]
         };
 
         for (eventName in eventFunctions){
             if (eventFunctions.hasOwnProperty(eventName)){
-                eventFunction = eventFunctions[eventName];
-                ProductList.PubSub.subscribe(eventName, eventFunction);
+                eventFunctionList = eventFunctions[eventName];
+                for (i=0 ; i < eventFunctionList.length; i++)
+                ProductList.PubSub.subscribe(eventName, eventFunctionList[i]);
             }
         }
     }
