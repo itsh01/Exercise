@@ -15,7 +15,9 @@ ProductList.Main = (function(){
     ///////
 
     var table = document.getElementById('main-table'),
+        tableHeaders = table.querySelectorAll('[data-header]'),
         tbody = document.getElementById('products'),
+        thead = document.getElementById('table-header'),
         columnsOrder = getColumnsOrder(table),
         moveToPageEvent = new CustomEvent('moveToPageEvent'),
         itemsPerPage = 5,
@@ -27,9 +29,8 @@ ProductList.Main = (function(){
      * @param table {Element} - DOMElement table read the display from
      * @returns {Array} - display order
      */
-    function getColumnsOrder(table){
-        var tableHeaders = table.querySelectorAll('[data-header]'),
-            tableHeaderLength = tableHeaders.length,
+    function getColumnsOrder(){
+        var tableHeaderLength = tableHeaders.length,
             itemAttributesDisplayOrder = [],
             i;
 
@@ -463,8 +464,6 @@ ProductList.Main = (function(){
      *  Publish sort event when header is clicked
      */
     function attachSortEvent(){
-        var thead = document.getElementById('table-header');
-
         thead.addEventListener('click', function(e){
             var targetHeaderElement = e.target,
                 columnHeader = targetHeaderElement.dataset["header"];
