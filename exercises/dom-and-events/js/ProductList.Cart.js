@@ -9,16 +9,25 @@ var ProductList = ProductList || {};
 ProductList.Cart = (function() {
     'use strict';
 
-    var cash = 0,
-        items = {},
+    var items = {},
         products = ProductList.Mock;
 
+    /**
+     *  Add item to cart
+     *
+     * @param id {String} - id of added item
+     */
     function addItem(id){
         items[id] = items[id] || 0;
         items[id] += 1;
         updateTotalPrice();
     }
 
+    /**
+     *  Remove item to cart
+     *
+     * @param id {String} - id of removed item
+     */
     function removeItem(id){
         items[id] = items[id] || 0;
         if (items[id] > 0){
@@ -27,10 +36,21 @@ ProductList.Cart = (function() {
         }
     }
 
+    /**
+     *  Update items count
+     *
+     * @param id {String} - id of added/removed item
+     * @param price {Number} - price of item
+     */
     function updateItem(id, price){
         (price > 0) ? addItem(id) : removeItem(id);
     }
 
+    /**
+     *  Calculate the total price
+     *
+     * @returns {Number} - total price
+     */
     function getTotalPrice(){
         var key = '',
             totalPrice = 0,
@@ -46,30 +66,42 @@ ProductList.Cart = (function() {
         return totalPrice;
     }
 
+    /**
+     *  Update the total price in the ui
+     */
     function updateTotalPrice(){
-        var cartInput = document.getElementById('cart-input'),
-            totalPrice = getTotalPrice();
+        var cartInput = document.getElementById('cart-input');
 
-        cash = totalPrice;
-        cartInput.value = totalPrice;
+        cartInput.value = getTotalPrice();
     }
 
+    /**
+     *  Get number of requested items from specific type
+     *
+     * @param itemId {String} - item id
+     * @returns {Number} - count order from specific item
+     */
     function getItemCount(itemId){
         return items[itemId];
     }
 
+    /**
+     *  Get total cart items order
+     *
+     * @returns {Object} - items order
+     */
     function getItemsSummary(){
         return items;
     }
 
+    /**
+     *  Subscribe events to run when changes happen in cart
+     */
     function subscribeToPubSub(){
         ProductList.PubSub.subscribe('itemUpdated', updateItem);
         ProductList.PubSub.subscribe('itemAdded', addItem);
         ProductList.PubSub.subscribe('itemRemoved', removeItem);
     }
-
-
-
 
     subscribeToPubSub();
 

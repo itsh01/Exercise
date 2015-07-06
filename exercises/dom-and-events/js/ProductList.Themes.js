@@ -14,6 +14,11 @@ ProductList.Themes = (function() {
         body = document.querySelector('body');
 
 
+    /**
+     *  Set a different theme
+     *
+     * @param themeName {String} - theme name to set
+     */
     function changeTheme(themeName){
         if (themes.indexOf(themeName) === -1){
             return;
@@ -23,6 +28,9 @@ ProductList.Themes = (function() {
         body.className = themeName;
     }
 
+    /**
+     *  Create a theme changer widget
+     */
     function createThemeChanger(){
         var selectElement = document.createElement("select"),
             optionElement = null,
