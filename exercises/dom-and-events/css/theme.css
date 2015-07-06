@@ -6,3 +6,24 @@
     top: 0;
     left: 0;
 }
+
+/*theme-black*/
+
+.black {
+    background: radial-gradient(#000, #525252);
+    color: #9A9A9A;
+}
+
+.black select{
+    color: #111;
+}
+
+.black .table-styled.table-zebra .table-row:nth-child(odd) {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.black .btn-primary {
+    color: #fff;
+    background-color: #5B778F;
+    border-color: #394A5A;
+}
