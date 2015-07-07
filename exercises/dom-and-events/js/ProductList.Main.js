@@ -469,7 +469,7 @@ ProductList.Main = (function(){
                 columnHeader = targetHeaderElement.dataset["header"];
 
             if (columnHeader){
-                ProductList.Utils.sortItemsByProperty(products, columnHeader);
+                ProductList.Utils.sortItemObjectsByProperty(products, columnHeader);
                 ProductList.PubSub.publish('itemsSorted', []);
             }
         });
