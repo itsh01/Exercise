@@ -41,7 +41,7 @@ ProductList.Utils = (function() {
      */
     function getItemById(items, itemId) {
         return items.filter(function (item) {
-            return item.id == itemId;
+            return item.data.id == itemId;
         }).pop();
     }
 

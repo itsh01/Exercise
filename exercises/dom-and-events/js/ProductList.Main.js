@@ -10,7 +10,8 @@ ProductList.Main = (function(){
     'use strict';
 
     // mock items
-    var products = ProductList.Mock;
+    //var products = ProductList.Mock;
+    var products = ProductList.Store.getProducts();
 
     ///////
 
@@ -90,25 +91,28 @@ ProductList.Main = (function(){
      *  Create a single row by single item
      *
      * @param item {Object} - item to create row by
-     * @param order {Array} - item's properties display oreder
+     * @param columnsOrder {Array} - item's properties display oreder
      * @param numOfItems {Number} - number if items
      * @returns {Element} - DOMElement row of item
      */
-    function createRowByItem(item, order, numOfItems){
+    function createRowByItem(item, columnsOrder, numOfItems){
         var row = document.createElement('div'),
-            cell,
-            i;
+            cell = null,
+            numOfColumns = columnsOrder.length,
+            i = 0,
+            key = null;
 
         row.className = "table-row";
 
-        for (i in order){
+        for (i; i < numOfColumns; i++){
+            key = columnsOrder[i];
             cell = document.createElement('div');
-            cell.innerHTML = item[ order[i] ];
-            cell.className = "table-cell item-" + order[i];
+            cell.innerHTML = item.data[key];
+            cell.className = "table-cell item-" + key;
             row.appendChild(cell);
         }
 
-        row.appendChild(getOrderButtonCell(item['id']));
+        row.appendChild(getOrderButtonCell(item.data.id));
 
         createSelectInRow(row, numOfItems);
 
@@ -287,7 +291,7 @@ ProductList.Main = (function(){
         for (id in itemsSummary){
             if (itemsSummary.hasOwnProperty(id) && itemsSummary[id] !== 0){
                 item = ProductList.Utils.getItemById(products, id);
-                inner += '<li>' + itemsSummary[id] + ' - ' + item.name + '</li>';
+                inner += '<li>' + itemsSummary[id] + ' - ' + item.data.name + '</li>';
             }
         }
         inner += '</ul>';
@@ -400,7 +404,7 @@ ProductList.Main = (function(){
      */
     function exceedingItemLimit(addOrRemove, inputElement, item) {
         var inputElementValue = parseInt(inputElement.value, 10),
-            exceedingTopLimit = (addOrRemove > 0 && inputElementValue === item.limit),
+            exceedingTopLimit = (addOrRemove > 0 && inputElementValue === item.data.limit),
             exceedingBottomLimit = (addOrRemove < 0 && inputElementValue === 0);
 
         return exceedingBottomLimit || exceedingTopLimit;
@@ -439,7 +443,7 @@ ProductList.Main = (function(){
                     return;
                 }
 
-                ProductList.Cart.updateItem(item.id, addOrRemove);
+                ProductList.Cart.updateItem(item.data.id, addOrRemove);
             }
 
         });
