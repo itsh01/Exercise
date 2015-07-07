@@ -58,10 +58,21 @@ ProductList.Utils = (function() {
         }).pop();
     }
 
+    /**
+     *  Get random floored number between 0 and chosen range-1
+     *
+     * @param range {number} - top limit
+     * @returns {number} - random number
+     */
+    function getRandom(range){
+        return Math.floor( Math.random() * range );
+    }
+
     return {
         convertToArray: convertToArray,
         sortItemsByProperty: sortItemsByProperty,
         sortItemObjectsByProperty: sortItemObjectsByProperty,
+        getRandom: getRandom,
         getItemById: getItemById
     };
 

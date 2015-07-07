@@ -102,7 +102,10 @@ ProductList.Main = (function(){
             i = 0,
             key = null;
 
-        row.className = "table-row";
+        row.className += " table-row";
+        if (item instanceof ProductList.Store.ItemOnSale){
+            row.className += ' item-on-sale';
+        }
 
         for (i; i < numOfColumns; i++){
             key = columnsOrder[i];
@@ -115,6 +118,7 @@ ProductList.Main = (function(){
         row.appendChild(getAddRemoveButtonsCell(item.getId()));
 
         createSelectInRow(row, numOfItems);
+
 
         return row;
     }

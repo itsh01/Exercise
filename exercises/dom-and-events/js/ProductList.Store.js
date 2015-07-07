@@ -17,7 +17,8 @@ ProductList.Store = (function() {
     //    "limit": 20
     //}
 
-    var products = ProductList.Mock;
+    var products = ProductList.Mock,
+        itemsTypes = ['default', 'onSale', 'outOfStock'];
 
     //base item
     function Item(data){
@@ -50,15 +51,27 @@ ProductList.Store = (function() {
 
     ItemOnSale.prototype = Object.create(Item.prototype);
 
+    ItemOnSale.prototype.getDiscountPercent = function(){
+        return this.data.discountPercent;
+    };
     ItemOnSale.prototype.getPrice = function(){
         var originalPrice = parseInt(this.data.price, 10);
-        return originalPrice - this.data.discountPercent / 100 * originalPrice;
+        return originalPrice - this.getDiscountPercent() / 100 * originalPrice;
     };
 
 
     function covertProductsToObjects(){
         products = products.map(function(data){
-            return new Item(data);
+            var random = ProductList.Utils.getRandom(10);
+
+            if (random < 7){
+                return new Item(data);
+            }
+            else {
+                data.discountPercent = ProductList.Utils.getRandom(50);
+                return new ItemOnSale(data);
+            }
+
         });
     }
 

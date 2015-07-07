@@ -47,6 +47,12 @@
     display: table-row;
 }
 
+.table-row.item-on-sale,
+.table-styled.table-zebra .table-row.item-on-sale,
+.table-styled.table-zebra .table-row.item-on-sale:nth-child(odd){
+    background: #5DCB6F;
+}
+
 .table-cell {
     display: table-cell;
     border: solid;
