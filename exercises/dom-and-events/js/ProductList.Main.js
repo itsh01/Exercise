@@ -112,7 +112,7 @@ ProductList.Main = (function(){
             row.appendChild(cell);
         }
 
-        row.appendChild(getOrderButtonCell(item.data.id));
+        row.appendChild(getAddRemoveButtonsCell(item.getId()));
 
         createSelectInRow(row, numOfItems);
 
@@ -125,7 +125,7 @@ ProductList.Main = (function(){
      * @param itemId {String} - item identifier
      * @returns {Element} - DOMElement button
      */
-    function getOrderButtonCell(itemId){
+    function getAddRemoveButtonsCell(itemId){
         var cellElement = document.createElement('div');
 
         cellElement.className = "table-cell";
@@ -291,7 +291,7 @@ ProductList.Main = (function(){
         for (id in itemsSummary){
             if (itemsSummary.hasOwnProperty(id) && itemsSummary[id] !== 0){
                 item = ProductList.Utils.getItemById(products, id);
-                inner += '<li>' + itemsSummary[id] + ' - ' + item.data.name + '</li>';
+                inner += '<li>' + itemsSummary[id] + ' - ' + item.getName() + '</li>';
             }
         }
         inner += '</ul>';
@@ -404,7 +404,7 @@ ProductList.Main = (function(){
      */
     function exceedingItemLimit(addOrRemove, inputElement, item) {
         var inputElementValue = parseInt(inputElement.value, 10),
-            exceedingTopLimit = (addOrRemove > 0 && inputElementValue === item.data.limit),
+            exceedingTopLimit = (addOrRemove > 0 && inputElementValue === item.getStock()),
             exceedingBottomLimit = (addOrRemove < 0 && inputElementValue === 0);
 
         return exceedingBottomLimit || exceedingTopLimit;
@@ -443,7 +443,7 @@ ProductList.Main = (function(){
                     return;
                 }
 
-                ProductList.Cart.updateItem(item.data.id, addOrRemove);
+                ProductList.Cart.updateItem(item.getId(), addOrRemove);
             }
 
         });
@@ -477,8 +477,6 @@ ProductList.Main = (function(){
 
     /**
      *  Draw table with sorted items by requested property
-     *
-     * @param property {String} - property to order by
      */
     function drawSortedItems(){
         deleteElementContent(tbody);

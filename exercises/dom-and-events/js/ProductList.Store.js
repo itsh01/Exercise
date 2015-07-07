@@ -25,6 +25,12 @@ ProductList.Store = (function() {
     }
 
     Item.prototype = {
+        getId: function(){
+            return this.data.id;
+        },
+        getName: function(){
+            return this.data.name;
+        },
         getPrice: function(){
             return parseInt(this.data.price, 10);
         },

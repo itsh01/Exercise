@@ -58,7 +58,7 @@ ProductList.Cart = (function() {
         for (key in items){
             if (items.hasOwnProperty(key)){
                 item = ProductList.Utils.getItemById(products, key);
-                totalPrice += parseInt(item.data.price, 10) * items[key];
+                totalPrice += parseInt(item.getPrice(), 10) * items[key];
             }
         }
 
