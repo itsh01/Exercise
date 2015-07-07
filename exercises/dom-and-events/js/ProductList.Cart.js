@@ -20,7 +20,6 @@ ProductList.Cart = (function() {
     function addItem(id){
         items[id] = items[id] || 0;
         items[id] += 1;
-        updateTotalPrice();
     }
 
     /**
@@ -32,7 +31,6 @@ ProductList.Cart = (function() {
         items[id] = items[id] || 0;
         if (items[id] > 0){
             items[id] -= 1;
-            updateTotalPrice();
         }
     }
 
