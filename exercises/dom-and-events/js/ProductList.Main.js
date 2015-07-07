@@ -100,10 +100,11 @@ ProductList.Main = (function(){
             cell = null,
             numOfColumns = columnsOrder.length,
             i = 0,
+            itemIsOnSale = item instanceof ProductList.Store.ItemOnSale,
             key = null;
 
         row.className += " table-row";
-        if (item instanceof ProductList.Store.ItemOnSale){
+        if (itemIsOnSale){
             row.className += ' item-on-sale';
         }
 
@@ -111,6 +112,10 @@ ProductList.Main = (function(){
             key = columnsOrder[i];
             cell = document.createElement('div');
             cell.innerHTML = item.data[key];
+            if (itemIsOnSale && key === "price"){
+                cell.innerHTML = '<div class="discounted">' + item.data[key] + '<div>';
+                cell.innerHTML += '<div class="real-price">' + item.getPrice() + '&dollar;<div>';
+            }
             cell.className = "table-cell item-" + key;
             row.appendChild(cell);
         }

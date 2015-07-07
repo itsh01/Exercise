@@ -55,8 +55,10 @@ ProductList.Store = (function() {
         return this.data.discountPercent;
     };
     ItemOnSale.prototype.getPrice = function(){
-        var originalPrice = parseInt(this.data.price, 10);
-        return originalPrice - this.getDiscountPercent() / 100 * originalPrice;
+        var originalPrice = parseInt(this.data.price, 10),
+            discountedPrice = originalPrice - this.getDiscountPercent() / 100 * originalPrice;
+
+        return parseInt(discountedPrice, 10);
     };
 
 

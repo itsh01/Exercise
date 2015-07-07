@@ -6,6 +6,16 @@
     top: 0;
     left: 0;
 }
+.discounted {
+    color: #555555;
+    font-size: 1rem;
+    text-decoration: line-through;
+}
+.real-price {
+    color: #FF3A3A;
+    font-weight: bold;
+}
+
 
 /*theme-black*/
 
