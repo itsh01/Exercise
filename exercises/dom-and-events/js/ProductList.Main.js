@@ -465,7 +465,8 @@ ProductList.Main = (function(){
                 columnHeader = targetHeaderElement.dataset["header"];
 
             if (columnHeader){
-                ProductList.PubSub.publish('itemsSorted', [columnHeader]);
+                ProductList.Utils.sortItemsByProperty(products, columnHeader);
+                ProductList.PubSub.publish('itemsSorted', []);
             }
         });
     }
@@ -475,11 +476,9 @@ ProductList.Main = (function(){
      *
      * @param property {String} - property to order by
      */
-    function drawSortedItems(property){
-        var sortedItems = ProductList.Utils.sortItemsByProperty(products, property);
-
+    function drawSortedItems(){
         deleteElementContent(tbody);
-        populateTableElement(tbody, sortedItems, columnsOrder);
+        populateTableElement(tbody, products, columnsOrder);
         moveToPage(currentPage);
     }
 
