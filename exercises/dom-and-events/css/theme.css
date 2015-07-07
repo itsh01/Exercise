@@ -31,6 +31,9 @@
 .black .table-styled.table-zebra .table-row:nth-child(odd) {
     background: rgba(0, 0, 0, 0.5);
 }
+.black .table-styled.table-zebra .table-row.item-on-sale:nth-child(odd){
+    background: #5DCB6F;
+}
 
 .black .btn-primary {
     color: #fff;
