@@ -425,8 +425,7 @@ ProductList.Main = (function(){
             var targetButtonElement = e.target,
                 inputElement = null,
                 item = null,
-                addOrRemove = null,
-                valueToAdd = 0;
+                addOrRemove = null;
 
 
             if (isChangeButton(targetButtonElement)) {
@@ -434,7 +433,6 @@ ProductList.Main = (function(){
                 inputElement = targetButtonElement.parentElement.querySelector('[data-itemid]');
                 item = ProductList.Utils.getItemById(products, inputElement.dataset['itemid']);
                 addOrRemove = parseInt(targetButtonElement.dataset['action'], 10);
-                //valueToAdd = parseInt(item.price, 10) * addOrRemove;
                 inputElement.value = inputElement.value || 0;
 
                 if (exceedingItemLimit(addOrRemove, inputElement, item)) {
@@ -500,8 +498,9 @@ ProductList.Main = (function(){
         for (eventName in eventFunctions){
             if (eventFunctions.hasOwnProperty(eventName)){
                 eventFunctionList = eventFunctions[eventName];
-                for (i=0 ; i < eventFunctionList.length; i++)
-                ProductList.PubSub.subscribe(eventName, eventFunctionList[i]);
+                for (i=0 ; i < eventFunctionList.length; i++){
+                    ProductList.PubSub.subscribe(eventName, eventFunctionList[i]);
+                }
             }
         }
     }
