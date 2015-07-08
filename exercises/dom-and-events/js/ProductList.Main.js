@@ -102,11 +102,15 @@ ProductList.Main = (function(){
             numOfColumns = columnsOrder.length,
             i = 0,
             itemIsOnSale = item instanceof ProductList.Store.ItemOnSale,
+            itemIsOutOfStock = !item.isInStock(),
             key = null;
 
         row.className += " table-row";
         if (itemIsOnSale){
             row.className += ' item-on-sale';
+        }
+        if (itemIsOutOfStock){
+            row.className += ' item-out-of-stock';
         }
 
         for (i; i < numOfColumns; i++){
@@ -396,7 +400,6 @@ ProductList.Main = (function(){
             descriptionCells[i].innerHTML = '<div>'+descriptionCells[i].innerHTML+'</div>';
         }
     }
-
 
     /**
      *  Update order input elements according to cart

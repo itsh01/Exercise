@@ -28,6 +28,10 @@
     color: #111;
 }
 
+.black .table-row.item-out-of-stock{
+    color: #494848;
+}
+
 .black .table-styled.table-zebra .table-row:nth-child(odd) {
     background: rgba(0, 0, 0, 0.5);
 }

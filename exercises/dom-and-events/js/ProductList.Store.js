@@ -8,19 +8,14 @@ var ProductList = ProductList || {};
 ProductList.Store = (function() {
     'use strict';
 
-    //{
-    //    "id": "55927eac85594c45b02c5963",
-    //    "name": "reprehenderit",
-    //    "image": "http://placehold.it/32x32",
-    //    "description": "Laborum veniam aliquip mollit reprehenderit ad id. Qui mollit amet voluptate consequat eiusmod consequat aliquip mollit minim fugiat nulla laborum dolor. Incididunt laborum elit laborum ad ad reprehenderit laboris consectetur dolor officia occaecat non Lorem.\r\n",
-    //    "price": "2682$",
-    //    "limit": 20
-    //}
-
     var products = ProductList.Mock,
         itemsTypes = ['default', 'onSale', 'outOfStock'];
 
-    //base item
+    /**
+     *  Base Item object
+     * @param data {Object}
+     * @constructor {Item}
+     */
     function Item(data){
         this.data = data;
     }
@@ -44,13 +39,16 @@ ProductList.Store = (function() {
         constructor: Item
     };
 
-    //item on sale
+    /**
+     *  Item on sale object
+     * @param data {Object}
+     * @constructor {ItemOnSale}
+     */
     function ItemOnSale(data){
-        this.data = data;
+        Item.call(this, data);
     }
 
     ItemOnSale.prototype = Object.create(Item.prototype);
-
     ItemOnSale.prototype.getDiscountPercent = function(){
         return this.data.discountPercent;
     };
@@ -61,6 +59,15 @@ ProductList.Store = (function() {
         return parseInt(discountedPrice, 10);
     };
 
+    /**
+     *  Item on sale object
+     * @param data {Object}
+     * @constructor {ItemOutOfStock}
+     */
+    function ItemOutOfStock(data){
+        Item.call(this, data);
+    }
+    ItemOutOfStock.prototype = Object.create(Item.prototype);
 
     function covertProductsToObjects(){
         products = products.map(function(data){
@@ -69,9 +76,13 @@ ProductList.Store = (function() {
             if (random < 7){
                 return new Item(data);
             }
-            else {
+            else if (random < 9){
                 data.discountPercent = ProductList.Utils.getRandom(50);
                 return new ItemOnSale(data);
+            }
+            else {
+                data.limit = 0;
+                return new ItemOutOfStock(data);
             }
 
         });

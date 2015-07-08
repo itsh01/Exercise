@@ -56,6 +56,10 @@
     background: #5DCB6F;
 }
 
+.table-row.item-out-of-stock{
+    color: #BABABA;
+}
+
 .table-cell {
     display: table-cell;
     border: solid;
