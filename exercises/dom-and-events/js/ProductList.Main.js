@@ -541,6 +541,14 @@ ProductList.Main = (function(){
     }
 
     /**
+     *  Refresh page
+     */
+    function refresh(){
+        products = ProductList.Store.getProducts();
+        moveToPage(currentPage);
+    }
+
+    /**
      *  Initialize state
      */
     function init(){
@@ -556,6 +564,7 @@ ProductList.Main = (function(){
 
     return {
       handleChange: handleChange,
+      refresh: refresh,
       moveToPage: moveToPage
     };
 

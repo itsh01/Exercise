@@ -11,6 +11,9 @@ ProductList.Store = (function() {
     var products = ProductList.Mock,
         itemsTypes = ['default', 'onSale', 'outOfStock'];
 
+
+    // objects
+
     /**
      *  Base Item object
      * @param data {Object}
@@ -36,6 +39,9 @@ ProductList.Store = (function() {
         isInStock: function(){
             return this.data.limit > 0;
         },
+        getAllData: function(){
+            return this.data;
+        },
         constructor: Item
     };
 
@@ -49,6 +55,7 @@ ProductList.Store = (function() {
     }
 
     ItemOnSale.prototype = Object.create(Item.prototype);
+    ItemOnSale.prototype.constructor = ItemOnSale;
     ItemOnSale.prototype.getDiscountPercent = function(){
         return this.data.discountPercent;
     };
@@ -68,7 +75,51 @@ ProductList.Store = (function() {
         Item.call(this, data);
     }
     ItemOutOfStock.prototype = Object.create(Item.prototype);
+    ItemOutOfStock.prototype.constructor = ItemOutOfStock;
 
+    function Coupon(code){
+        this.code = code;
+        this.validated = false;
+        this.used = false;
+    }
+
+    Coupon.prototype = {
+        validate: function(code){
+            this.validated = (this.code === code);
+            return this;
+        },
+        constructor: Coupon
+    };
+
+    function CouponDiscount(code, discountPercent){
+        Coupon.call(this, code);
+        this.discountPercent = discountPercent;
+    }
+    CouponDiscount.prototype = Object.create(Coupon.prototype);
+    CouponDiscount.prototype.constructor = CouponDiscount;
+    CouponDiscount.prototype.apply = function(){
+        if (this.validated && !this.used){
+            products = products.map(function (item){
+                if (item instanceof ItemOutOfStock){
+                    return item;
+                }
+                var itemData = item.getAllData()
+                itemData.discountPercent = itemData.discountPercent || 0;
+                itemData.discountPercent += 20;
+                return new ItemOnSale(itemData);
+            });
+            ProductList.Main.refresh();
+            this.used = true;
+        }
+    };
+
+    var coupons = [new CouponDiscount('123', 20)];
+
+    // functions
+
+    /**
+     *  Covert product item literal objects to Item objects
+     */
     function covertProductsToObjects(){
         products = products.map(function(data){
             var random = ProductList.Utils.getRandom(10);
@@ -88,16 +139,37 @@ ProductList.Store = (function() {
         });
     }
 
+    /**
+     *  Get an array of Item objects
+     *
+     * @returns {Array} - array of Item objects
+     */
     function getProducts(){
         return products;
     }
+
+
+    /**
+     *  Get an array of Coupon objects
+     *
+     * @returns {Array} - array of Coupon objects
+     */
+    function getCoupons(){
+        return coupons;
+    }
+
+
 
     covertProductsToObjects();
 
     return {
         Item: Item,
         ItemOnSale: ItemOnSale,
-        getProducts: getProducts
+        ItemOutOfStock: ItemOutOfStock,
+        Coupon: Coupon,
+        CouponDiscount: CouponDiscount,
+        getProducts: getProducts,
+        getCoupons: getCoupons
     };
 
 })();
