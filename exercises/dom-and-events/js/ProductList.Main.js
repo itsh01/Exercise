@@ -47,6 +47,7 @@ ProductList.Main = (function(){
     function fixTableState() {
         fixRowSelections();
         fixImages();
+        fixDescription();
         updateOrderInputs();
     }
 
@@ -383,6 +384,19 @@ ProductList.Main = (function(){
             imageCells[i].innerHTML = '<img src="'+imageCells[i].innerHTML+'" />';
         }
     }
+
+    /**
+     *  Fix description display to be wrapped in a div
+     */
+    function fixDescription(){
+        var descriptionCells = document.querySelectorAll('.item-description'),
+            i = descriptionCells.length-1;
+
+        for (i ; i>=0 ; i--){
+            descriptionCells[i].innerHTML = '<div>'+descriptionCells[i].innerHTML+'</div>';
+        }
+    }
+
 
     /**
      *  Update order input elements according to cart

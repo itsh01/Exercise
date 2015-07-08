@@ -1,8 +1,11 @@
 
 
 .item-description {
+    vertical-align: top;
+}
+.item-description div{
     font-size: 1rem;
-    height: 5rem;
+    height: 4rem;
     overflow: hidden;
     display: block;
     vertical-align: top;
