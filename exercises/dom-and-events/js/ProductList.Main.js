@@ -163,7 +163,7 @@ ProductList.Main = (function(){
             handleChange(this);
         });
 
-        newCellElement.className = "table-cell selectOrder";
+        newCellElement.className = "table-cell select-order";
         newCellElement.appendChild(selectElement);
 
         row.insertBefore(newCellElement, idCellElement);
@@ -368,7 +368,7 @@ ProductList.Main = (function(){
             i;
 
         for( i = 0; i < rowsLength; i++ ){
-           rows[i].querySelector(".selectOrder select").selectedIndex = i;
+           rows[i].querySelector(".select-order select").selectedIndex = i;
         }
     }
 
