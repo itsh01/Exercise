@@ -519,6 +519,7 @@ ProductList.Main = (function(){
             eventFunctionList = [],
             eventFunctions = {
             'itemsSorted': [drawSortedItems],
+            'couponApplied': [refresh],
             'itemUpdated': [updateCart, updateItemAmountInput]
         };
 

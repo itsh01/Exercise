@@ -99,25 +99,35 @@ ProductList.Store = (function() {
     CouponDiscount.prototype.constructor = CouponDiscount;
     CouponDiscount.prototype.apply = function(){
         if (this.validated && !this.used){
-            products = products.map(function (item){
-                if (item instanceof ItemOutOfStock){
-                    return item;
-                }
-                var itemData = item.getAllData()
-                itemData.discountPercent = itemData.discountPercent || 0;
-                itemData.discountPercent += 20;
-                return new ItemOnSale(itemData);
-            });
-            ProductList.Main.refresh();
+            products = products.map(convertItemToOnSale);
+            ProductList.PubSub.publish("couponApplied");
             this.used = true;
             return true;
         }
         return false;
     };
 
+
+
     var coupons = [new CouponDiscount('123', 20)];
 
     // functions
+
+    /**
+     *  Convert Item to be ItemOnSale
+     *
+     *  item {Item} - item to convert
+     */
+    function convertItemToOnSale(item){
+        var itemData = {};
+        if (item instanceof ItemOutOfStock){
+            return item;
+        }
+        itemData = item.getAllData();
+        itemData.discountPercent = itemData.discountPercent || 0;
+        itemData.discountPercent += 20;
+        return new ItemOnSale(itemData);
+    }
 
     /**
      *  Covert product item literal objects to Item objects
