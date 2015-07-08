@@ -42,3 +42,20 @@
     vertical-align: top;
     margin: 1.6rem 0;
 }
+
+.dashboard {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background: #BEBEBE;
+    height: 6rem;
+    width: 100%;
+    z-index: 1;
+}
+
+.coupon-form {
+    float: left;
+}
+.coupon-wrapper {
+    margin: 1.4rem 3rem;
+}

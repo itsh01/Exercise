@@ -538,6 +538,37 @@ ProductList.Main = (function(){
     function attachEvents(){
         attachOrderAddRemoveEvent();
         attachSortEvent();
+        attachSubmitCouponEvent();
+    }
+
+    /**
+     *  Attach event for submit coupon
+     */
+    function attachSubmitCouponEvent(){
+       var couponFormElement = document.getElementById("coupon-form"),
+           couponCodeElement = document.getElementById('coupon-code'),
+           coupons = ProductList.Store.getCoupons(),
+           couponCode = '',
+           numOfCoupons = coupons.length;
+
+
+        couponFormElement.addEventListener('submit', function (e) {
+            var i = 0,
+                couponUsed = false;
+
+            e.preventDefault();
+            couponCode = couponCodeElement.value;
+
+            for(i; i < numOfCoupons; i++ ){
+                couponUsed = coupons[i]
+                    .validate(couponCode)
+                    .apply() || couponUsed;
+            }
+            if (!couponUsed) {
+                alert("Wrong coupon code!");
+            }
+            couponCodeElement.value = '';
+        });
     }
 
     /**

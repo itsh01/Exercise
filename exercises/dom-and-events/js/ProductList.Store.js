@@ -110,7 +110,9 @@ ProductList.Store = (function() {
             });
             ProductList.Main.refresh();
             this.used = true;
+            return true;
         }
+        return false;
     };
 
     var coupons = [new CouponDiscount('123', 20)];
