@@ -59,3 +59,31 @@
 .coupon-wrapper {
     margin: 1.4rem 3rem;
 }
+
+
+/*responsive layout*/
+
+@media screen and (max-width: 800px){
+    .table-cell.item-description,
+    .table-cell.item-id,
+    .table-cell[data-header="description"],
+    .table-cell[data-header="id"] {
+        display: none;
+    }
+    .table-layout {
+        width: 100%;
+    }
+    .table-heading .table-cell {
+        text-align: left;
+    }
+    .coupon-wrapper .form-control {
+        display: inline-block;
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    [data-itemid] {
+        display: block;
+    }
+}
