@@ -1,4 +1,9 @@
 
+/*footer cover fix*/
+
+body {
+    margin-bottom: 6rem;
+}
 
 /*page header*/
 
@@ -63,7 +68,35 @@
 
 /*responsive layout*/
 
-@media screen and (max-width: 800px){
+.container .table-layout {
+    margin: 0 10rem;
+}
+.pagination-container {
+    margin: 0 9rem;
+}
+.cart {
+    margin-right: 10rem;
+}
+
+@media screen and (max-width: 990px) {
+    .container .table-layout {
+        margin: 0;
+    }
+    .pagination-container {
+        margin: 0;
+    }
+    .cart {
+        margin-right: initial;
+    }
+}
+@media screen and (max-width: 900px) {
+    .items-summery {
+        position: static;
+        clear: both;
+    }
+}
+
+@media screen and (max-width: 800px) {
     .table-cell.item-description,
     .table-cell.item-id,
     .table-cell[data-header="description"],
