@@ -98,6 +98,7 @@ ProductList.Cart = (function() {
      */
     function subscribeToPubSub(){
         ProductList.PubSub.subscribe('itemUpdated', updateTotalPrice);
+        ProductList.PubSub.subscribe('couponApplied', updateTotalPrice);
     }
 
     subscribeToPubSub();
