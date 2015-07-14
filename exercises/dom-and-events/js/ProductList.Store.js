@@ -36,6 +36,10 @@ ProductList.Store = (function() {
         getStock:function(){
             return this.data.limit;
         },
+        setStock:function(newValue){
+            this.data.limit = newValue;
+            return newValue;
+        },
         isInStock: function(){
             return this.data.limit > 0;
         },
@@ -77,6 +81,11 @@ ProductList.Store = (function() {
     ItemOutOfStock.prototype = Object.create(Item.prototype);
     ItemOutOfStock.prototype.constructor = ItemOutOfStock;
 
+    /**
+     * Base Coupon
+     * @param code {String} - coupon code to be validated
+     * @constructor {Coupon}
+     */
     function Coupon(code){
         this.code = code;
         this.validated = false;
@@ -97,9 +106,15 @@ ProductList.Store = (function() {
     }
     CouponDiscount.prototype = Object.create(Coupon.prototype);
     CouponDiscount.prototype.constructor = CouponDiscount;
+    CouponDiscount.prototype.getDiscountPercent = function(){
+        return this.discountPercent;
+    };
     CouponDiscount.prototype.apply = function(){
         if (this.validated && !this.used){
-            products = products.map(convertItemToOnSale);
+            var coupon = this;
+            products = products.map( function(item){
+                return convertItemToOnSale(item, coupon);
+            });
             ProductList.PubSub.publish("couponApplied");
             this.used = true;
             return true;
@@ -107,25 +122,67 @@ ProductList.Store = (function() {
         return false;
     };
 
+    function CouponFreeItem(code, itemId){
+        Coupon.call(this, code);
+        this.itemId = itemId;
+    }
+    CouponFreeItem.prototype = Object.create(Coupon.prototype);
+    CouponFreeItem.prototype.constructor = CouponFreeItem;
+    CouponFreeItem.prototype.getDiscountPercent = function(){
+        return 100;
+    };
+    CouponFreeItem.prototype.getItemId = function(){
+        return this.itemId;
+    };
+    CouponFreeItem.prototype.apply = function(){
+        if (this.validated && !this.used){
+            var originalItem = ProductList.Utils.getItemById( products, this.getItemId() ),
+                originalItemStock  = originalItem.getStock(),
+                freeItem = convertItemToOnSale(originalItem, this);
 
+            if (!originalItem.isInStock()){
+                alert('Sorry, item out of stock.');
+                return true;
+            }
+            originalItem.setStock(originalItemStock - 1);
+            freeItem.setStock(1);
+            products.unshift(freeItem);
+            ProductList.PubSub.publish("couponApplied");
+            this.used = true;
+            return true;
+        }
+        return false;
+    };
 
-    var coupons = [new CouponDiscount('123', 20)];
+    var coupons = [
+        new CouponDiscount('123', 20),
+        new CouponFreeItem('qwe', '55927eac85594c45b02c5963')
+    ];
 
     // functions
 
     /**
      *  Convert Item to be ItemOnSale
      *
-     *  item {Item} - item to convert
+     * @param item {Item} - item to convert
+     * @param coupon
+     * @returns {*}
      */
-    function convertItemToOnSale(item){
-        var itemData = {};
-        if (item instanceof ItemOutOfStock){
+    function convertItemToOnSale(item, coupon){
+        var itemData = ProductList.Utils.copyObject( item.getAllData() ),
+            newDiscount = coupon.getDiscountPercent();
+
+        if (item instanceof ItemOutOfStock || item.getPrice() === 0){
             return item;
         }
-        itemData = item.getAllData();
+
         itemData.discountPercent = itemData.discountPercent || 0;
-        itemData.discountPercent += 20;
+        itemData.discountPercent += newDiscount;
+
+        if (itemData.discountPercent > 100){
+            itemData.discountPercent = 100;
+        }
+
         return new ItemOnSale(itemData);
     }
 

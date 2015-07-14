@@ -68,11 +68,21 @@ ProductList.Utils = (function() {
         return Math.floor( Math.random() * range );
     }
 
+    /**
+     *  Copy Object
+     *
+     * @param obj
+     */
+    function copyObject(obj){
+        return JSON.parse( JSON.stringify(obj) );
+    }
+
     return {
         convertToArray: convertToArray,
         sortItemsByProperty: sortItemsByProperty,
         sortItemObjectsByProperty: sortItemObjectsByProperty,
         getRandom: getRandom,
+        copyObject: copyObject,
         getItemById: getItemById
     };
 
