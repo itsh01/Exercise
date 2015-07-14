@@ -80,6 +80,7 @@ ProductList.Store = (function() {
      * @constructor {ItemOutOfStock}
      */
     function ItemOutOfStock(data){
+        data.limit = 0;
         Item.call(this, data);
     }
     ItemOutOfStock.prototype = Object.create(Item.prototype);
@@ -119,7 +120,7 @@ ProductList.Store = (function() {
             products = products.map( function(item){
                 return convertItemToOnSale(item, coupon);
             });
-            ProductList.PubSub.publish("couponApplied");
+            ProductList.PubSub.publish("couponApplied", []);
             this.used = true;
             return true;
         }
@@ -152,7 +153,7 @@ ProductList.Store = (function() {
             freeItem.setId( freeItem.getId() + 'F' );
             freeItem.setStock(1);
             products.unshift(freeItem);
-            ProductList.PubSub.publish("couponApplied");
+            ProductList.PubSub.publish("couponApplied", []);
             this.used = true;
             return true;
         }
@@ -206,7 +207,6 @@ ProductList.Store = (function() {
                 return new ItemOnSale(data);
             }
             else {
-                data.limit = 0;
                 return new ItemOutOfStock(data);
             }
 
