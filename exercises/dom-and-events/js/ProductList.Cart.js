@@ -94,11 +94,29 @@ ProductList.Cart = (function() {
     }
 
     /**
+     *  Commit Order
+     */
+    function commitOrder(){
+        var itemId = '',
+            currentProduct = null;
+        for (itemId in items){
+            if (items.hasOwnProperty(itemId)){
+                currentProduct = ProductList.Utils.getItemById(products, itemId);
+                currentProduct.setStock(currentProduct.getStock() - items[itemId]);
+            }
+
+        }
+        items = {};
+        ProductList.PubSub.publish('orderCommitted');
+    }
+
+    /**
      *  Subscribe events to run when changes happen in cart
      */
     function subscribeToPubSub(){
         ProductList.PubSub.subscribe('itemUpdated', updateTotalPrice);
         ProductList.PubSub.subscribe('couponApplied', updateTotalPrice);
+        ProductList.PubSub.subscribe('orderCommitted', updateTotalPrice);
     }
 
     subscribeToPubSub();
@@ -107,6 +125,7 @@ ProductList.Cart = (function() {
         updateCart: updateTotalPrice,
         updateItem: updateItem,
         getItemCount: getItemCount,
+        commitOrder: commitOrder,
         getItemsSummary: getItemsSummary,
         getTotalPrice: getTotalPrice
     }

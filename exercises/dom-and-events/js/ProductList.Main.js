@@ -520,6 +520,7 @@ ProductList.Main = (function(){
             eventFunctions = {
             'itemsSorted': [drawSortedItems],
             'couponApplied': [refresh],
+            'orderCommitted': [refresh, updateCart],
             'itemUpdated': [updateCart, updateItemAmountInput]
         };
 
@@ -540,6 +541,19 @@ ProductList.Main = (function(){
         attachOrderAddRemoveEvent();
         attachSortEvent();
         attachSubmitCouponEvent();
+        attachCommitOrderEvent();
+    }
+
+    /**
+     *  Attach event for submit coupon
+     */
+    function attachCommitOrderEvent(){
+        var orderFormElement = document.getElementById('order-form');
+
+        orderFormElement.addEventListener('submit', function(e){
+           e.preventDefault();
+           ProductList.Cart.commitOrder();
+        });
     }
 
     /**

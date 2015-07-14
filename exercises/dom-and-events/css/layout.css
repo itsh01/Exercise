@@ -65,6 +65,14 @@ body {
     margin: 1.4rem 3rem;
 }
 
+.order-form {
+    float: right;
+}
+.order-wrapper {
+    margin: 1.4rem 3rem;
+}
+
+
 
 /*responsive layout*/
 
