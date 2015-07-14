@@ -27,6 +27,10 @@ ProductList.Store = (function() {
         getId: function(){
             return this.data.id;
         },
+        setId: function(newValue){
+            this.data.id = newValue;
+            return newValue;
+        },
         getName: function(){
             return this.data.name;
         },
@@ -145,6 +149,7 @@ ProductList.Store = (function() {
                 return true;
             }
             originalItem.setStock(originalItemStock - 1);
+            freeItem.setId( freeItem.getId() + 'F' );
             freeItem.setStock(1);
             products.unshift(freeItem);
             ProductList.PubSub.publish("couponApplied");
