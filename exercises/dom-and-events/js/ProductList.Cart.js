@@ -53,7 +53,8 @@ ProductList.Cart = (function() {
     function getTotalPrice(){
         var key = '',
             totalPrice = 0,
-            item;
+            item
+            products = ProductList.Store.getProducts();
 
         for (key in items){
             if (items.hasOwnProperty(key)){
