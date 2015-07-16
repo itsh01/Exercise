@@ -108,7 +108,7 @@ ProductList.Cart = (function() {
 
         }
         items = {};
-        ProductList.PubSub.publish('orderCommitted');
+        ProductList.PubSub.publish('orderCommitted', []);
     }
 
     /**
