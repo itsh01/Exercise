@@ -53,7 +53,7 @@
 .table-row.item-on-sale,
 .table-styled.table-zebra .table-row.item-on-sale,
 .table-styled.table-zebra .table-row.item-on-sale:nth-child(odd){
-    background: #5DCB6F;
+    background: #9DE2A9;
 }
 
 .table-row.item-out-of-stock{
@@ -63,7 +63,6 @@
 .table-cell {
     display: table-cell;
     border: solid;
-    border-width: thin;
     padding-left: 5px;
     padding-right: 5px;
 }
