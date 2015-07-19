@@ -45,6 +45,15 @@ module.exports = function(grunt) {
                 ],
                 dest: 'dest/'
             }
+        },
+        asciify: {
+            banner:{
+                text: 'Building...',
+                options:{
+                    font:'doom',
+                    log:true
+                }
+            }
         }
     });
 
@@ -54,7 +63,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-asciify');
 
-    grunt.registerTask('default', ['copy:main', 'uglify:main', 'cssmin:main']);
+    grunt.registerTask('default', ['asciify:banner','copy:main', 'uglify:main', 'cssmin:main']);
 
 };
