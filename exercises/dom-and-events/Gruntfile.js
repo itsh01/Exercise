@@ -54,6 +54,17 @@ module.exports = function(grunt) {
                     log:true
                 }
             }
+        },
+        csslint: {
+            options:{
+                "adjoining-classes": false,
+                "import": false,
+                "fallback-colors": false
+            },
+            src: ['src/css/*.css']
+        },
+        eslint: {
+            src: ["src/js/*.js"]
         }
     });
 
@@ -63,8 +74,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-csslint');
+    grunt.loadNpmTasks("grunt-contrib-eslint");
     grunt.loadNpmTasks('grunt-asciify');
 
-    grunt.registerTask('default', ['asciify:banner','copy:main', 'uglify:main', 'cssmin:main']);
+    grunt.registerTask('lint', ['csslint', 'jslint']);
+    grunt.registerTask('default', ['asciify:banner', 'copy:main', 'uglify:main', 'cssmin:main']);
 
 };
