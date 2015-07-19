@@ -65,7 +65,17 @@ module.exports = function(grunt) {
         },
         eslint: {
             src: ["src/js/*.js"]
+        },
+        dox: {
+            options: {
+                title: "ProductList Cart"
+            },
+            files: {
+                src: ['src/js/'],
+                dest: 'docs'
+            }
         }
+
     });
 
 
@@ -77,6 +87,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks("grunt-contrib-eslint");
     grunt.loadNpmTasks('grunt-asciify');
+    grunt.loadNpmTasks('grunt-dox');
+
 
     grunt.registerTask('lint', ['csslint', 'jslint']);
     grunt.registerTask('default', ['asciify:banner', 'copy:main', 'uglify:main', 'cssmin:main']);
