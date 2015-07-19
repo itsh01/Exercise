@@ -13,7 +13,10 @@ module.exports = function(grunt) {
                     expand: true,
                     src: '*.js',
                     dest: 'dest/js',
-                    cwd: 'src/js'
+                    cwd: 'src/js',
+                    rename: function(base,path){
+                        return base + '/' + path.replace('.js','.min.js')
+                    }
                 }]
             }
         },
@@ -21,7 +24,7 @@ module.exports = function(grunt) {
             main: {
                 expand: true,
                 cwd: 'src/',
-                src: '**',
+                src: ['!**/js','lib/**','css/**','*'],
                 dest: 'dest/'
             }
         }
