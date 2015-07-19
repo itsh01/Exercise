@@ -7,7 +7,7 @@ var ProductList = ProductList || {};
 // Product List Namespace
 
 ProductList.Main = (function(){
-    'use strict';
+    "use strict";
 
     // mock items
     //var products = ProductList.Mock;
@@ -15,12 +15,12 @@ ProductList.Main = (function(){
 
     ///////
 
-    var table = document.getElementById('main-table'),
-        tableHeaders = table.querySelectorAll('[data-header]'),
-        tbody = document.getElementById('products'),
-        thead = document.getElementById('table-header'),
+    var table = document.getElementById("main-table"),
+        tableHeaders = table.querySelectorAll("[data-header]"),
+        tbody = document.getElementById("products"),
+        thead = document.getElementById("table-header"),
         columnsOrder = getColumnsOrder(),
-        moveToPageEvent = new CustomEvent('moveToPageEvent'),
+        moveToPageEvent = new CustomEvent("moveToPageEvent"),
         itemsPerPage = 5,
         currentPage = 1;
 
@@ -36,7 +36,7 @@ ProductList.Main = (function(){
             i;
 
         for (i = 0; i < tableHeaderLength; i++){
-            itemAttributesDisplayOrder[i] = tableHeaders[i].dataset['header'];
+            itemAttributesDisplayOrder[i] = tableHeaders[i].dataset["header"];
         }
         return itemAttributesDisplayOrder;
     }
@@ -97,7 +97,7 @@ ProductList.Main = (function(){
      * @returns {Element} - DOMElement row of item
      */
     function createRowByItem(item, columnsOrder, numOfItems){
-        var row = document.createElement('div'),
+        var row = document.createElement("div"),
             cell = null,
             numOfColumns = columnsOrder.length,
             i = 0,
@@ -107,15 +107,15 @@ ProductList.Main = (function(){
 
         row.className += " table-row";
         if (itemIsOnSale){
-            row.className += ' item-on-sale';
+            row.className += " item-on-sale";
         }
         if (itemIsOutOfStock){
-            row.className += ' item-out-of-stock';
+            row.className += " item-out-of-stock";
         }
 
         for (i; i < numOfColumns; i++){
             key = columnsOrder[i];
-            cell = document.createElement('div');
+            cell = document.createElement("div");
             cell.innerHTML = item.data[key];
             if (itemIsOnSale && key === "price"){
                 cell.innerHTML = '<div class="discounted">' + item.data[key] + '<div>';
@@ -381,7 +381,7 @@ ProductList.Main = (function(){
      *  Fix images display from path string to <img> tag
      */
     function fixImages(){
-        var imageCells = document.querySelectorAll('.item-image'),
+        var imageCells = document.querySelectorAll(".item-image"),
             i = imageCells.length-1;
 
         for (i ; i>=0 ; i--){
@@ -393,7 +393,7 @@ ProductList.Main = (function(){
      *  Fix description display to be wrapped in a div
      */
     function fixDescription(){
-        var descriptionCells = document.querySelectorAll('.item-description'),
+        var descriptionCells = document.querySelectorAll(".item-description"),
             i = descriptionCells.length-1;
 
         for (i ; i>=0 ; i--){
@@ -405,13 +405,13 @@ ProductList.Main = (function(){
      *  Update order input elements according to cart
      */
     function updateOrderInputs(){
-        var inputElements = document.querySelectorAll('[data-itemid]'),
+        var inputElements = document.querySelectorAll("[data-itemid]"),
             inputIndex = inputElements.length - 1,
             itemId = "",
             itemCount = 0;
 
         for (inputIndex; inputIndex >= 0; inputIndex--){
-            itemId = inputElements[inputIndex].dataset['itemid'];
+            itemId = inputElements[inputIndex].dataset["itemid"];
             itemCount = parseInt( ProductList.Cart.getItemCount(itemId), 10 );
             inputElements[inputIndex].value = itemCount;
         }
@@ -451,7 +451,7 @@ ProductList.Main = (function(){
      */
     function attachOrderAddRemoveEvent() {
 
-        table.addEventListener('click', function(e){
+        table.addEventListener("click", function(e){
             var targetButtonElement = e.target,
                 inputElement = null,
                 item = null,
@@ -460,9 +460,9 @@ ProductList.Main = (function(){
 
             if (isChangeButton(targetButtonElement)) {
 
-                inputElement = targetButtonElement.parentElement.querySelector('[data-itemid]');
-                item = ProductList.Utils.getItemById(products, inputElement.dataset['itemid']);
-                addOrRemove = parseInt(targetButtonElement.dataset['action'], 10);
+                inputElement = targetButtonElement.parentElement.querySelector("[data-itemid]");
+                item = ProductList.Utils.getItemById(products, inputElement.dataset["itemid"]);
+                addOrRemove = parseInt(targetButtonElement.dataset["action"], 10);
                 inputElement.value = inputElement.value || 0;
 
                 if (exceedingItemLimit(addOrRemove, inputElement, item)) {
@@ -481,7 +481,7 @@ ProductList.Main = (function(){
      * @param id {String} - item id to update its input
      */
     function updateItemAmountInput(id){
-        var itemAmountInputElement = document.querySelector('[data-itemid="'+id+'"]');
+        var itemAmountInputElement = document.querySelector("[data-itemid=\""+id+"\"]");
 
         itemAmountInputElement.value = ProductList.Cart.getItemCount(id);
     }
@@ -490,13 +490,13 @@ ProductList.Main = (function(){
      *  Publish sort event when header is clicked
      */
     function attachSortEvent(){
-        thead.addEventListener('click', function(e){
+        thead.addEventListener("click", function(e){
             var targetHeaderElement = e.target,
                 columnHeader = targetHeaderElement.dataset["header"];
 
             if (columnHeader){
                 ProductList.Utils.sortItemObjectsByProperty(products, columnHeader);
-                ProductList.PubSub.publish('itemsSorted', []);
+                ProductList.PubSub.publish("itemsSorted", []);
             }
         });
     }
@@ -548,9 +548,9 @@ ProductList.Main = (function(){
      *  Attach event for submit coupon
      */
     function attachCommitOrderEvent(){
-        var orderFormElement = document.getElementById('order-form');
+        var orderFormElement = document.getElementById("order-form");
 
-        orderFormElement.addEventListener('submit', function(e){
+        orderFormElement.addEventListener("submit", function(e){
            e.preventDefault();
            ProductList.Cart.commitOrder();
         });
@@ -561,13 +561,13 @@ ProductList.Main = (function(){
      */
     function attachSubmitCouponEvent(){
        var couponFormElement = document.getElementById("coupon-form"),
-           couponCodeElement = document.getElementById('coupon-code'),
+           couponCodeElement = document.getElementById("coupon-code"),
            coupons = ProductList.Store.getCoupons(),
            couponCode = '',
            numOfCoupons = coupons.length;
 
 
-        couponFormElement.addEventListener('submit', function (e) {
+        couponFormElement.addEventListener("submit", function (e) {
             var i = 0,
                 couponUsed = false;
 
@@ -582,7 +582,7 @@ ProductList.Main = (function(){
             if (!couponUsed) {
                 alert("Wrong coupon code!");
             }
-            couponCodeElement.value = '';
+            couponCodeElement.value = "";
         });
     }
 
