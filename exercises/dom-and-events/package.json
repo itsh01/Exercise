@@ -1,0 +1,26 @@
+{
+  "name": "cart",
+  "version": "1.0.0",
+  "description": "Shopping cart project",
+  "main": "index.html",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-contrib-concat": "^0.5.1"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:itsh01/Exercise.git/tree/master/exercises/dom-and-events"
+  },
+  "keywords": [
+    "cart"
+  ],
+  "author": "Itay Shtekel",
+  "license": "LicenseRef-LICENSE",
+  "devDependencies": {
+    "grunt-contrib-copy": "^0.8.0"
+  }
+}

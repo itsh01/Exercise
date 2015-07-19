@@ -1,0 +1,46 @@
+
+
+/*theme-changer*/
+.theme-changer {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.discounted {
+    color: #555555;
+    font-size: 1rem;
+    text-decoration: line-through;
+}
+.real-price {
+    color: #FF3A3A;
+    font-weight: bold;
+}
+
+
+/*theme-black*/
+
+.black {
+    background: radial-gradient(#000, #525252);
+    color: #9A9A9A;
+}
+
+.black select{
+    color: #111;
+}
+
+.black .table-row.item-out-of-stock{
+    color: #494848;
+}
+
+.black .table-styled.table-zebra .table-row:nth-child(odd) {
+    background: rgba(0, 0, 0, 0.5);
+}
+.black .table-styled.table-zebra .table-row.item-on-sale:nth-child(odd){
+    background: #5DCB6F;
+}
+
+.black .btn-primary {
+    color: #fff;
+    background-color: #5B778F;
+    border-color: #394A5A;
+}

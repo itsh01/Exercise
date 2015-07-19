@@ -1,0 +1,1 @@
+var ProductList=ProductList||{};ProductList.PubSub=function(){"use strict";function a(a,b){return e[a]=e[a]||{},d+=1,e[a][d]=b,d}function b(a,b){var c,d=e[a];if(d)for(c in d)d.hasOwnProperty(c)&&d[c].apply(this,b)}function c(a,b){e[a]&&delete e[a][b]}var d=1,e={};return{subscribe:a,publish:b,unSubscribe:c}}();

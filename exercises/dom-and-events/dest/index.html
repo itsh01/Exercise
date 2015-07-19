@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DOM and Events</title>
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" href="http://www.iconarchive.com/download/i57391/richd/terebi-ojisan/Terebi-Finder-Flat.ico" />
+</head>
+<body>
+    <header class="page-header">
+        <h1>DOM and Events</h1>
+    </header>
+    <main class="container">
+        <div class="table-layout table-styled table-zebra" id="main-table">
+            <div class="thead">
+                <div class="table-heading" id="table-header">
+                        <div class="table-cell">#</div>
+                        <div data-header="id" class="clickable table-cell">Id</div>
+                        <div data-header="name" class="clickable table-cell">Product</div>
+                        <div data-header="image" class="clickable table-cell">Image</div>
+                        <div data-header="description" class="clickable table-cell">Description</div>
+                        <div data-header="price" class="clickable table-cell">Price</div>
+                        <div data-header="limit" class="clickable table-cell">In Stock</div>
+                        <div class="table-cell">Order</div>
+                </div>
+            </div>
+            <div id="products" class="tbody">
+
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <form class="coupon-form form-inline" id="coupon-form">
+                <fieldset class="coupon-wrapper">
+                    <input type="text" id="coupon-code" class="form-control" placeholder="Coupon Code"/>
+                    <button type="submit" class="btn btn-success" id="submit-coupon">Submit</button>
+                </fieldset>
+            </form>
+            <form class="order-form form-inline" id="order-form">
+                <fieldset class="order-wrapper">
+                    <button type="submit" class="btn btn-success" id="submit-order">Order Items</button>
+                </fieldset>
+            </form>
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+    <script src="js/ProductList.Mock.js"></script>
+    <script src="js/ProductList.Utils.js"></script>
+    <script src="js/ProductList.PubSub.js"></script>
+    <script src="js/ProductList.Themes.js"></script>
+    <script src="js/ProductList.Store.js"></script>
+    <script src="js/ProductList.Cart.js"></script>
+    <script src="js/ProductList.Main.js"></script>
+</body>
+</html>
