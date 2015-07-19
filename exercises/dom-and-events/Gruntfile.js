@@ -46,6 +46,9 @@ module.exports = function(grunt) {
                 dest: 'dest/'
             }
         },
+        clean:{
+            main:['dest']
+        },
         asciify: {
             banner:{
                 text: 'Building...',
@@ -83,6 +86,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks("grunt-contrib-eslint");
@@ -91,6 +95,7 @@ module.exports = function(grunt) {
 
 
     grunt.registerTask('lint', ['csslint', 'jslint']);
-    grunt.registerTask('default', ['asciify:banner', 'copy:main', 'uglify:main', 'cssmin:main']);
+    grunt.registerTask('build', ['copy:main', 'uglify:main', 'cssmin:main']);
+    grunt.registerTask('default', ['asciify:banner', 'clean:main', 'build', 'dox']);
 
 };

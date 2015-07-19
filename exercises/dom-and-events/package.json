@@ -22,6 +22,7 @@
   "license": "LicenseRef-LICENSE",
   "devDependencies": {
     "grunt-asciify": "^0.2.2",
+    "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-csslint": "^0.5.0",
     "grunt-contrib-cssmin": "^0.12.3",
