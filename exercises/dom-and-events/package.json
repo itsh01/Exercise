@@ -21,6 +21,7 @@
   "author": "Itay Shtekel",
   "license": "LicenseRef-LICENSE",
   "devDependencies": {
-    "grunt-contrib-copy": "^0.8.0"
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-cssmin": "^0.12.3"
   }
 }
