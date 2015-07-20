@@ -86,4 +86,4 @@ ProductList.Utils = (function() {
         getItemById: getItemById
     };
 
-})();
+}());

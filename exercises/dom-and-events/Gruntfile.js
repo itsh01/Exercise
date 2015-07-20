@@ -15,7 +15,7 @@ module.exports = function(grunt) {
                     dest: 'dest/js',
                     cwd: 'src/js',
                     rename: function(base,path){
-                        return base + '/' + path.replace('.js','.min.js')
+                        return base + '/' + path.replace('.js', '.min.js');
                     }
                 }]
             }
@@ -60,18 +60,18 @@ module.exports = function(grunt) {
         },
         csslint: {
             options:{
-                "adjoining-classes": false,
-                "import": false,
-                "fallback-colors": false
+                'adjoining-classes': false,
+                'import': false,
+                'fallback-colors': false
             },
             src: ['src/css/*.css']
         },
         eslint: {
-            src: ["src/js/*.js", 'Gruntfile.js']
+            src: ['src/js/*.js', 'Gruntfile.js']
         },
         dox: {
             options: {
-                title: "ProductList Cart"
+                title: 'ProductList Cart'
             },
             files: {
                 src: ['src/js/'],

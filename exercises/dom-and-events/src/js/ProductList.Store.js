@@ -120,7 +120,7 @@ ProductList.Store = (function() {
             products = products.map( function(item){
                 return convertItemToOnSale(item, coupon);
             });
-            ProductList.PubSub.publish("couponApplied", []);
+            ProductList.PubSub.publish('couponApplied', []);
             this.used = true;
             return true;
         }
@@ -153,7 +153,7 @@ ProductList.Store = (function() {
             freeItem.setId( freeItem.getId() + 'F' );
             freeItem.setStock(1);
             products.unshift(freeItem);
-            ProductList.PubSub.publish("couponApplied", []);
+            ProductList.PubSub.publish('couponApplied', []);
             this.used = true;
             return true;
         }
@@ -196,7 +196,7 @@ ProductList.Store = (function() {
      *  Covert product item literal objects to Item objects
      */
     function covertProductsToObjects(){
-        products = products.map(function(data){
+        products = products.map(function(data) {
             var random = ProductList.Utils.getRandom(10);
 
             if (random < 7){

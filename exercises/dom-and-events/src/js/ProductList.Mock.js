@@ -4,9 +4,9 @@
 
 var ProductList = ProductList || {};
 
-ProductList.Mock = (function() {
+ProductList.Mock = (function () {
     'use strict';
-
+    /*eslint-disable quotes, quote-props*/
     return [
         {
             "id": "55927eac85594c45b02c5963",
@@ -233,5 +233,5 @@ ProductList.Mock = (function() {
             "limit": 20
         }
     ];
-
-})();
+    /*eslint-enable quotes, quote-props*/
+}());

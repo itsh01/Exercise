@@ -6,7 +6,7 @@ var ProductList = ProductList || {};
 
 // Product List Namespace
 
-ProductList.Cart = (function() {
+ProductList.Cart = ( function () {
     'use strict';
 
     var items = {},
@@ -41,7 +41,11 @@ ProductList.Cart = (function() {
      * @param addOrRemove {Number} - 1/-1 either add or remove accordingly
      */
     function updateItem(id, addOrRemove){
-        (addOrRemove > 0) ? addItem(id) : removeItem(id);
+        if (addOrRemove > 0) {
+            addItem(id);
+        } else {
+            removeItem(id);
+        }
         ProductList.PubSub.publish('itemUpdated', [id]);
     }
 
@@ -51,10 +55,10 @@ ProductList.Cart = (function() {
      * @returns {Number} - total price
      */
     function getTotalPrice(){
-        var key = "",
+        var key = '',
             totalPrice = 0,
-            item,
-            products = ProductList.Store.getProducts();
+            item;
+        products = ProductList.Store.getProducts();
 
         for (key in items){
             if (items.hasOwnProperty(key)){
@@ -98,7 +102,7 @@ ProductList.Cart = (function() {
      *  Commit Order
      */
     function commitOrder(){
-        var itemId = "",
+        var itemId = '',
             currentProduct = null;
         for (itemId in items){
             if (items.hasOwnProperty(itemId)){
@@ -108,16 +112,16 @@ ProductList.Cart = (function() {
 
         }
         items = {};
-        ProductList.PubSub.publish("orderCommitted", []);
+        ProductList.PubSub.publish('orderCommitted', []);
     }
 
     /**
      *  Subscribe events to run when changes happen in cart
      */
     function subscribeToPubSub(){
-        ProductList.PubSub.subscribe("itemUpdated", updateTotalPrice);
-        ProductList.PubSub.subscribe("couponApplied", updateTotalPrice);
-        ProductList.PubSub.subscribe("orderCommitted", updateTotalPrice);
+        ProductList.PubSub.subscribe('itemUpdated', updateTotalPrice);
+        ProductList.PubSub.subscribe('couponApplied', updateTotalPrice);
+        ProductList.PubSub.subscribe('orderCommitted', updateTotalPrice);
     }
 
     subscribeToPubSub();
@@ -130,4 +134,4 @@ ProductList.Cart = (function() {
         getItemsSummary: getItemsSummary,
         getTotalPrice: getTotalPrice
     };
-})();
+}());

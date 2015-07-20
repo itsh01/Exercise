@@ -6,7 +6,7 @@ var ProductList = ProductList || {};
 
 // Publish Subscribe Event Manager
 
-ProductList.PubSub = (function(){
+ProductList.PubSub = (function (){
     'use strict';
 
     var counter = 1,
@@ -67,4 +67,4 @@ ProductList.PubSub = (function(){
         unSubscribe: unSubscribe
     };
 
-})();
+}());
