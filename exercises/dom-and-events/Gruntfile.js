@@ -4,7 +4,7 @@
 
 'use strict';
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
     grunt.config.init({
         uglify: {
@@ -14,7 +14,7 @@ module.exports = function(grunt) {
                     src: '*.js',
                     dest: 'dest/js',
                     cwd: 'src/js',
-                    rename: function(base,path){
+                    rename: function (base, path) {
                         return base + '/' + path.replace('.js', '.min.js');
                     }
                 }]
@@ -46,20 +46,20 @@ module.exports = function(grunt) {
                 dest: 'dest/'
             }
         },
-        clean:{
-            main:['dest']
+        clean: {
+            main: ['dest']
         },
         asciify: {
-            banner:{
+            banner: {
                 text: 'Building...',
-                options:{
-                    font:'doom',
-                    log:true
+                options: {
+                    font: 'doom',
+                    log: true
                 }
             }
         },
         csslint: {
-            options:{
+            options: {
                 'adjoining-classes': false,
                 'import': false,
                 'fallback-colors': false
@@ -77,6 +77,15 @@ module.exports = function(grunt) {
                 src: ['src/js/'],
                 dest: 'docs'
             }
+        },
+        watch: {
+            scripts: {
+                files: ['src/js/*.js'],
+                tasks: ['eslint'],
+                options: {
+                    debounceDelay: 500
+                }
+            }
         }
 
     });
@@ -90,6 +99,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-contrib-eslint');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-asciify');
     grunt.loadNpmTasks('grunt-dox');
 

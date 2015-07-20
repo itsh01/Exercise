@@ -56,7 +56,7 @@ ProductList.PubSub = (function (){
      * @param {number} id - subscription id
      */
     function unSubscribe(name, id){
-        if(events[name]){
+        if (events[name]){
             delete events[name][id];
         }
     }

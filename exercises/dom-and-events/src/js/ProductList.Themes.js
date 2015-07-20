@@ -6,11 +6,10 @@
 var ProductList = ProductList || {};
 
 
-ProductList.Themes = (function() {
+ProductList.Themes = (function () {
     'use strict';
 
     var themes = ['black', 'default'],
-        currentTheme = 'default',
         body = document.querySelector('body');
 
 
@@ -24,7 +23,6 @@ ProductList.Themes = (function() {
             return;
         }
 
-        currentTheme = themeName;
         body.className = themeName;
     }
 
@@ -34,9 +32,9 @@ ProductList.Themes = (function() {
     function createThemeChanger(){
         var selectElement = document.createElement('select'),
             optionElement = null,
-            i = themes.length-1;
+            i = themes.length - 1;
 
-        for (i; i>=0; i--){
+        for (i; i >= 0; i--){
             optionElement = document.createElement('option');
             optionElement.innerHTML = themes[i];
             optionElement.value = themes[i];
@@ -44,7 +42,7 @@ ProductList.Themes = (function() {
         }
 
         selectElement.className = 'theme-changer';
-        selectElement.addEventListener('change', function(){
+        selectElement.addEventListener('change', function (){
             changeTheme(this.value);
         });
 

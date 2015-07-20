@@ -6,7 +6,7 @@
 var ProductList = ProductList || {};
 
 
-ProductList.Utils = (function() {
+ProductList.Utils = (function () {
     'use strict';
 
     /**
@@ -27,8 +27,8 @@ ProductList.Utils = (function() {
      * @returns {Array} - array sorted by requested property
      */
     function sortItemsByProperty(items, propertyName){
-        return items.sort(function(a,b){
-            return (a[propertyName] > b[propertyName]) ? 1 : -1;
+        return items.sort(function (a, b){
+            return a[propertyName] > b[propertyName] ? 1 : -1;
         });
     }
 
@@ -40,8 +40,8 @@ ProductList.Utils = (function() {
      * @returns {Array} - array sorted by requested property
      */
     function sortItemObjectsByProperty(items, propertyName){
-        return items.sort(function(a,b){
-            return (a.data[propertyName] > b.data[propertyName]) ? 1 : -1;
+        return items.sort(function (a, b){
+            return a.data[propertyName] > b.data[propertyName] ? 1 : -1;
         });
     }
 
@@ -54,7 +54,7 @@ ProductList.Utils = (function() {
      */
     function getItemById(items, itemId) {
         return items.filter(function (item) {
-            return item.getId() == itemId;
+            return item.getId() === itemId;
         }).pop();
     }
 

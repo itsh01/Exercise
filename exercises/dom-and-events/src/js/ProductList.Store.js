@@ -5,11 +5,10 @@
 var ProductList = ProductList || {};
 
 
-ProductList.Store = (function() {
+ProductList.Store = (function () {
     'use strict';
 
-    var products = ProductList.Mock,
-        itemsTypes = ['default', 'onSale', 'outOfStock'];
+    var products = ProductList.Mock;
 
 
     // objects
@@ -24,30 +23,30 @@ ProductList.Store = (function() {
     }
 
     Item.prototype = {
-        getId: function(){
+        getId: function (){
             return this.data.id;
         },
-        setId: function(newValue){
+        setId: function (newValue){
             this.data.id = newValue;
             return newValue;
         },
-        getName: function(){
+        getName: function (){
             return this.data.name;
         },
-        getPrice: function(){
+        getPrice: function (){
             return parseInt(this.data.price, 10);
         },
-        getStock:function(){
+        getStock: function (){
             return this.data.limit;
         },
-        setStock:function(newValue){
+        setStock: function (newValue){
             this.data.limit = newValue;
             return newValue;
         },
-        isInStock: function(){
+        isInStock: function (){
             return this.data.limit > 0;
         },
-        getAllData: function(){
+        getAllData: function (){
             return this.data;
         },
         constructor: Item
@@ -64,10 +63,10 @@ ProductList.Store = (function() {
 
     ItemOnSale.prototype = Object.create(Item.prototype);
     ItemOnSale.prototype.constructor = ItemOnSale;
-    ItemOnSale.prototype.getDiscountPercent = function(){
+    ItemOnSale.prototype.getDiscountPercent = function (){
         return this.data.discountPercent;
     };
-    ItemOnSale.prototype.getPrice = function(){
+    ItemOnSale.prototype.getPrice = function (){
         var originalPrice = parseInt(this.data.price, 10),
             discountedPrice = originalPrice - this.getDiscountPercent() / 100 * originalPrice;
 
@@ -98,8 +97,8 @@ ProductList.Store = (function() {
     }
 
     Coupon.prototype = {
-        validate: function(code){
-            this.validated = (this.code === code);
+        validate: function (code){
+            this.validated = this.code === code;
             return this;
         },
         constructor: Coupon
@@ -111,14 +110,14 @@ ProductList.Store = (function() {
     }
     CouponDiscount.prototype = Object.create(Coupon.prototype);
     CouponDiscount.prototype.constructor = CouponDiscount;
-    CouponDiscount.prototype.getDiscountPercent = function(){
+    CouponDiscount.prototype.getDiscountPercent = function () {
         return this.discountPercent;
     };
-    CouponDiscount.prototype.apply = function(){
+    CouponDiscount.prototype.apply = function () {
         if (this.validated && !this.used){
-            var coupon = this;
-            products = products.map( function(item){
-                return convertItemToOnSale(item, coupon);
+            var self = this;
+            products = products.map( function (item){
+                return convertItemToOnSale(item, self);
             });
             ProductList.PubSub.publish('couponApplied', []);
             this.used = true;
@@ -127,25 +126,26 @@ ProductList.Store = (function() {
         return false;
     };
 
-    function CouponFreeItem(code, itemId){
+    function CouponFreeItem(code, itemId) {
         Coupon.call(this, code);
         this.itemId = itemId;
     }
     CouponFreeItem.prototype = Object.create(Coupon.prototype);
     CouponFreeItem.prototype.constructor = CouponFreeItem;
-    CouponFreeItem.prototype.getDiscountPercent = function(){
+    CouponFreeItem.prototype.getDiscountPercent = function () {
         return 100;
     };
-    CouponFreeItem.prototype.getItemId = function(){
+    CouponFreeItem.prototype.getItemId = function () {
         return this.itemId;
     };
-    CouponFreeItem.prototype.apply = function(){
-        if (this.validated && !this.used){
+    CouponFreeItem.prototype.apply = function () {
+        if (this.validated && !this.used) {
             var originalItem = ProductList.Utils.getItemById( products, this.getItemId() ),
-                originalItemStock  = originalItem.getStock(),
+                originalItemStock = originalItem.getStock(),
                 freeItem = convertItemToOnSale(originalItem, this);
 
             if (!originalItem.isInStock()){
+                /*eslint no-alert:0*/
                 alert('Sorry, item out of stock.');
                 return true;
             }
@@ -195,20 +195,20 @@ ProductList.Store = (function() {
     /**
      *  Covert product item literal objects to Item objects
      */
-    function covertProductsToObjects(){
-        products = products.map(function(data) {
-            var random = ProductList.Utils.getRandom(10);
+    function covertProductsToObjects() {
+        products = products.map(function (data) {
+            var random = ProductList.Utils.getRandom(10),
+                retVal = null;
 
-            if (random < 7){
-                return new Item(data);
-            }
-            else if (random < 9){
+            if (random < 7) {
+                retVal = new Item(data);
+            } else if (random < 9) {
                 data.discountPercent = ProductList.Utils.getRandom(50);
-                return new ItemOnSale(data);
+                retVal = new ItemOnSale(data);
+            } else {
+                retVal = new ItemOutOfStock(data);
             }
-            else {
-                return new ItemOutOfStock(data);
-            }
+            return retVal;
 
         });
     }
@@ -218,7 +218,7 @@ ProductList.Store = (function() {
      *
      * @returns {Array} - array of Item objects
      */
-    function getProducts(){
+    function getProducts() {
         return products;
     }
 
@@ -228,7 +228,7 @@ ProductList.Store = (function() {
      *
      * @returns {Array} - array of Coupon objects
      */
-    function getCoupons(){
+    function getCoupons() {
         return coupons;
     }
 
@@ -246,4 +246,4 @@ ProductList.Store = (function() {
         getCoupons: getCoupons
     };
 
-})();
+}());
