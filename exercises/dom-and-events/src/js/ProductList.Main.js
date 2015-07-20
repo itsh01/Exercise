@@ -36,7 +36,7 @@ ProductList.Main = (function (){
             i;
 
         for (i = 0; i < tableHeaderLength; i++){
-            itemAttributesDisplayOrder[i] = tableHeaders[i].dataset['header'];
+            itemAttributesDisplayOrder[i] = tableHeaders[i].dataset.header;
         }
         return itemAttributesDisplayOrder;
     }
@@ -58,9 +58,9 @@ ProductList.Main = (function (){
      * @param columnsOrder {Array} - order of items' properties
      * @returns {DocumentFragment} - fragment of rows
      */
-    function createTableRowElements(items, columnsOrder) {
+    function createTableRowElements(items) {
         var i = 0,
-            numOfItemInPage = (items.length > itemsPerPage) ? itemsPerPage : items.length,
+            numOfItemInPage = items.length > itemsPerPage ? itemsPerPage : items.length,
             tableRowsFragment = document.createDocumentFragment();
 
         for (i; i < numOfItemInPage; i++) {
@@ -79,10 +79,10 @@ ProductList.Main = (function (){
      * @param items {Array} - Items to display
      * @param columnsOrder {Array} - Item's properties display order
      */
-    function populateTableElement(tableElement, items, columnsOrder){
+    function populateTableElement(tableElement, items){
         var tableRowsFragment = null;
 
-        tableRowsFragment = createTableRowElements(items, columnsOrder);
+        tableRowsFragment = createTableRowElements(items);
         tableElement.appendChild(tableRowsFragment);
 
         fixTableState();
@@ -96,7 +96,7 @@ ProductList.Main = (function (){
      * @param numOfItems {Number} - number if items
      * @returns {Element} - DOMElement row of item
      */
-    function createRowByItem(item, columnsOrder, numOfItems){
+    function createRowByItem(item, numOfItems){
         var row = document.createElement('div'),
             cell = null,
             numOfColumns = columnsOrder.length,
@@ -162,9 +162,9 @@ ProductList.Main = (function (){
             newCellElement = document.createElement('div'),
             selectElement = document.createElement('select');
 
-        selectElement.innerHTML = createNumberOptions(1,numOfItems+1);
+        selectElement.innerHTML = createNumberOptions(1, numOfItems + 1);
 
-        selectElement.addEventListener('change', function(){
+        selectElement.addEventListener('change', function (){
             handleChange(this);
         });
 
@@ -203,12 +203,14 @@ ProductList.Main = (function (){
             pageLinks = ProductList.Utils.convertToArray(navElement.querySelectorAll('[data-pagenum]')),
             anchorsLength = pageLinks.length;
 
+        function dispatchMoveToPageEvent(){
+            this.dispatchEvent(moveToPageEvent);
+        }
+
         for (i; i < anchorsLength; i++) {
-            pageNum = pageLinks[i].dataset['pagenum'];
+            pageNum = pageLinks[i].dataset.pagenum;
             pageLinks[i].addEventListener('moveToPageEvent', moveToPage.bind(null, pageNum));
-            pageLinks[i].addEventListener('click', function(){
-                this.dispatchEvent(moveToPageEvent);
-            });
+            pageLinks[i].addEventListener('click', dispatchMoveToPageEvent);
         }
     }
 
@@ -245,7 +247,7 @@ ProductList.Main = (function (){
 
         navElement.className = 'pagination-container';
 
-        for(i ; i < pages; i++){
+        for (i; i < pages; i++){
             page = i + 1;
             inner += '<li><a href="#" data-pagenum="' + page + '">' + page + '</a></li>';
         }
@@ -311,11 +313,11 @@ ProductList.Main = (function (){
         inner += '</ul>';
 
         lastCart = document.getElementById('cart-summery');
-        if(lastCart){
-          lastCart.remove();
+        if (lastCart){
+            lastCart.remove();
         }
         cartSummaryElement.innerHTML = inner;
-        cartSummaryElement.setAttribute('id','cart-summery');
+        cartSummaryElement.setAttribute('id', 'cart-summery');
         cartSummaryElement.className = 'items-summery';
         appendToContainerElement(cartSummaryElement);
     }
@@ -327,7 +329,7 @@ ProductList.Main = (function (){
      */
     function moveToPage(page){
         deleteElementContent(tbody);
-        populateTableElement(tbody, products.slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage), columnsOrder);
+        populateTableElement(tbody, products.slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage));
         currentPage = page;
     }
 
@@ -348,16 +350,14 @@ ProductList.Main = (function (){
     function handleChange(selectElement){
 
         var selectedOption = parseInt(selectElement.selectedOptions[0].value, 10),
-            tbody = document.getElementById('products'),
             rowToBeMoved = tbody.removeChild(selectElement.parentElement.parentElement),
             toBeReplacedWith;
 
-        toBeReplacedWith = document.querySelector('.tbody .table-row:nth-child('+(selectedOption)+')');
+        toBeReplacedWith = document.querySelector('.tbody .table-row:nth-child(' + selectedOption + ')');
 
         if (toBeReplacedWith){
-            tbody.insertBefore(rowToBeMoved,toBeReplacedWith);
-        }
-        else {
+            tbody.insertBefore(rowToBeMoved, toBeReplacedWith);
+        } else {
             tbody.appendChild(rowToBeMoved);
         }
 
@@ -372,8 +372,8 @@ ProductList.Main = (function (){
             rowsLength = rows.length,
             i;
 
-        for( i = 0; i < rowsLength; i++ ){
-           rows[i].querySelector('.select-order select').selectedIndex = i;
+        for (i = 0; i < rowsLength; i++ ){
+            rows[i].querySelector('.select-order select').selectedIndex = i;
         }
     }
 
@@ -382,10 +382,10 @@ ProductList.Main = (function (){
      */
     function fixImages(){
         var imageCells = document.querySelectorAll('.item-image'),
-            i = imageCells.length-1;
+            i = imageCells.length - 1;
 
-        for (i ; i>=0 ; i--){
-            imageCells[i].innerHTML = '<img src="'+imageCells[i].innerHTML+'" />';
+        for (i; i >= 0; i--){
+            imageCells[i].innerHTML = '<img src="' + imageCells[i].innerHTML + '" />';
         }
     }
 
@@ -394,10 +394,10 @@ ProductList.Main = (function (){
      */
     function fixDescription(){
         var descriptionCells = document.querySelectorAll('.item-description'),
-            i = descriptionCells.length-1;
+            i = descriptionCells.length - 1;
 
-        for (i ; i>=0 ; i--){
-            descriptionCells[i].innerHTML = '<div>'+descriptionCells[i].innerHTML+'</div>';
+        for (i; i >= 0; i--){
+            descriptionCells[i].innerHTML = '<div>' + descriptionCells[i].innerHTML + '</div>';
         }
     }
 
@@ -411,7 +411,7 @@ ProductList.Main = (function (){
             itemCount = 0;
 
         for (inputIndex; inputIndex >= 0; inputIndex--){
-            itemId = inputElements[inputIndex].dataset['itemid'];
+            itemId = inputElements[inputIndex].dataset.itemid;
             itemCount = parseInt( ProductList.Cart.getItemCount(itemId), 10 );
             inputElements[inputIndex].value = itemCount;
         }
@@ -430,8 +430,8 @@ ProductList.Main = (function (){
      */
     function exceedingItemLimit(addOrRemove, inputElement, item) {
         var inputElementValue = parseInt(inputElement.value, 10),
-            exceedingTopLimit = (addOrRemove > 0 && inputElementValue === item.getStock()),
-            exceedingBottomLimit = (addOrRemove < 0 && inputElementValue === 0);
+            exceedingTopLimit = addOrRemove > 0 && inputElementValue === item.getStock(),
+            exceedingBottomLimit = addOrRemove < 0 && inputElementValue === 0;
 
         return exceedingBottomLimit || exceedingTopLimit;
     }
@@ -451,7 +451,7 @@ ProductList.Main = (function (){
      */
     function attachOrderAddRemoveEvent() {
 
-        table.addEventListener('click', function(e){
+        table.addEventListener('click', function (e){
             var targetButtonElement = e.target,
                 inputElement = null,
                 item = null,
@@ -461,8 +461,8 @@ ProductList.Main = (function (){
             if (isChangeButton(targetButtonElement)) {
 
                 inputElement = targetButtonElement.parentElement.querySelector('[data-itemid]');
-                item = ProductList.Utils.getItemById(products, inputElement.dataset['itemid']);
-                addOrRemove = parseInt(targetButtonElement.dataset['action'], 10);
+                item = ProductList.Utils.getItemById(products, inputElement.dataset.itemid);
+                addOrRemove = parseInt(targetButtonElement.dataset.action, 10);
                 inputElement.value = inputElement.value || 0;
 
                 if (exceedingItemLimit(addOrRemove, inputElement, item)) {
@@ -481,7 +481,7 @@ ProductList.Main = (function (){
      * @param id {String} - item id to update its input
      */
     function updateItemAmountInput(id){
-        var itemAmountInputElement = document.querySelector('[data-itemid="'+id+'"]');
+        var itemAmountInputElement = document.querySelector('[data-itemid="' + id + '"]');
 
         itemAmountInputElement.value = ProductList.Cart.getItemCount(id);
     }
@@ -490,9 +490,9 @@ ProductList.Main = (function (){
      *  Publish sort event when header is clicked
      */
     function attachSortEvent(){
-        thead.addEventListener('click', function(e){
+        thead.addEventListener('click', function (e){
             var targetHeaderElement = e.target,
-                columnHeader = targetHeaderElement.dataset['header'];
+                columnHeader = targetHeaderElement.dataset.header;
 
             if (columnHeader){
                 ProductList.Utils.sortItemObjectsByProperty(products, columnHeader);
@@ -518,16 +518,16 @@ ProductList.Main = (function (){
             i = 0,
             eventFunctionList = [],
             eventFunctions = {
-            'itemsSorted': [drawSortedItems],
-            'couponApplied': [refresh],
-            'orderCommitted': [refresh, updateCart],
-            'itemUpdated': [updateCart, updateItemAmountInput]
+            itemsSorted: [drawSortedItems],
+            couponApplied: [refresh],
+            orderCommitted: [refresh, updateCart],
+            itemUpdated: [updateCart, updateItemAmountInput]
         };
 
         for (eventName in eventFunctions){
             if (eventFunctions.hasOwnProperty(eventName)){
                 eventFunctionList = eventFunctions[eventName];
-                for (i=0 ; i < eventFunctionList.length; i++){
+                for (i = 0; i < eventFunctionList.length; i++){
                     ProductList.PubSub.subscribe(eventName, eventFunctionList[i]);
                 }
             }
@@ -550,9 +550,9 @@ ProductList.Main = (function (){
     function attachCommitOrderEvent(){
         var orderFormElement = document.getElementById('order-form');
 
-        orderFormElement.addEventListener('submit', function(e){
-           e.preventDefault();
-           ProductList.Cart.commitOrder();
+        orderFormElement.addEventListener('submit', function (e){
+            e.preventDefault();
+            ProductList.Cart.commitOrder();
         });
     }
 
@@ -560,7 +560,7 @@ ProductList.Main = (function (){
      *  Attach event for submit coupon
      */
     function attachSubmitCouponEvent(){
-       var couponFormElement = document.getElementById('coupon-form'),
+        var couponFormElement = document.getElementById('coupon-form'),
            couponCodeElement = document.getElementById('coupon-code'),
            coupons = ProductList.Store.getCoupons(),
            couponCode = '',
@@ -574,12 +574,13 @@ ProductList.Main = (function (){
             e.preventDefault();
             couponCode = couponCodeElement.value;
 
-            for(i; i < numOfCoupons; i++ ){
+            for (i; i < numOfCoupons; i++ ){
                 couponUsed = coupons[i]
                     .validate(couponCode)
                     .apply() || couponUsed;
             }
             if (!couponUsed) {
+                /*eslint no-alert:0*/
                 alert('Wrong coupon code!');
             }
             couponCodeElement.value = '';
