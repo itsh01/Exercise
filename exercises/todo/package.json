@@ -16,7 +16,9 @@
   "author": "Itay Shtekel",
   "license": "LicenseRef-LICENSE",
   "devDependencies": {
+    "eslint": "^0.24.1",
     "eslint-config-coding-standard": "git+ssh://git@github.com/wix/eslint-config-coding-standard.git#v1.0.2",
+    "eslint-plugin-react": "^2.7.1",
     "grunt": "^0.4.5",
     "grunt-asciify": "^0.2.2",
     "grunt-contrib-clean": "^0.6.0",
@@ -27,7 +29,8 @@
     "grunt-contrib-eslint": "0.0.5",
     "grunt-contrib-uglify": "^0.9.1",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-dox": "^0.5.0"
+    "grunt-dox": "^0.5.0",
+    "grunt-react": "^0.12.2"
   },
   "dependencies": {
     "bootstrap": "^3.3.5"

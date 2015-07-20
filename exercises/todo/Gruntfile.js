@@ -46,7 +46,8 @@ module.exports = function (grunt) {
             }
         },
         clean: {
-            main: ['build']
+            main: ['build'],
+            jsx: ['src/js/*.js']
         },
         asciify: {
             banner: {
@@ -67,7 +68,7 @@ module.exports = function (grunt) {
             src: ['src/css/*.css']
         },
         eslint: {
-            src: ['src/js/*.js', 'Gruntfile.js']
+            src: ['src/js/*.jsx', 'Gruntfile.js']
         },
         dox: {
             options: {
@@ -86,6 +87,19 @@ module.exports = function (grunt) {
                     debounceDelay: 500
                 }
             }
+        },
+        react: {
+            main: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/js',
+                        src: ['**/*.jsx'],
+                        dest: 'src/js',
+                        ext: '.js'
+                    }
+                ]
+            }
         }
 
     });
@@ -101,9 +115,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-asciify');
     grunt.loadNpmTasks('grunt-dox');
+    grunt.loadNpmTasks('grunt-react');
 
 
     grunt.registerTask('lint', ['csslint', 'eslint']);
+    grunt.registerTask('jsx', ['react:main']);
     grunt.registerTask('build', ['copy', 'uglify:main', 'cssmin:main']);
-    grunt.registerTask('default', ['asciify:banner', 'lint', 'clean:main', 'build', 'dox']);
+    grunt.registerTask('default', ['asciify:banner', 'lint', 'clean:main', 'jsx', 'build', 'clean:jsx', 'dox']);
 };
