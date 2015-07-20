@@ -7,7 +7,7 @@ var ProductList = ProductList || {};
 // Product List Namespace
 
 ProductList.Cart = (function() {
-    "use strict";
+    'use strict';
 
     var items = {},
         products = ProductList.Store.getProducts();
@@ -42,7 +42,7 @@ ProductList.Cart = (function() {
      */
     function updateItem(id, addOrRemove){
         (addOrRemove > 0) ? addItem(id) : removeItem(id);
-        ProductList.PubSub.publish("itemUpdated", [id]);
+        ProductList.PubSub.publish('itemUpdated', [id]);
     }
 
     /**
@@ -70,7 +70,7 @@ ProductList.Cart = (function() {
      *  Update the total price in the ui
      */
     function updateTotalPrice(){
-        var cartInput = document.getElementById("cart-input");
+        var cartInput = document.getElementById('cart-input');
 
         cartInput.value = getTotalPrice();
     }

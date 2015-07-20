@@ -67,7 +67,7 @@ module.exports = function(grunt) {
             src: ['src/css/*.css']
         },
         eslint: {
-            src: ["src/js/*.js"]
+            src: ["src/js/*.js", 'Gruntfile.js']
         },
         dox: {
             options: {
@@ -89,12 +89,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-csslint');
-    grunt.loadNpmTasks("grunt-contrib-eslint");
     grunt.loadNpmTasks('grunt-asciify');
     grunt.loadNpmTasks('grunt-dox');
 
 
-    grunt.registerTask('lint', ['csslint', 'jslint']);
+    grunt.registerTask('lint', ['csslint', 'eslint']);
     grunt.registerTask('build', ['copy:main', 'uglify:main', 'cssmin:main']);
     grunt.registerTask('default', ['asciify:banner', 'clean:main', 'build', 'dox']);
 
