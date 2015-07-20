@@ -62,7 +62,8 @@ module.exports = function (grunt) {
             options: {
                 'adjoining-classes': false,
                 'import': false,
-                'fallback-colors': false
+                'fallback-colors': false,
+                'unqualified-attributes': false
             },
             src: ['src/css/*.css']
         },

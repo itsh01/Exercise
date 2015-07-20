@@ -94,7 +94,7 @@ body {
         margin: 0;
     }
     .cart {
-        margin-right: initial;
+        margin-right: inherit;
     }
 }
 @media screen and (max-width: 900px) {
