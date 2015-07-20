@@ -1,0 +1,28 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "authors": [
+    "Itay Shtekel <shtekel1@gmail.com>"
+  ],
+  "description": "To Do List",
+  "main": "src/index.html",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "To",
+    "Do"
+  ],
+  "license": "LicenseRef-LICENSE",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5"
+  }
+}
