@@ -1,5 +1,28 @@
 
 .main-container {
-    margin: 0 20rem;
+    margin: 0 10rem;
+    padding: 0 10rem;
     text-align: center;
+}
+
+.main-header {
+    padding: 3rem;
+}
+
+.task-list {
+    list-style: none;
+}
+
+.task-list li {
+    padding: 2rem;
+    font-size: 3rem;
+    -webkit-transition: 0.3s linear all;
+    -moz-transition: 0.3s linear all;
+    -ms-transition: 0.3s linear all;
+    -o-transition: 0.3s linear all;
+    transition: 0.3s linear all;
+}
+.task-list li:hover {
+    background: #CDE4FF;
+    cursor: pointer;
 }

@@ -80,9 +80,9 @@ module.exports = function (grunt) {
             }
         },
         watch: {
-            scripts: {
-                files: ['src/js/*.js'],
-                tasks: ['eslint'],
+            build: {
+                files: ['src/**/*'],
+                tasks: ['default'],
                 options: {
                     debounceDelay: 500
                 }
