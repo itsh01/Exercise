@@ -222,8 +222,8 @@ code {
 
 // Product List Namespace
 
-ProductList.Cart = (function() {
-    &quot;use strict&quot;;
+ProductList.Cart = ( function () {
+    'use strict';
 
     var items = {},
         products = ProductList.Store.getProducts();</code></pre></div></div></div></article><article class="comment"><header><h1 id="addItem">addItem</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>addItem()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{id}</span><span class="name">{String}</span><span class="description">- id of added item</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Add item to cart</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function addItem(id){
@@ -235,13 +235,17 @@ ProductList.Cart = (function() {
             items[id] -= 1;
         }
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="updateItem">updateItem</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>updateItem()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{id}</span><span class="name">{String}</span><span class="description">- id of added/removed item</span></li><li class="tag"><span class="type">@param: </span><span class="types">{addOrRemove}</span><span class="name">{Number}</span><span class="description">- 1/-1 either add or remove accordingly</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Update items count</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function updateItem(id, addOrRemove){
-        (addOrRemove &gt; 0) ? addItem(id) : removeItem(id);
-        ProductList.PubSub.publish(&quot;itemUpdated&quot;, [id]);
+        if (addOrRemove &gt; 0) {
+            addItem(id);
+        } else {
+            removeItem(id);
+        }
+        ProductList.PubSub.publish('itemUpdated', [id]);
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="getTotalPrice">getTotalPrice</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>getTotalPrice()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@returns: </span><span class="string">{Number} - total price</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Calculate the total price</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function getTotalPrice(){
-        var key = &quot;&quot;,
+        var key = '',
             totalPrice = 0,
-            item,
-            products = ProductList.Store.getProducts();
+            item;
+        products = ProductList.Store.getProducts();
 
         for (key in items){
             if (items.hasOwnProperty(key)){
@@ -252,7 +256,7 @@ ProductList.Cart = (function() {
 
         return totalPrice;
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="updateTotalPrice">updateTotalPrice</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>updateTotalPrice()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Update the total price in the ui</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function updateTotalPrice(){
-        var cartInput = document.getElementById(&quot;cart-input&quot;);
+        var cartInput = document.getElementById('cart-input');
 
         cartInput.value = getTotalPrice();
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="getItemCount">getItemCount</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>getItemCount()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{itemId}</span><span class="name">{String}</span><span class="description">- item id</span></li><li class="tag"><span class="type">@returns: </span><span class="string">{Number} - count order from specific item</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Get number of requested items from specific type</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function getItemCount(itemId){
@@ -260,7 +264,7 @@ ProductList.Cart = (function() {
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="getItemsSummary">getItemsSummary</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>getItemsSummary()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@returns: </span><span class="string">{Object} - items order</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Get total cart items order</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function getItemsSummary(){
         return items;
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="commitOrder">commitOrder</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>commitOrder()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Commit Order</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function commitOrder(){
-        var itemId = &quot;&quot;,
+        var itemId = '',
             currentProduct = null;
         for (itemId in items){
             if (items.hasOwnProperty(itemId)){
@@ -270,11 +274,11 @@ ProductList.Cart = (function() {
 
         }
         items = {};
-        ProductList.PubSub.publish(&quot;orderCommitted&quot;, []);
+        ProductList.PubSub.publish('orderCommitted', []);
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="subscribeToPubSub">subscribeToPubSub</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>subscribeToPubSub()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Subscribe events to run when changes happen in cart</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function subscribeToPubSub(){
-        ProductList.PubSub.subscribe(&quot;itemUpdated&quot;, updateTotalPrice);
-        ProductList.PubSub.subscribe(&quot;couponApplied&quot;, updateTotalPrice);
-        ProductList.PubSub.subscribe(&quot;orderCommitted&quot;, updateTotalPrice);
+        ProductList.PubSub.subscribe('itemUpdated', updateTotalPrice);
+        ProductList.PubSub.subscribe('couponApplied', updateTotalPrice);
+        ProductList.PubSub.subscribe('orderCommitted', updateTotalPrice);
     }
 
     subscribeToPubSub();
@@ -287,7 +291,7 @@ ProductList.Cart = (function() {
         getItemsSummary: getItemsSummary,
         getTotalPrice: getTotalPrice
     };
-})();</code></pre></div></div></div></article></div></div><!-- Foundation JS--><script type="text/javascript">document.write('<script src=' +
+}());</code></pre></div></div></div></article></div></div><!-- Foundation JS--><script type="text/javascript">document.write('<script src=' +
 ('__proto__' in {} ? 'http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min' : 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min') +
 '.js><\/script>')
 </script><script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/4.1.6/js/foundation.min.js"></script><script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/4.1.6/js/foundation/foundation.reveal.min.js"></script><!-- Prism js--><script>/**

@@ -107,6 +107,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('lint', ['csslint', 'eslint']);
     grunt.registerTask('build', ['copy:main', 'uglify:main', 'cssmin:main']);
-    grunt.registerTask('default', ['asciify:banner', 'clean:main', 'build', 'dox']);
+    grunt.registerTask('default', ['asciify:banner', 'lint', 'clean:main', 'build', 'dox']);
 
 };

@@ -222,8 +222,8 @@ code {
 
 // Product List Namespace
 
-ProductList.Main = (function(){
-    &quot;use strict&quot;;
+ProductList.Main = (function (){
+    'use strict';
 
     // mock items
     //var products = ProductList.Mock;
@@ -231,12 +231,12 @@ ProductList.Main = (function(){
 
     ///////
 
-    var table = document.getElementById(&quot;main-table&quot;),
-        tableHeaders = table.querySelectorAll(&quot;[data-header]&quot;),
-        tbody = document.getElementById(&quot;products&quot;),
-        thead = document.getElementById(&quot;table-header&quot;),
+    var table = document.getElementById('main-table'),
+        tableHeaders = table.querySelectorAll('[data-header]'),
+        tbody = document.getElementById('products'),
+        thead = document.getElementById('table-header'),
         columnsOrder = getColumnsOrder(),
-        moveToPageEvent = new CustomEvent(&quot;moveToPageEvent&quot;),
+        moveToPageEvent = new CustomEvent('moveToPageEvent'),
         itemsPerPage = 5,
         currentPage = 1;</code></pre></div></div></div></article><article class="comment"><header><h1 id="getColumnsOrder">getColumnsOrder</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>getColumnsOrder()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{table}</span><span class="name">{Element}</span><span class="description">- DOMElement table read the display from</span></li><li class="tag"><span class="type">@returns: </span><span class="string">{Array} - display order</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Get items&#39; properties display order by table header</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function getColumnsOrder(){
         var tableHeaderLength = tableHeaders.length,
@@ -244,7 +244,7 @@ ProductList.Main = (function(){
             i;
 
         for (i = 0; i &lt; tableHeaderLength; i++){
-            itemAttributesDisplayOrder[i] = tableHeaders[i].dataset[&quot;header&quot;];
+            itemAttributesDisplayOrder[i] = tableHeaders[i].dataset.header;
         }
         return itemAttributesDisplayOrder;
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="fixTableState">fixTableState</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>fixTableState()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Update Fields on the DOM by the suitable objects</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function fixTableState() {
@@ -252,9 +252,9 @@ ProductList.Main = (function(){
         fixImages();
         fixDescription();
         updateOrderInputs();
-    }</code></pre></div></div></div></article><article class="comment"><header><h1 id="createTableRowElements">createTableRowElements</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>createTableRowElements()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{items}</span><span class="name">{Array}</span><span class="description">- items to create rows by</span></li><li class="tag"><span class="type">@param: </span><span class="types">{columnsOrder}</span><span class="name">{Array}</span><span class="description">- order of items' properties</span></li><li class="tag"><span class="type">@returns: </span><span class="string">{DocumentFragment} - fragment of rows</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Create a fragment of rows elements by items</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function createTableRowElements(items, columnsOrder) {
+    }</code></pre></div></div></div></article><article class="comment"><header><h1 id="createTableRowElements">createTableRowElements</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>createTableRowElements()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{items}</span><span class="name">{Array}</span><span class="description">- items to create rows by</span></li><li class="tag"><span class="type">@param: </span><span class="types">{columnsOrder}</span><span class="name">{Array}</span><span class="description">- order of items' properties</span></li><li class="tag"><span class="type">@returns: </span><span class="string">{DocumentFragment} - fragment of rows</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Create a fragment of rows elements by items</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function createTableRowElements(items) {
         var i = 0,
-            numOfItemInPage = (items.length &gt; itemsPerPage) ? itemsPerPage : items.length,
+            numOfItemInPage = items.length &gt; itemsPerPage ? itemsPerPage : items.length,
             tableRowsFragment = document.createDocumentFragment();
 
         for (i; i &lt; numOfItemInPage; i++) {
@@ -264,15 +264,15 @@ ProductList.Main = (function(){
         }
 
         return tableRowsFragment;
-    }</code></pre></div></div></div></article><article class="comment"><header><h1 id="populateTableElement">populateTableElement</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>populateTableElement()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{tableElement}</span><span class="name">{Element}</span><span class="description">- DOMElement table to add to</span></li><li class="tag"><span class="type">@param: </span><span class="types">{items}</span><span class="name">{Array}</span><span class="description">- Items to display</span></li><li class="tag"><span class="type">@param: </span><span class="types">{columnsOrder}</span><span class="name">{Array}</span><span class="description">- Item's properties display order</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Initialize table by products list</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function populateTableElement(tableElement, items, columnsOrder){
+    }</code></pre></div></div></div></article><article class="comment"><header><h1 id="populateTableElement">populateTableElement</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>populateTableElement()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{tableElement}</span><span class="name">{Element}</span><span class="description">- DOMElement table to add to</span></li><li class="tag"><span class="type">@param: </span><span class="types">{items}</span><span class="name">{Array}</span><span class="description">- Items to display</span></li><li class="tag"><span class="type">@param: </span><span class="types">{columnsOrder}</span><span class="name">{Array}</span><span class="description">- Item's properties display order</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Initialize table by products list</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function populateTableElement(tableElement, items){
         var tableRowsFragment = null;
 
-        tableRowsFragment = createTableRowElements(items, columnsOrder);
+        tableRowsFragment = createTableRowElements(items);
         tableElement.appendChild(tableRowsFragment);
 
         fixTableState();
-    }</code></pre></div></div></div></article><article class="comment"><header><h1 id="createRowByItem">createRowByItem</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>createRowByItem()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{item}</span><span class="name">{Object}</span><span class="description">- item to create row by</span></li><li class="tag"><span class="type">@param: </span><span class="types">{columnsOrder}</span><span class="name">{Array}</span><span class="description">- item's properties display oreder</span></li><li class="tag"><span class="type">@param: </span><span class="types">{numOfItems}</span><span class="name">{Number}</span><span class="description">- number if items</span></li><li class="tag"><span class="type">@returns: </span><span class="string">{Element} - DOMElement row of item</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Create a single row by single item</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function createRowByItem(item, columnsOrder, numOfItems){
-        var row = document.createElement(&quot;div&quot;),
+    }</code></pre></div></div></div></article><article class="comment"><header><h1 id="createRowByItem">createRowByItem</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>createRowByItem()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{item}</span><span class="name">{Object}</span><span class="description">- item to create row by</span></li><li class="tag"><span class="type">@param: </span><span class="types">{columnsOrder}</span><span class="name">{Array}</span><span class="description">- item's properties display oreder</span></li><li class="tag"><span class="type">@param: </span><span class="types">{numOfItems}</span><span class="name">{Number}</span><span class="description">- number if items</span></li><li class="tag"><span class="type">@returns: </span><span class="string">{Element} - DOMElement row of item</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Create a single row by single item</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function createRowByItem(item, numOfItems){
+        var row = document.createElement('div'),
             cell = null,
             numOfColumns = columnsOrder.length,
             i = 0,
@@ -280,23 +280,23 @@ ProductList.Main = (function(){
             itemIsOutOfStock = !item.isInStock(),
             key = null;
 
-        row.className += &quot; table-row&quot;;
+        row.className += ' table-row';
         if (itemIsOnSale){
-            row.className += &quot; item-on-sale&quot;;
+            row.className += ' item-on-sale';
         }
         if (itemIsOutOfStock){
-            row.className += &quot; item-out-of-stock&quot;;
+            row.className += ' item-out-of-stock';
         }
 
         for (i; i &lt; numOfColumns; i++){
             key = columnsOrder[i];
-            cell = document.createElement(&quot;div&quot;);
+            cell = document.createElement('div');
             cell.innerHTML = item.data[key];
-            if (itemIsOnSale &amp;&amp; key === &quot;price&quot;){
+            if (itemIsOnSale &amp;&amp; key === 'price'){
                 cell.innerHTML = '&lt;div class=&quot;discounted&quot;&gt;' + item.data[key] + '&lt;div&gt;';
                 cell.innerHTML += '&lt;div class=&quot;real-price&quot;&gt;' + item.getPrice() + '&amp;dollar;&lt;div&gt;';
             }
-            cell.className = &quot;table-cell item-&quot; + key;
+            cell.className = 'table-cell item-' + key;
             row.appendChild(cell);
         }
 
@@ -309,7 +309,7 @@ ProductList.Main = (function(){
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="getAddRemoveButtonsCell">getAddRemoveButtonsCell</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>getAddRemoveButtonsCell()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{itemId}</span><span class="name">{String}</span><span class="description">- item identifier</span></li><li class="tag"><span class="type">@returns: </span><span class="string">{Element} - DOMElement button</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Create an order button with add/remove options</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function getAddRemoveButtonsCell(itemId){
         var cellElement = document.createElement('div');
 
-        cellElement.className = &quot;table-cell&quot;;
+        cellElement.className = 'table-cell';
 
         cellElement.innerHTML = '&lt;input type=&quot;number&quot; disabled=&quot;disabled&quot; data-itemid=&quot;' + itemId + '&quot; /&gt;';
         cellElement.innerHTML += '&lt;button class=&quot;btn btn-primary btn-xs change-amount&quot; data-action=&quot;-1&quot;&gt;-&lt;/button&gt;';
@@ -321,13 +321,13 @@ ProductList.Main = (function(){
             newCellElement = document.createElement('div'),
             selectElement = document.createElement('select');
 
-        selectElement.innerHTML = createNumberOptions(1,numOfItems+1);
+        selectElement.innerHTML = createNumberOptions(1, numOfItems + 1);
 
-        selectElement.addEventListener('change', function(){
+        selectElement.addEventListener('change', function (){
             handleChange(this);
         });
 
-        newCellElement.className = &quot;table-cell select-order&quot;;
+        newCellElement.className = 'table-cell select-order';
         newCellElement.appendChild(selectElement);
 
         row.insertBefore(newCellElement, idCellElement);
@@ -346,19 +346,21 @@ ProductList.Main = (function(){
             pageLinks = ProductList.Utils.convertToArray(navElement.querySelectorAll('[data-pagenum]')),
             anchorsLength = pageLinks.length;
 
+        function dispatchMoveToPageEvent(){
+            this.dispatchEvent(moveToPageEvent);
+        }
+
         for (i; i &lt; anchorsLength; i++) {
-            pageNum = pageLinks[i].dataset['pagenum'];
+            pageNum = pageLinks[i].dataset.pagenum;
             pageLinks[i].addEventListener('moveToPageEvent', moveToPage.bind(null, pageNum));
-            pageLinks[i].addEventListener('click', function(){
-                this.dispatchEvent(moveToPageEvent);
-            });
+            pageLinks[i].addEventListener('click', dispatchMoveToPageEvent);
         }
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="setNumPerPageElementState">setNumPerPageElementState</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>setNumPerPageElementState()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>set num per page element state</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function setNumPerPageElementState() {
         var numPerPageElement = document.getElementById('items-per-page');
         numPerPageElement.addEventListener('change', changeItemsPerPage);
         numPerPageElement.value = itemsPerPage;
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="appendToContainerElement">appendToContainerElement</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>appendToContainerElement()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{childElement}</span><span class="name">{Element}</span><span class="description">- child to append</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>append an element to container main element</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function appendToContainerElement(childElement) {
-        document.getElementsByClassName(&quot;container&quot;)[0].appendChild(childElement);
+        document.getElementsByClassName('container')[0].appendChild(childElement);
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="createPager">createPager</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>createPager()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{items}</span><span class="name">{Array}</span><span class="description">- items to create pager by</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Create a page navigation</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function createPager(items){
         var navElement = document.createElement('nav'),
             lastNav,
@@ -367,9 +369,9 @@ ProductList.Main = (function(){
             i = 0,
             page = 0;
 
-        navElement.className = &quot;pagination-container&quot;;
+        navElement.className = 'pagination-container';
 
-        for(i ; i &lt; pages; i++){
+        for (i; i &lt; pages; i++){
             page = i + 1;
             inner += '&lt;li&gt;&lt;a href=&quot;#&quot; data-pagenum=&quot;' + page + '&quot;&gt;' + page + '&lt;/a&gt;&lt;/li&gt;';
         }
@@ -390,7 +392,7 @@ ProductList.Main = (function(){
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="createCart">createCart</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>createCart()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Create cart total display</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function createCart(){
         var cartElement = document.createElement('div');
 
-        cartElement.className = &quot;cart&quot;;
+        cartElement.className = 'cart';
 
         cartElement.innerHTML = '&lt;input type=&quot;number&quot; disabled=&quot;disabled&quot; id=&quot;cart-input&quot; /&gt;';
 
@@ -420,81 +422,79 @@ ProductList.Main = (function(){
         inner += '&lt;/ul&gt;';
 
         lastCart = document.getElementById('cart-summery');
-        if(lastCart){
-          lastCart.remove();
+        if (lastCart){
+            lastCart.remove();
         }
         cartSummaryElement.innerHTML = inner;
-        cartSummaryElement.setAttribute('id','cart-summery');
-        cartSummaryElement.className = &quot;items-summery&quot;;
+        cartSummaryElement.setAttribute('id', 'cart-summery');
+        cartSummaryElement.className = 'items-summery';
         appendToContainerElement(cartSummaryElement);
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="moveToPage">moveToPage</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>moveToPage()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{page}</span><span class="name">{Number}</span><span class="description">- Page to switch to</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Move to another page</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function moveToPage(page){
         deleteElementContent(tbody);
-        populateTableElement(tbody, products.slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage), columnsOrder);
+        populateTableElement(tbody, products.slice(page * itemsPerPage - itemsPerPage, page * itemsPerPage));
         currentPage = page;
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="deleteElementContent">deleteElementContent</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>deleteElementContent()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{element}</span><span class="name">{Element}</span><span class="description">- DOMElement to delete its content</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>set innerHTML of an element to &#39;&#39;</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function deleteElementContent(element){
         element.innerHTML = '';
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="handleChange">handleChange</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>handleChange()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{selectElement}</span><span class="name">{Object}</span><span class="description">- select input to handle its value change</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Handling a change in a select</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function handleChange(selectElement){
 
         var selectedOption = parseInt(selectElement.selectedOptions[0].value, 10),
-            tbody = document.getElementById(&quot;products&quot;),
             rowToBeMoved = tbody.removeChild(selectElement.parentElement.parentElement),
             toBeReplacedWith;
 
-        toBeReplacedWith = document.querySelector('.tbody .table-row:nth-child('+(selectedOption)+')');
+        toBeReplacedWith = document.querySelector('.tbody .table-row:nth-child(' + selectedOption + ')');
 
         if (toBeReplacedWith){
-            tbody.insertBefore(rowToBeMoved,toBeReplacedWith);
-        }
-        else {
+            tbody.insertBefore(rowToBeMoved, toBeReplacedWith);
+        } else {
             tbody.appendChild(rowToBeMoved);
         }
 
         fixRowSelections();
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="fixRowSelections">fixRowSelections</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>fixRowSelections()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Fix Selects value according to row position</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function fixRowSelections(){
-        var rows = document.getElementById(&quot;products&quot;).children,
+        var rows = document.getElementById('products').children,
             rowsLength = rows.length,
             i;
 
-        for( i = 0; i &lt; rowsLength; i++ ){
-           rows[i].querySelector(&quot;.select-order select&quot;).selectedIndex = i;
+        for (i = 0; i &lt; rowsLength; i++ ){
+            rows[i].querySelector('.select-order select').selectedIndex = i;
         }
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="fixImages">fixImages</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>fixImages()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Fix images display from path string to <img> tag</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function fixImages(){
-        var imageCells = document.querySelectorAll(&quot;.item-image&quot;),
-            i = imageCells.length-1;
+        var imageCells = document.querySelectorAll('.item-image'),
+            i = imageCells.length - 1;
 
-        for (i ; i&gt;=0 ; i--){
-            imageCells[i].innerHTML = '&lt;img src=&quot;'+imageCells[i].innerHTML+'&quot; /&gt;';
+        for (i; i &gt;= 0; i--){
+            imageCells[i].innerHTML = '&lt;img src=&quot;' + imageCells[i].innerHTML + '&quot; /&gt;';
         }
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="fixDescription">fixDescription</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>fixDescription()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Fix description display to be wrapped in a div</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function fixDescription(){
-        var descriptionCells = document.querySelectorAll(&quot;.item-description&quot;),
-            i = descriptionCells.length-1;
+        var descriptionCells = document.querySelectorAll('.item-description'),
+            i = descriptionCells.length - 1;
 
-        for (i ; i&gt;=0 ; i--){
-            descriptionCells[i].innerHTML = '&lt;div&gt;'+descriptionCells[i].innerHTML+'&lt;/div&gt;';
+        for (i; i &gt;= 0; i--){
+            descriptionCells[i].innerHTML = '&lt;div&gt;' + descriptionCells[i].innerHTML + '&lt;/div&gt;';
         }
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="updateOrderInputs">updateOrderInputs</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>updateOrderInputs()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Update order input elements according to cart</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function updateOrderInputs(){
-        var inputElements = document.querySelectorAll(&quot;[data-itemid]&quot;),
+        var inputElements = document.querySelectorAll('[data-itemid]'),
             inputIndex = inputElements.length - 1,
-            itemId = &quot;&quot;,
+            itemId = '',
             itemCount = 0;
 
         for (inputIndex; inputIndex &gt;= 0; inputIndex--){
-            itemId = inputElements[inputIndex].dataset[&quot;itemid&quot;];
+            itemId = inputElements[inputIndex].dataset.itemid;
             itemCount = parseInt( ProductList.Cart.getItemCount(itemId), 10 );
             inputElements[inputIndex].value = itemCount;
         }
 
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="exceedingItemLimit">exceedingItemLimit</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>exceedingItemLimit()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{addOrRemove}</span><span class="name">{Number}</span><span class="description">- 1 -&gt; add flag, -1 -&gt; remove flag</span></li><li class="tag"><span class="type">@param: </span><span class="types">{inputElement}</span><span class="name">{Element}</span><span class="description">- DOMElement input to check its value</span></li><li class="tag"><span class="type">@param: </span><span class="types">{item}</span><span class="name">{Object}</span><span class="description">- item object to check its limit</span></li><li class="tag"><span class="type">@returns: </span><span class="string">{boolean} - is exceeding limit</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Check if items&#39; order is exceeding the limit,<br /> bottom limit is 0<br /> top limit is according to item object</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function exceedingItemLimit(addOrRemove, inputElement, item) {
         var inputElementValue = parseInt(inputElement.value, 10),
-            exceedingTopLimit = (addOrRemove &gt; 0 &amp;&amp; inputElementValue === item.getStock()),
-            exceedingBottomLimit = (addOrRemove &lt; 0 &amp;&amp; inputElementValue === 0);
+            exceedingTopLimit = addOrRemove &gt; 0 &amp;&amp; inputElementValue === item.getStock(),
+            exceedingBottomLimit = addOrRemove &lt; 0 &amp;&amp; inputElementValue === 0;
 
         return exceedingBottomLimit || exceedingTopLimit;
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="isChangeButton">isChangeButton</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>isChangeButton()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{targetButtonElement}</span><span class="name">{Element}</span><span class="description">- DOMElement to check</span></li><li class="tag"><span class="type">@returns: </span><span class="string">{Array|{index: number, input: string}} - is a change button</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Check if element is a change button</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function isChangeButton(targetButtonElement) {
         return targetButtonElement.className.match('change-amount');
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="attachOrderAddRemoveEvent">attachOrderAddRemoveEvent</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>attachOrderAddRemoveEvent()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Publish itemUpdate event when add/remove to cart</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function attachOrderAddRemoveEvent() {
 
-        table.addEventListener(&quot;click&quot;, function(e){
+        table.addEventListener('click', function (e){
             var targetButtonElement = e.target,
                 inputElement = null,
                 item = null,
@@ -503,9 +503,9 @@ ProductList.Main = (function(){
 
             if (isChangeButton(targetButtonElement)) {
 
-                inputElement = targetButtonElement.parentElement.querySelector(&quot;[data-itemid]&quot;);
-                item = ProductList.Utils.getItemById(products, inputElement.dataset[&quot;itemid&quot;]);
-                addOrRemove = parseInt(targetButtonElement.dataset[&quot;action&quot;], 10);
+                inputElement = targetButtonElement.parentElement.querySelector('[data-itemid]');
+                item = ProductList.Utils.getItemById(products, inputElement.dataset.itemid);
+                addOrRemove = parseInt(targetButtonElement.dataset.action, 10);
                 inputElement.value = inputElement.value || 0;
 
                 if (exceedingItemLimit(addOrRemove, inputElement, item)) {
@@ -517,17 +517,17 @@ ProductList.Main = (function(){
 
         });
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="updateItemAmountInput">updateItemAmountInput</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>updateItemAmountInput()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{id}</span><span class="name">{String}</span><span class="description">- item id to update its input</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Update current amount of ordered item in the suitable input</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function updateItemAmountInput(id){
-        var itemAmountInputElement = document.querySelector(&quot;[data-itemid=\&quot;&quot;+id+&quot;\&quot;]&quot;);
+        var itemAmountInputElement = document.querySelector('[data-itemid=&quot;' + id + '&quot;]');
 
         itemAmountInputElement.value = ProductList.Cart.getItemCount(id);
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="attachSortEvent">attachSortEvent</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>attachSortEvent()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Publish sort event when header is clicked</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function attachSortEvent(){
-        thead.addEventListener(&quot;click&quot;, function(e){
+        thead.addEventListener('click', function (e){
             var targetHeaderElement = e.target,
-                columnHeader = targetHeaderElement.dataset[&quot;header&quot;];
+                columnHeader = targetHeaderElement.dataset.header;
 
             if (columnHeader){
                 ProductList.Utils.sortItemObjectsByProperty(products, columnHeader);
-                ProductList.PubSub.publish(&quot;itemsSorted&quot;, []);
+                ProductList.PubSub.publish('itemsSorted', []);
             }
         });
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="drawSortedItems">drawSortedItems</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>drawSortedItems()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Draw table with sorted items by requested property</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function drawSortedItems(){
@@ -539,16 +539,16 @@ ProductList.Main = (function(){
             i = 0,
             eventFunctionList = [],
             eventFunctions = {
-            'itemsSorted': [drawSortedItems],
-            'couponApplied': [refresh],
-            'orderCommitted': [refresh, updateCart],
-            'itemUpdated': [updateCart, updateItemAmountInput]
+            itemsSorted: [drawSortedItems],
+            couponApplied: [refresh],
+            orderCommitted: [refresh, updateCart],
+            itemUpdated: [updateCart, updateItemAmountInput]
         };
 
         for (eventName in eventFunctions){
             if (eventFunctions.hasOwnProperty(eventName)){
                 eventFunctionList = eventFunctions[eventName];
-                for (i=0 ; i &lt; eventFunctionList.length; i++){
+                for (i = 0; i &lt; eventFunctionList.length; i++){
                     ProductList.PubSub.subscribe(eventName, eventFunctionList[i]);
                 }
             }
@@ -559,36 +559,35 @@ ProductList.Main = (function(){
         attachSubmitCouponEvent();
         attachCommitOrderEvent();
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="attachCommitOrderEvent">attachCommitOrderEvent</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>attachCommitOrderEvent()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Attach event for submit coupon</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function attachCommitOrderEvent(){
-        var orderFormElement = document.getElementById(&quot;order-form&quot;);
+        var orderFormElement = document.getElementById('order-form');
 
-        orderFormElement.addEventListener(&quot;submit&quot;, function(e){
-           e.preventDefault();
-           ProductList.Cart.commitOrder();
+        orderFormElement.addEventListener('submit', function (e){
+            e.preventDefault();
+            ProductList.Cart.commitOrder();
         });
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="attachSubmitCouponEvent">attachSubmitCouponEvent</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>attachSubmitCouponEvent()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Attach event for submit coupon</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function attachSubmitCouponEvent(){
-       var couponFormElement = document.getElementById(&quot;coupon-form&quot;),
-           couponCodeElement = document.getElementById(&quot;coupon-code&quot;),
+        var couponFormElement = document.getElementById('coupon-form'),
+           couponCodeElement = document.getElementById('coupon-code'),
            coupons = ProductList.Store.getCoupons(),
            couponCode = '',
            numOfCoupons = coupons.length;
 
 
-        couponFormElement.addEventListener(&quot;submit&quot;, function (e) {
+        couponFormElement.addEventListener('submit', function (e) {
             var i = 0,
                 couponUsed = false;
 
             e.preventDefault();
             couponCode = couponCodeElement.value;
 
-            for(i; i &lt; numOfCoupons; i++ ){
+            for (i; i &lt; numOfCoupons; i++ ){
                 couponUsed = coupons[i]
                     .validate(couponCode)
                     .apply() || couponUsed;
             }
-            if (!couponUsed) {
-                alert(&quot;Wrong coupon code!&quot;);
+            if (!couponUsed) {</code></pre></div></div></div></article><article class="comment"><header></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>slint no-alert:0</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">alert('Wrong coupon code!');
             }
-            couponCodeElement.value = &quot;&quot;;
+            couponCodeElement.value = '';
         });
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="refresh">refresh</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>refresh()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Refresh page</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function refresh(){
         products = ProductList.Store.getProducts();
@@ -610,7 +609,7 @@ ProductList.Main = (function(){
       moveToPage: moveToPage
     };
 
-})();</code></pre></div></div></div></article></div></div><!-- Foundation JS--><script type="text/javascript">document.write('<script src=' +
+}());</code></pre></div></div></div></article></div></div><!-- Foundation JS--><script type="text/javascript">document.write('<script src=' +
 ('__proto__' in {} ? 'http://cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min' : 'http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min') +
 '.js><\/script>')
 </script><script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/4.1.6/js/foundation.min.js"></script><script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/4.1.6/js/foundation/foundation.reveal.min.js"></script><!-- Prism js--><script>/**
