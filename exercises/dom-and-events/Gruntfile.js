@@ -89,6 +89,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-csslint');
+    grunt.loadNpmTasks('grunt-contrib-eslint');
     grunt.loadNpmTasks('grunt-asciify');
     grunt.loadNpmTasks('grunt-dox');
 
