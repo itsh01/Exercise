@@ -35,18 +35,15 @@ ProductList.PubSub = (function (){
      * @param {Object} data - data for callback execution
      */
     function publish(name, data){
-        var key,
-            event = events[name];
+        var event = events[name];
 
         if (!event){
             return;
         }
 
-        for (key in event){
-            if (event.hasOwnProperty(key)){
-                event[key].apply(this, data);
-            }
-        }
+        _.forIn(event, function (callback){
+            callback.apply(this, data);
+        });
     }
 
     /**

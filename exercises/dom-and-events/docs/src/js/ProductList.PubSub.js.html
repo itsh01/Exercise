@@ -234,18 +234,15 @@ ProductList.PubSub = (function (){
 
         return counter;
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="publish">publish</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>publish()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{String}</span><span class="name">name</span><span class="description">- the event name</span></li><li class="tag"><span class="type">@param: </span><span class="types">{Object}</span><span class="name">data</span><span class="description">- data for callback execution</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Launch an event</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function publish(name, data){
-        var key,
-            event = events[name];
+        var event = events[name];
 
         if (!event){
             return;
         }
 
-        for (key in event){
-            if (event.hasOwnProperty(key)){
-                event[key].apply(this, data);
-            }
-        }
+        _.forIn(event, function (callback){
+            callback.apply(this, data);
+        });
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="unSubscribe">unSubscribe</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>unSubscribe()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{String}</span><span class="name">name</span><span class="description">- the event name</span></li><li class="tag"><span class="type">@param: </span><span class="types">{number}</span><span class="name">id</span><span class="description">- subscription id</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Remove an event from PubSub</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function unSubscribe(name, id){
         if (events[name]){
             delete events[name][id];
