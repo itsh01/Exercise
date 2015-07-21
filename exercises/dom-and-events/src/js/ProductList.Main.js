@@ -174,12 +174,11 @@ ProductList.Main = (function (){
      * @returns {String} - html options string
      */
     function createNumberOptions(from, to) {
-        var htmlString = '',
-            i = from;
+        var htmlString = '';
 
-        for (i; i < to; i++) {
+        _.forIn(_.range(from, to), function (i){
             htmlString += '<option value="' + i + '">' + i + '</option>';
-        }
+        });
 
         return htmlString;
     }

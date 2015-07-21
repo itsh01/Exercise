@@ -325,19 +325,16 @@ ProductList.Main = (function (){
 
         row.insertBefore(newCellElement, idCellElement);
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="createNumberOptions">createNumberOptions</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>createNumberOptions()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{from}</span><span class="name">{Number}</span><span class="description">- starting option</span></li><li class="tag"><span class="type">@param: </span><span class="types">{to}</span><span class="name">{Number}</span><span class="description">- ending option</span></li><li class="tag"><span class="type">@returns: </span><span class="string">{String} - html options string</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Create options html string</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function createNumberOptions(from, to) {
-        var htmlString = '',
-            i = from;
+        var htmlString = '';
 
-        for (i; i &lt; to; i++) {
+        _.forIn(_.range(from, to), function (i){
             htmlString += '&lt;option value=&quot;' + i + '&quot;&gt;' + i + '&lt;/option&gt;';
-        }
+        });
 
         return htmlString;
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="attachPagerEvent">attachPagerEvent</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>attachPagerEvent()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{navElement}</span><span class="name">{Element}</span><span class="description">- pager nav element</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Attach moving to another page when clicked on pager</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function attachPagerEvent(navElement) {
-        //var i = 0,
         var pageNum = 0,
             pageLinks = ProductList.Utils.convertToArray(navElement.querySelectorAll('[data-pagenum]'));
-            //anchorsLength = pageLinks.length;
 
         function dispatchMoveToPageEvent(){
             this.dispatchEvent(moveToPageEvent);
@@ -349,11 +346,6 @@ ProductList.Main = (function (){
             pageLink.addEventListener('click', dispatchMoveToPageEvent);
         }).value();
 
-        //for (i; i &lt; anchorsLength; i++) {
-        //    pageNum = pageLinks[i].dataset.pagenum;
-        //    pageLinks[i].addEventListener('moveToPageEvent', moveToPage.bind(null, pageNum));
-        //    pageLinks[i].addEventListener('click', dispatchMoveToPageEvent);
-        //}
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="setNumPerPageElementState">setNumPerPageElementState</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>setNumPerPageElementState()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>set num per page element state</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function setNumPerPageElementState() {
         var numPerPageElement = document.getElementById('items-per-page');
         numPerPageElement.addEventListener('change', changeItemsPerPage);
