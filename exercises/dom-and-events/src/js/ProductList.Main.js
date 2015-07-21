@@ -91,11 +91,8 @@ ProductList.Main = (function (){
     function createRowByItem(item, numOfItems){
         var row = document.createElement('div'),
             cell = null,
-            numOfColumns = columnsOrder.length,
-            i = 0,
             itemIsOnSale = item instanceof ProductList.Store.ItemOnSale,
-            itemIsOutOfStock = !item.isInStock(),
-            key = null;
+            itemIsOutOfStock = !item.isInStock();
 
         row.className += ' table-row';
         if (itemIsOnSale){
@@ -105,22 +102,20 @@ ProductList.Main = (function (){
             row.className += ' item-out-of-stock';
         }
 
-        for (i; i < numOfColumns; i++){
-            key = columnsOrder[i];
+        _.forIn(columnsOrder, function (columnName){
             cell = document.createElement('div');
-            cell.innerHTML = item.data[key];
-            if (itemIsOnSale && key === 'price'){
-                cell.innerHTML = '<div class="discounted">' + item.data[key] + '<div>';
+            cell.innerHTML = item.data[columnName];
+            if (itemIsOnSale && columnName === 'price'){
+                cell.innerHTML = '<div class="discounted">' + item.data[columnName] + '<div>';
                 cell.innerHTML += '<div class="real-price">' + item.getPrice() + '&dollar;<div>';
             }
-            cell.className = 'table-cell item-' + key;
+            cell.className = 'table-cell item-' + columnName;
             row.appendChild(cell);
-        }
+        });
 
         row.appendChild(getAddRemoveButtonsCell(item.getId()));
 
         createSelectInRow(row, numOfItems);
-
 
         return row;
     }
@@ -229,30 +224,27 @@ ProductList.Main = (function (){
      */
     function createPager(items){
         var navElement = document.createElement('nav'),
-            lastNav,
+            lastNav = document.querySelector('.pagination-container'),
             inner = '<ul class="pagination">',
-            pages = Math.ceil(items.length / itemsPerPage),
-            i = 0,
-            page = 0;
+            pages = Math.ceil(items.length / itemsPerPage);
 
-        navElement.className = 'pagination-container';
 
-        for (i; i < pages; i++){
-            page = i + 1;
-            inner += '<li><a href="#" data-pagenum="' + page + '">' + page + '</a></li>';
-        }
+        _.forIn(_.range(1, pages + 1), function (i){
+            inner += '<li><a href="#" data-pagenum="' + i + '">' + i + '</a></li>';
+        });
+
         inner += '</ul><select id="items-per-page" class="per-page-selection">';
         inner += createNumberOptions(5, 11);
         inner += '</select>';
 
+        navElement.className = 'pagination-container';
         navElement.innerHTML = inner;
 
-        attachPagerEvent(navElement);
-
-        lastNav = document.querySelector('.pagination-container');
         if (lastNav){
             lastNav.remove();
         }
+
+        attachPagerEvent(navElement);
         appendToContainerElement(navElement);
         setNumPerPageElementState();
     }
@@ -284,31 +276,27 @@ ProductList.Main = (function (){
      */
     function updateCart(){
         var cartSummaryElement = document.createElement('div'),
-            lastCart,
-            itemsSummary,
+            lastCart = document.getElementById('cart-summery'),
+            itemsSummary = ProductList.Cart.getItemsSummary(),
             inner = '',
-            item,
-            id;
+            item = null;
 
-
-        itemsSummary = ProductList.Cart.getItemsSummary();
-
-        inner += '<ul>';
-        for (id in itemsSummary){
-            if (itemsSummary.hasOwnProperty(id) && itemsSummary[id] !== 0){
+        _.forIn(itemsSummary, function (count, id){
+            if (count > 0){
                 item = ProductList.Utils.getItemById(products, id);
-                inner += '<li>' + itemsSummary[id] + ' - ' + item.getName() + '</li>';
+                inner += '<li>' + count + ' - ' + item.getName() + '</li>';
             }
-        }
-        inner += '</ul>';
+        });
 
-        lastCart = document.getElementById('cart-summery');
+        inner = '<ul>' + inner + '</ul>';
+
         if (lastCart){
             lastCart.remove();
         }
+
         cartSummaryElement.innerHTML = inner;
-        cartSummaryElement.setAttribute('id', 'cart-summery');
         cartSummaryElement.className = 'items-summery';
+        cartSummaryElement.id = 'cart-summery';
         appendToContainerElement(cartSummaryElement);
     }
 
@@ -358,37 +346,33 @@ ProductList.Main = (function (){
      *  Fix Selects value according to row position
      */
     function fixRowSelections(){
-        var rows = document.getElementById('products').children,
-            rowsLength = rows.length,
-            i;
+        var rowElements = document.getElementById('products').children;
 
-        for (i = 0; i < rowsLength; i++ ){
-            rows[i].querySelector('.select-order select').selectedIndex = i;
-        }
+        _(rowElements).forEach(function (rowElement, index){
+            rowElement.querySelector('.select-order select').selectedIndex = index;
+        }).value();
     }
 
     /**
      *  Fix images display from path string to <img> tag
      */
     function fixImages(){
-        var imageCells = document.querySelectorAll('.item-image'),
-            i = imageCells.length - 1;
+        var imageCells = document.querySelectorAll('.item-image');
 
-        for (i; i >= 0; i--){
-            imageCells[i].innerHTML = '<img src="' + imageCells[i].innerHTML + '" />';
-        }
+        _(imageCells).forEach(function (cellElement){
+            cellElement.innerHTML = '<img src="' + cellElement.innerHTML + '" />';
+        }).value();
     }
 
     /**
      *  Fix description display to be wrapped in a div
      */
     function fixDescription(){
-        var descriptionCells = document.querySelectorAll('.item-description'),
-            i = descriptionCells.length - 1;
+        var descriptionCells = document.querySelectorAll('.item-description');
 
-        for (i; i >= 0; i--){
-            descriptionCells[i].innerHTML = '<div>' + descriptionCells[i].innerHTML + '</div>';
-        }
+        _(descriptionCells).forEach(function (cellElement){
+            cellElement.innerHTML = '<div>' + cellElement.innerHTML + '</div>';
+        }).value();
     }
 
     /**
@@ -396,16 +380,14 @@ ProductList.Main = (function (){
      */
     function updateOrderInputs(){
         var inputElements = document.querySelectorAll('[data-itemid]'),
-            inputIndex = inputElements.length - 1,
             itemId = '',
             itemCount = 0;
 
-        for (inputIndex; inputIndex >= 0; inputIndex--){
-            itemId = inputElements[inputIndex].dataset.itemid;
-            itemCount = parseInt( ProductList.Cart.getItemCount(itemId), 10 );
-            inputElements[inputIndex].value = itemCount;
-        }
-
+        _(inputElements).forEach(function (inputElement){
+            itemId = inputElement.dataset.itemid;
+            itemCount = parseInt( ProductList.Cart.getItemCount(itemId), 10);
+            inputElement.value = itemCount;
+        }).value();
     }
 
     /**

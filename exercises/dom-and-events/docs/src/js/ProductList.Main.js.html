@@ -267,11 +267,8 @@ ProductList.Main = (function (){
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="createRowByItem">createRowByItem</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>createRowByItem()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{item}</span><span class="name">{Object}</span><span class="description">- item to create row by</span></li><li class="tag"><span class="type">@param: </span><span class="types">{columnsOrder}</span><span class="name">{Array}</span><span class="description">- item's properties display oreder</span></li><li class="tag"><span class="type">@param: </span><span class="types">{numOfItems}</span><span class="name">{Number}</span><span class="description">- number if items</span></li><li class="tag"><span class="type">@returns: </span><span class="string">{Element} - DOMElement row of item</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Create a single row by single item</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function createRowByItem(item, numOfItems){
         var row = document.createElement('div'),
             cell = null,
-            numOfColumns = columnsOrder.length,
-            i = 0,
             itemIsOnSale = item instanceof ProductList.Store.ItemOnSale,
-            itemIsOutOfStock = !item.isInStock(),
-            key = null;
+            itemIsOutOfStock = !item.isInStock();
 
         row.className += ' table-row';
         if (itemIsOnSale){
@@ -281,22 +278,20 @@ ProductList.Main = (function (){
             row.className += ' item-out-of-stock';
         }
 
-        for (i; i &lt; numOfColumns; i++){
-            key = columnsOrder[i];
+        _.forIn(columnsOrder, function (columnName){
             cell = document.createElement('div');
-            cell.innerHTML = item.data[key];
-            if (itemIsOnSale &amp;&amp; key === 'price'){
-                cell.innerHTML = '&lt;div class=&quot;discounted&quot;&gt;' + item.data[key] + '&lt;div&gt;';
+            cell.innerHTML = item.data[columnName];
+            if (itemIsOnSale &amp;&amp; columnName === 'price'){
+                cell.innerHTML = '&lt;div class=&quot;discounted&quot;&gt;' + item.data[columnName] + '&lt;div&gt;';
                 cell.innerHTML += '&lt;div class=&quot;real-price&quot;&gt;' + item.getPrice() + '&amp;dollar;&lt;div&gt;';
             }
-            cell.className = 'table-cell item-' + key;
+            cell.className = 'table-cell item-' + columnName;
             row.appendChild(cell);
-        }
+        });
 
         row.appendChild(getAddRemoveButtonsCell(item.getId()));
 
         createSelectInRow(row, numOfItems);
-
 
         return row;
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="getAddRemoveButtonsCell">getAddRemoveButtonsCell</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>getAddRemoveButtonsCell()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{itemId}</span><span class="name">{String}</span><span class="description">- item identifier</span></li><li class="tag"><span class="type">@returns: </span><span class="string">{Element} - DOMElement button</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Create an order button with add/remove options</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function getAddRemoveButtonsCell(itemId){
@@ -354,30 +349,27 @@ ProductList.Main = (function (){
         document.getElementsByClassName('container')[0].appendChild(childElement);
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="createPager">createPager</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>createPager()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{items}</span><span class="name">{Array}</span><span class="description">- items to create pager by</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Create a page navigation</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function createPager(items){
         var navElement = document.createElement('nav'),
-            lastNav,
+            lastNav = document.querySelector('.pagination-container'),
             inner = '&lt;ul class=&quot;pagination&quot;&gt;',
-            pages = Math.ceil(items.length / itemsPerPage),
-            i = 0,
-            page = 0;
+            pages = Math.ceil(items.length / itemsPerPage);
 
-        navElement.className = 'pagination-container';
 
-        for (i; i &lt; pages; i++){
-            page = i + 1;
-            inner += '&lt;li&gt;&lt;a href=&quot;#&quot; data-pagenum=&quot;' + page + '&quot;&gt;' + page + '&lt;/a&gt;&lt;/li&gt;';
-        }
+        _.forIn(_.range(1, pages + 1), function (i){
+            inner += '&lt;li&gt;&lt;a href=&quot;#&quot; data-pagenum=&quot;' + i + '&quot;&gt;' + i + '&lt;/a&gt;&lt;/li&gt;';
+        });
+
         inner += '&lt;/ul&gt;&lt;select id=&quot;items-per-page&quot; class=&quot;per-page-selection&quot;&gt;';
         inner += createNumberOptions(5, 11);
         inner += '&lt;/select&gt;';
 
+        navElement.className = 'pagination-container';
         navElement.innerHTML = inner;
 
-        attachPagerEvent(navElement);
-
-        lastNav = document.querySelector('.pagination-container');
         if (lastNav){
             lastNav.remove();
         }
+
+        attachPagerEvent(navElement);
         appendToContainerElement(navElement);
         setNumPerPageElementState();
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="createCart">createCart</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>createCart()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Create cart total display</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function createCart(){
@@ -394,31 +386,27 @@ ProductList.Main = (function (){
         moveToPage(1);
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="updateCart">updateCart</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>updateCart()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Update cart items summary display</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function updateCart(){
         var cartSummaryElement = document.createElement('div'),
-            lastCart,
-            itemsSummary,
+            lastCart = document.getElementById('cart-summery'),
+            itemsSummary = ProductList.Cart.getItemsSummary(),
             inner = '',
-            item,
-            id;
+            item = null;
 
-
-        itemsSummary = ProductList.Cart.getItemsSummary();
-
-        inner += '&lt;ul&gt;';
-        for (id in itemsSummary){
-            if (itemsSummary.hasOwnProperty(id) &amp;&amp; itemsSummary[id] !== 0){
+        _.forIn(itemsSummary, function (count, id){
+            if (count &gt; 0){
                 item = ProductList.Utils.getItemById(products, id);
-                inner += '&lt;li&gt;' + itemsSummary[id] + ' - ' + item.getName() + '&lt;/li&gt;';
+                inner += '&lt;li&gt;' + count + ' - ' + item.getName() + '&lt;/li&gt;';
             }
-        }
-        inner += '&lt;/ul&gt;';
+        });
 
-        lastCart = document.getElementById('cart-summery');
+        inner = '&lt;ul&gt;' + inner + '&lt;/ul&gt;';
+
         if (lastCart){
             lastCart.remove();
         }
+
         cartSummaryElement.innerHTML = inner;
-        cartSummaryElement.setAttribute('id', 'cart-summery');
         cartSummaryElement.className = 'items-summery';
+        cartSummaryElement.id = 'cart-summery';
         appendToContainerElement(cartSummaryElement);
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="moveToPage">moveToPage</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>moveToPage()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{page}</span><span class="name">{Number}</span><span class="description">- Page to switch to</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Move to another page</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function moveToPage(page){
         deleteElementContent(tbody);
@@ -442,39 +430,33 @@ ProductList.Main = (function (){
 
         fixRowSelections();
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="fixRowSelections">fixRowSelections</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>fixRowSelections()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Fix Selects value according to row position</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function fixRowSelections(){
-        var rows = document.getElementById('products').children,
-            rowsLength = rows.length,
-            i;
+        var rowElements = document.getElementById('products').children;
 
-        for (i = 0; i &lt; rowsLength; i++ ){
-            rows[i].querySelector('.select-order select').selectedIndex = i;
-        }
+        _(rowElements).forEach(function (rowElement, index){
+            rowElement.querySelector('.select-order select').selectedIndex = index;
+        }).value();
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="fixImages">fixImages</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>fixImages()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Fix images display from path string to <img> tag</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function fixImages(){
-        var imageCells = document.querySelectorAll('.item-image'),
-            i = imageCells.length - 1;
+        var imageCells = document.querySelectorAll('.item-image');
 
-        for (i; i &gt;= 0; i--){
-            imageCells[i].innerHTML = '&lt;img src=&quot;' + imageCells[i].innerHTML + '&quot; /&gt;';
-        }
+        _(imageCells).forEach(function (cellElement){
+            cellElement.innerHTML = '&lt;img src=&quot;' + cellElement.innerHTML + '&quot; /&gt;';
+        }).value();
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="fixDescription">fixDescription</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>fixDescription()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Fix description display to be wrapped in a div</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function fixDescription(){
-        var descriptionCells = document.querySelectorAll('.item-description'),
-            i = descriptionCells.length - 1;
+        var descriptionCells = document.querySelectorAll('.item-description');
 
-        for (i; i &gt;= 0; i--){
-            descriptionCells[i].innerHTML = '&lt;div&gt;' + descriptionCells[i].innerHTML + '&lt;/div&gt;';
-        }
+        _(descriptionCells).forEach(function (cellElement){
+            cellElement.innerHTML = '&lt;div&gt;' + cellElement.innerHTML + '&lt;/div&gt;';
+        }).value();
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="updateOrderInputs">updateOrderInputs</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>updateOrderInputs()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Update order input elements according to cart</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function updateOrderInputs(){
         var inputElements = document.querySelectorAll('[data-itemid]'),
-            inputIndex = inputElements.length - 1,
             itemId = '',
             itemCount = 0;
 
-        for (inputIndex; inputIndex &gt;= 0; inputIndex--){
-            itemId = inputElements[inputIndex].dataset.itemid;
-            itemCount = parseInt( ProductList.Cart.getItemCount(itemId), 10 );
-            inputElements[inputIndex].value = itemCount;
-        }
-
+        _(inputElements).forEach(function (inputElement){
+            itemId = inputElement.dataset.itemid;
+            itemCount = parseInt( ProductList.Cart.getItemCount(itemId), 10);
+            inputElement.value = itemCount;
+        }).value();
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="exceedingItemLimit">exceedingItemLimit</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>exceedingItemLimit()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{addOrRemove}</span><span class="name">{Number}</span><span class="description">- 1 -&gt; add flag, -1 -&gt; remove flag</span></li><li class="tag"><span class="type">@param: </span><span class="types">{inputElement}</span><span class="name">{Element}</span><span class="description">- DOMElement input to check its value</span></li><li class="tag"><span class="type">@param: </span><span class="types">{item}</span><span class="name">{Object}</span><span class="description">- item object to check its limit</span></li><li class="tag"><span class="type">@returns: </span><span class="string">{boolean} - is exceeding limit</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Check if items&#39; order is exceeding the limit,<br /> bottom limit is 0<br /> top limit is according to item object</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function exceedingItemLimit(addOrRemove, inputElement, item) {
         var inputElementValue = parseInt(inputElement.value, 10),
             exceedingTopLimit = addOrRemove &gt; 0 &amp;&amp; inputElementValue === item.getStock(),
