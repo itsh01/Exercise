@@ -523,27 +523,21 @@ ProductList.Main = (function (){
         });
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="drawSortedItems">drawSortedItems</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>drawSortedItems()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Draw table with sorted items by requested property</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function drawSortedItems(){
         deleteElementContent(tbody);
-        populateTableElement(tbody, products, columnsOrder);
+        populateTableElement(tbody, products);
         moveToPage(currentPage);
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="subscribeToPubSub">subscribeToPubSub</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>subscribeToPubSub()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Subscribe events to suitable functions</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function subscribeToPubSub() {
-        var eventName = null,
-            i = 0,
-            eventFunctionList = [],
-            eventFunctions = {
+        var eventFunctions = {
             itemsSorted: [drawSortedItems],
             couponApplied: [refresh],
             orderCommitted: [refresh, updateCart],
             itemUpdated: [updateCart, updateItemAmountInput]
         };
 
-        for (eventName in eventFunctions){
-            if (eventFunctions.hasOwnProperty(eventName)){
-                eventFunctionList = eventFunctions[eventName];
-                for (i = 0; i &lt; eventFunctionList.length; i++){
-                    ProductList.PubSub.subscribe(eventName, eventFunctionList[i]);
-                }
-            }
-        }
+        _.forIn(eventFunctions, function (callbacks, event){
+            _(callbacks).forEach(function (callback){
+                ProductList.PubSub.subscribe(event, callback);
+            }).value();
+        });
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="attachEvents">attachEvents</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>attachEvents()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Attach events to suitable items</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function attachEvents(){
         attachOrderAddRemoveEvent();
         attachSortEvent();

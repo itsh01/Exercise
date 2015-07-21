@@ -496,7 +496,7 @@ ProductList.Main = (function (){
      */
     function drawSortedItems(){
         deleteElementContent(tbody);
-        populateTableElement(tbody, products, columnsOrder);
+        populateTableElement(tbody, products);
         moveToPage(currentPage);
     }
 
@@ -504,24 +504,18 @@ ProductList.Main = (function (){
      *  Subscribe events to suitable functions
      */
     function subscribeToPubSub() {
-        var eventName = null,
-            i = 0,
-            eventFunctionList = [],
-            eventFunctions = {
+        var eventFunctions = {
             itemsSorted: [drawSortedItems],
             couponApplied: [refresh],
             orderCommitted: [refresh, updateCart],
             itemUpdated: [updateCart, updateItemAmountInput]
         };
 
-        for (eventName in eventFunctions){
-            if (eventFunctions.hasOwnProperty(eventName)){
-                eventFunctionList = eventFunctions[eventName];
-                for (i = 0; i < eventFunctionList.length; i++){
-                    ProductList.PubSub.subscribe(eventName, eventFunctionList[i]);
-                }
-            }
-        }
+        _.forIn(eventFunctions, function (callbacks, event){
+            _(callbacks).forEach(function (callback){
+                ProductList.PubSub.subscribe(event, callback);
+            }).value();
+        });
     }
 
     /**
