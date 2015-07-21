@@ -252,7 +252,7 @@ ProductList.Main = (function (){
 
         for (i; i &lt; numOfItemInPage; i++) {
             tableRowsFragment.appendChild(
-                createRowByItem(items[i], columnsOrder, numOfItemInPage)
+                createRowByItem(items[i], numOfItemInPage)
             );
         }
 
@@ -334,20 +334,26 @@ ProductList.Main = (function (){
 
         return htmlString;
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="attachPagerEvent">attachPagerEvent</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>attachPagerEvent()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{navElement}</span><span class="name">{Element}</span><span class="description">- pager nav element</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Attach moving to another page when clicked on pager</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function attachPagerEvent(navElement) {
-        var i = 0,
-            pageNum = 0,
-            pageLinks = ProductList.Utils.convertToArray(navElement.querySelectorAll('[data-pagenum]')),
-            anchorsLength = pageLinks.length;
+        //var i = 0,
+        var pageNum = 0,
+            pageLinks = ProductList.Utils.convertToArray(navElement.querySelectorAll('[data-pagenum]'));
+            //anchorsLength = pageLinks.length;
 
         function dispatchMoveToPageEvent(){
             this.dispatchEvent(moveToPageEvent);
         }
 
-        for (i; i &lt; anchorsLength; i++) {
-            pageNum = pageLinks[i].dataset.pagenum;
-            pageLinks[i].addEventListener('moveToPageEvent', moveToPage.bind(null, pageNum));
-            pageLinks[i].addEventListener('click', dispatchMoveToPageEvent);
-        }
+        _(pageLinks).forEach(function (pageLink){
+            pageNum = pageLink.dataset.pagenum;
+            pageLink.addEventListener('moveToPageEvent', moveToPage.bind(null, pageNum));
+            pageLink.addEventListener('click', dispatchMoveToPageEvent);
+        }).value();
+
+        //for (i; i &lt; anchorsLength; i++) {
+        //    pageNum = pageLinks[i].dataset.pagenum;
+        //    pageLinks[i].addEventListener('moveToPageEvent', moveToPage.bind(null, pageNum));
+        //    pageLinks[i].addEventListener('click', dispatchMoveToPageEvent);
+        //}
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="setNumPerPageElementState">setNumPerPageElementState</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>setNumPerPageElementState()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>set num per page element state</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function setNumPerPageElementState() {
         var numPerPageElement = document.getElementById('items-per-page');
         numPerPageElement.addEventListener('change', changeItemsPerPage);

@@ -190,20 +190,19 @@ ProductList.Main = (function (){
      * @param navElement {Element} - pager nav element
      */
     function attachPagerEvent(navElement) {
-        var i = 0,
-            pageNum = 0,
-            pageLinks = ProductList.Utils.convertToArray(navElement.querySelectorAll('[data-pagenum]')),
-            anchorsLength = pageLinks.length;
+        var pageNum = 0,
+            pageLinks = ProductList.Utils.convertToArray(navElement.querySelectorAll('[data-pagenum]'));
 
         function dispatchMoveToPageEvent(){
             this.dispatchEvent(moveToPageEvent);
         }
 
-        for (i; i < anchorsLength; i++) {
-            pageNum = pageLinks[i].dataset.pagenum;
-            pageLinks[i].addEventListener('moveToPageEvent', moveToPage.bind(null, pageNum));
-            pageLinks[i].addEventListener('click', dispatchMoveToPageEvent);
-        }
+        _(pageLinks).forEach(function (pageLink){
+            pageNum = pageLink.dataset.pagenum;
+            pageLink.addEventListener('moveToPageEvent', moveToPage.bind(null, pageNum));
+            pageLink.addEventListener('click', dispatchMoveToPageEvent);
+        }).value();
+
     }
 
     /**
