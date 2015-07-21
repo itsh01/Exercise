@@ -242,19 +242,15 @@ ProductList.Cart = ( function () {
         }
         ProductList.PubSub.publish('itemUpdated', [id]);
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="getTotalPrice">getTotalPrice</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>getTotalPrice()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@returns: </span><span class="string">{Number} - total price</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Calculate the total price</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function getTotalPrice(){
-        var key = '',
-            totalPrice = 0,
-            item;
+        var item = null;
+
         products = ProductList.Store.getProducts();
 
-        for (key in items){
-            if (items.hasOwnProperty(key)){
-                item = ProductList.Utils.getItemById(products, key);
-                totalPrice += parseInt(item.getPrice(), 10) * items[key];
-            }
-        }
+        return _.reduce(items, function (sum, count, id){
+            item = ProductList.Utils.getItemById(products, id);
+            return sum + parseInt(item.getPrice(), 10) * count;
+        }, 0);
 
-        return totalPrice;
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="updateTotalPrice">updateTotalPrice</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>updateTotalPrice()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Update the total price in the ui</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function updateTotalPrice(){
         var cartInput = document.getElementById('cart-input');
 
@@ -264,15 +260,13 @@ ProductList.Cart = ( function () {
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="getItemsSummary">getItemsSummary</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>getItemsSummary()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@returns: </span><span class="string">{Object} - items order</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Get total cart items order</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function getItemsSummary(){
         return items;
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="commitOrder">commitOrder</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>commitOrder()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Commit Order</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function commitOrder(){
-        var itemId = '',
-            currentProduct = null;
-        for (itemId in items){
-            if (items.hasOwnProperty(itemId)){
-                currentProduct = ProductList.Utils.getItemById(products, itemId);
-                currentProduct.setStock(currentProduct.getStock() - items[itemId]);
-            }
+        var currentProduct = null;
 
-        }
+        _.forIn(items, function (count, id){
+            currentProduct = ProductList.Utils.getItemById(products, id);
+            currentProduct.setStock(currentProduct.getStock() - count);
+        });
+
         items = {};
         ProductList.PubSub.publish('orderCommitted', []);
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="subscribeToPubSub">subscribeToPubSub</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>subscribeToPubSub()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Subscribe events to run when changes happen in cart</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function subscribeToPubSub(){

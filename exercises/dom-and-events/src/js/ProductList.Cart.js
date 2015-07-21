@@ -55,19 +55,15 @@ ProductList.Cart = ( function () {
      * @returns {Number} - total price
      */
     function getTotalPrice(){
-        var key = '',
-            totalPrice = 0,
-            item;
+        var item = null;
+
         products = ProductList.Store.getProducts();
 
-        for (key in items){
-            if (items.hasOwnProperty(key)){
-                item = ProductList.Utils.getItemById(products, key);
-                totalPrice += parseInt(item.getPrice(), 10) * items[key];
-            }
-        }
+        return _.reduce(items, function (sum, count, id){
+            item = ProductList.Utils.getItemById(products, id);
+            return sum + parseInt(item.getPrice(), 10) * count;
+        }, 0);
 
-        return totalPrice;
     }
 
     /**
@@ -102,15 +98,13 @@ ProductList.Cart = ( function () {
      *  Commit Order
      */
     function commitOrder(){
-        var itemId = '',
-            currentProduct = null;
-        for (itemId in items){
-            if (items.hasOwnProperty(itemId)){
-                currentProduct = ProductList.Utils.getItemById(products, itemId);
-                currentProduct.setStock(currentProduct.getStock() - items[itemId]);
-            }
+        var currentProduct = null;
 
-        }
+        _.forIn(items, function (count, id){
+            currentProduct = ProductList.Utils.getItemById(products, id);
+            currentProduct.setStock(currentProduct.getStock() - count);
+        });
+
         items = {};
         ProductList.PubSub.publish('orderCommitted', []);
     }
