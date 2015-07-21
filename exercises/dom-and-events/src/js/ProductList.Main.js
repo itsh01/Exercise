@@ -57,7 +57,7 @@ ProductList.Main = (function (){
 
         for (i; i < numOfItemInPage; i++) {
             tableRowsFragment.appendChild(
-                createRowByItem(items[i], columnsOrder, numOfItemInPage)
+                createRowByItem(items[i], numOfItemInPage)
             );
         }
 
