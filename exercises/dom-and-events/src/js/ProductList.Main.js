@@ -31,14 +31,7 @@ ProductList.Main = (function (){
      * @returns {Array} - display order
      */
     function getColumnsOrder(){
-        var tableHeaderLength = tableHeaders.length,
-            itemAttributesDisplayOrder = [],
-            i;
-
-        for (i = 0; i < tableHeaderLength; i++){
-            itemAttributesDisplayOrder[i] = tableHeaders[i].dataset.header;
-        }
-        return itemAttributesDisplayOrder;
+        return _.pluck(tableHeaders, 'dataset.header');
     }
 
     /**
@@ -55,7 +48,6 @@ ProductList.Main = (function (){
      *  Create a fragment of rows elements by items
      *
      * @param items {Array} - items to create rows by
-     * @param columnsOrder {Array} - order of items' properties
      * @returns {DocumentFragment} - fragment of rows
      */
     function createTableRowElements(items) {

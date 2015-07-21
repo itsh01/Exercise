@@ -9,5 +9,6 @@
     "jasmine": false
   },
   "globals": {
+    "_": false
   }
 }

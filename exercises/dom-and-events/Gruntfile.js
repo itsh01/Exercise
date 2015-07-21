@@ -82,7 +82,7 @@ module.exports = function (grunt) {
         watch: {
             scripts: {
                 files: ['src/js/*.js'],
-                tasks: ['eslint'],
+                tasks: ['default'],
                 options: {
                     debounceDelay: 500
                 }

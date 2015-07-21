@@ -17,7 +17,9 @@
   "author": "Itay Shtekel",
   "license": "LicenseRef-LICENSE",
   "devDependencies": {
+    "babel-eslint": "^3.1.23",
     "eslint-config-coding-standard": "git+ssh://git@github.com/wix/eslint-config-coding-standard.git#v1.0.2",
+    "eslint-plugin-lodash": "^0.1.3",
     "grunt": "^0.4.5",
     "grunt-asciify": "^0.2.2",
     "grunt-contrib-clean": "^0.6.0",
