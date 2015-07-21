@@ -224,24 +224,28 @@ code {
 ProductList.Themes = (function () {
     'use strict';
 
-    var themes = ['black', 'default'],
+    var themes = ['default', 'black'],
         body = document.querySelector('body');</code></pre></div></div></div></article><article class="comment"><header><h1 id="changeTheme">changeTheme</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>changeTheme()</h5></header><ul class="no-bullet tags"><li class="tag"><span class="type">@param: </span><span class="types">{themeName}</span><span class="name">{String}</span><span class="description">- theme name to set</span></li></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Set a different theme</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function changeTheme(themeName){
         if (themes.indexOf(themeName) === -1){
             return;
         }
 
         body.className = themeName;
+    }
+
+    function createOptionElementByTheme(theme) {
+        var optionElement = document.createElement('option');
+        optionElement.innerHTML = theme;
+        optionElement.value = theme;
+        return optionElement;
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="createThemeChanger">createThemeChanger</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>createThemeChanger()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Create a theme changer widget</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function createThemeChanger(){
         var selectElement = document.createElement('select'),
-            optionElement = null,
-            i = themes.length - 1;
+            optionElement = null;
 
-        for (i; i &gt;= 0; i--){
-            optionElement = document.createElement('option');
-            optionElement.innerHTML = themes[i];
-            optionElement.value = themes[i];
+        _(themes).forEach(function (theme){
+            optionElement = createOptionElementByTheme(theme);
             selectElement.appendChild(optionElement);
-        }
+        }).value();
 
         selectElement.className = 'theme-changer';
         selectElement.addEventListener('change', function (){

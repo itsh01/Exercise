@@ -9,7 +9,7 @@ var ProductList = ProductList || {};
 ProductList.Themes = (function () {
     'use strict';
 
-    var themes = ['black', 'default'],
+    var themes = ['default', 'black'],
         body = document.querySelector('body');
 
 
@@ -26,20 +26,24 @@ ProductList.Themes = (function () {
         body.className = themeName;
     }
 
+    function createOptionElementByTheme(theme) {
+        var optionElement = document.createElement('option');
+        optionElement.innerHTML = theme;
+        optionElement.value = theme;
+        return optionElement;
+    }
+
     /**
      *  Create a theme changer widget
      */
     function createThemeChanger(){
         var selectElement = document.createElement('select'),
-            optionElement = null,
-            i = themes.length - 1;
+            optionElement = null;
 
-        for (i; i >= 0; i--){
-            optionElement = document.createElement('option');
-            optionElement.innerHTML = themes[i];
-            optionElement.value = themes[i];
+        _(themes).forEach(function (theme){
+            optionElement = createOptionElementByTheme(theme);
             selectElement.appendChild(optionElement);
-        }
+        }).value();
 
         selectElement.className = 'theme-changer';
         selectElement.addEventListener('change', function (){
