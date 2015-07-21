@@ -1,0 +1,23 @@
+{
+  "name": "dom-and-events",
+  "version": "1.0.0",
+  "authors": [
+    "Itay Shtekel <shtekel1@gmail.com>"
+  ],
+  "description": "Exercise",
+  "main": "dest/index.html",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "exercise"
+  ],
+  "license": "LicenseRef-LICENSE",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
