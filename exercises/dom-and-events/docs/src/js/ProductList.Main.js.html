@@ -552,24 +552,18 @@ ProductList.Main = (function (){
         });
     }</code></pre></div></div></div></article><article class="comment"><header><h1 id="attachSubmitCouponEvent">attachSubmitCouponEvent</h1><h5 class="subheader"><div class="label radius ctx-type">function</div>attachSubmitCouponEvent()</h5></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>Attach event for submit coupon</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">function attachSubmitCouponEvent(){
         var couponFormElement = document.getElementById('coupon-form'),
-           couponCodeElement = document.getElementById('coupon-code'),
-           coupons = ProductList.Store.getCoupons(),
-           couponCode = '',
-           numOfCoupons = coupons.length;
+            couponCodeElement = document.getElementById('coupon-code'),
+            coupons = ProductList.Store.getCoupons();
 
 
         couponFormElement.addEventListener('submit', function (e) {
-            var i = 0,
-                couponUsed = false;
+            var couponCode = couponCodeElement.value,
+                couponUsed = _.reduce(coupons, function (couponApplied, coupon){
+                    return coupon.validate(couponCode).apply() || couponApplied;
+                }, false);
 
             e.preventDefault();
-            couponCode = couponCodeElement.value;
 
-            for (i; i &lt; numOfCoupons; i++ ){
-                couponUsed = coupons[i]
-                    .validate(couponCode)
-                    .apply() || couponUsed;
-            }
             if (!couponUsed) {</code></pre></div></div></div></article><article class="comment"><header></header><ul class="no-bullet tags"></ul><div data-section="accordian" data-options="one_up: false;" class="section-container code auto"><div class="section"><p data-section-title class="title"><a href="#">Description</a></p><div data-section-content class="content description"><p>slint no-alert:0</p></div></div><div class="section"><p data-section-title class="title"><a href="#">Source</a></p><div data-section-content class="content"><pre><code class="language-javascript">alert('Wrong coupon code!');
             }
             couponCodeElement.value = '';

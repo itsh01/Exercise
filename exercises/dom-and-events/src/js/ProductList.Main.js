@@ -545,24 +545,18 @@ ProductList.Main = (function (){
      */
     function attachSubmitCouponEvent(){
         var couponFormElement = document.getElementById('coupon-form'),
-           couponCodeElement = document.getElementById('coupon-code'),
-           coupons = ProductList.Store.getCoupons(),
-           couponCode = '',
-           numOfCoupons = coupons.length;
+            couponCodeElement = document.getElementById('coupon-code'),
+            coupons = ProductList.Store.getCoupons();
 
 
         couponFormElement.addEventListener('submit', function (e) {
-            var i = 0,
-                couponUsed = false;
+            var couponCode = couponCodeElement.value,
+                couponUsed = _.reduce(coupons, function (couponApplied, coupon){
+                    return coupon.validate(couponCode).apply() || couponApplied;
+                }, false);
 
             e.preventDefault();
-            couponCode = couponCodeElement.value;
 
-            for (i; i < numOfCoupons; i++ ){
-                couponUsed = coupons[i]
-                    .validate(couponCode)
-                    .apply() || couponUsed;
-            }
             if (!couponUsed) {
                 /*eslint no-alert:0*/
                 alert('Wrong coupon code!');
