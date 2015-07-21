@@ -11,6 +11,7 @@
 
 .task-list {
     list-style: none;
+    padding: 3rem;
 }
 
 .task-list li {
