@@ -27,3 +27,7 @@
     background: #CDE4FF;
     cursor: pointer;
 }
+
+.task .btn {
+    margin: 1rem;
+}

@@ -24,9 +24,10 @@
             var self = this,
                 tasks = _.map(this.props.tasks, function (task){
                 return (
-                    <li>
+                    <li className="task">
                         { task.text }
                         <button
+                            className="btn btn-lg btn-danger"
                             data-task-id={task.id}
                             onClick={self.props.deleteTask}
                             ref="delTask"
@@ -53,13 +54,15 @@
         },
         render: function (){
             return (
-                <li>
+                <li className="task">
                     <form id="task=form" onSubmit={this.props.addTask} >
                         <input
+                            className="form-control"
                             placeholder="New Task"
                             ref="newTask"
                             type="text" />
-                        <button type="submit">Save</button>
+                        <button
+                            className="btn btn-lg btn-primary" type="submit">Save</button>
                     </form>
                 </li>
             );
