@@ -31,7 +31,8 @@
     "jasmine": false
   },
   "globals": {
-    "React"
+    "_": false,
+    "React": false
   },
   "plugins": [
     "react"
