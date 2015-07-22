@@ -5,12 +5,12 @@
 requirejs.config({
     paths: {
         lodash: '../lib/lodash/lodash.min',
-        Store: 'ProductList/Store.min',
-        Cart: 'ProductList/Cart.min',
-        PubSub: 'ProductList/PubSub.min',
-        Utils: 'ProductList/Utils.min',
-        Themes: 'ProductList/Themes.min',
-        Mock: 'ProductList/Mock.min'
+        Store: 'ProductList/Store',
+        Cart: 'ProductList/Cart',
+        PubSub: 'ProductList/PubSub',
+        Utils: 'ProductList/Utils',
+        Themes: 'ProductList/Themes',
+        Mock: 'ProductList/Mock'
     }
 });
 

@@ -88,8 +88,25 @@ module.exports = function (grunt) {
                     debounceDelay: 500
                 }
             }
+        },
+        requirejs: {
+            compile: {
+                options: {
+                    baseUrl: 'src/js',
+                    mainConfigFile: 'src/js/Main.js',
+                    out: 'dest/js/Main.min.js',
+                    name: 'main',
+                    optimization: 'uglify'
+                }
+            }
+        },
+        processhtml: {
+            dist: {
+                files: {
+                    'dest/index.html': ['src/index.html']
+                }
+            }
         }
-
     });
 
 
@@ -102,12 +119,15 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-contrib-eslint');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-processhtml');
     grunt.loadNpmTasks('grunt-asciify');
     grunt.loadNpmTasks('grunt-dox');
 
 
     grunt.registerTask('lint', ['csslint', 'eslint']);
-    grunt.registerTask('build', ['copy:main', 'uglify:main', 'cssmin:main']);
+    //grunt.registerTask('build', ['copy:main', 'uglify:main', 'cssmin:main']);
+    grunt.registerTask('build', ['copy:main', 'processhtml', 'requirejs', 'cssmin:main']);
     grunt.registerTask('default', ['asciify:banner', 'lint', 'clean:main', 'build', 'dox']);
 
 };
