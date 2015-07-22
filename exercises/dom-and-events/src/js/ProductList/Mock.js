@@ -1,11 +1,10 @@
 /**
- * Created by itaysh on 7/6/15.
+ * Created by itaysh on 7/22/15.
  */
 
-var ProductList = ProductList || {};
-
-ProductList.Mock = (function () {
+define(['lodash'], function (_) {
     'use strict';
+
     /*eslint-disable quotes, quote-props*/
     return [
         {
@@ -234,4 +233,4 @@ ProductList.Mock = (function () {
         }
     ];
     /*eslint-enable quotes, quote-props*/
-}());
+});

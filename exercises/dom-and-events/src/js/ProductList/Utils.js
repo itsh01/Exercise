@@ -1,12 +1,8 @@
 /**
- * Created by itaysh on 7/6/15.
+ * Created by itaysh on 7/22/15.
  */
 
-
-var ProductList = ProductList || {};
-
-
-ProductList.Utils = (function () {
+define(['lodash'], function (_) {
     'use strict';
 
     /**
@@ -85,5 +81,4 @@ ProductList.Utils = (function () {
         copyObject: copyObject,
         getItemById: getItemById
     };
-
-}());
+});

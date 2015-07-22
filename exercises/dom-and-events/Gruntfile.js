@@ -11,7 +11,7 @@ module.exports = function (grunt) {
             main: {
                 files: [{
                     expand: true,
-                    src: '*.js',
+                    src: '**/*.js',
                     dest: 'dest/js',
                     cwd: 'src/js',
                     rename: function (base, path) {
@@ -39,6 +39,7 @@ module.exports = function (grunt) {
                     '!js',
                     '!css',
                     'lib/**/*.min.js',
+                    'lib/**/require.js',
                     'lib/**/*.min.css',
                     'lib/**/fonts/**',
                     '*'

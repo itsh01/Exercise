@@ -1,12 +1,8 @@
 /**
- * Created by itaysh on 6/30/15.
+ * Created by itaysh on 7/22/15.
  */
 
-var ProductList = ProductList || {};
-
-// Publish Subscribe Event Manager
-
-ProductList.PubSub = (function (){
+define(['lodash'], function (_) {
     'use strict';
 
     var counter = 1,
@@ -64,4 +60,4 @@ ProductList.PubSub = (function (){
         unSubscribe: unSubscribe
     };
 
-}());
+});

@@ -1,17 +1,12 @@
 /**
- * Created by itaysh on 7/6/15.
+ * Created by itaysh on 7/22/15.
  */
 
-
-var ProductList = ProductList || {};
-
-
-ProductList.Themes = (function () {
+define(['lodash'], function (_) {
     'use strict';
 
     var themes = ['default', 'black'],
         body = document.querySelector('body');
-
 
     /**
      *  Set a different theme
@@ -57,5 +52,4 @@ ProductList.Themes = (function () {
         changeTheme: changeTheme,
         createThemeChanger: createThemeChanger
     };
-
-}());
+});
