@@ -17,11 +17,24 @@
         displayName: 'Task List',
         propTypes: {
             addTask: React.PropTypes.function,
+            deleteTask: React.PropTypes.function,
             tasks: React.PropTypes.array
         },
         render: function (){
-            var tasks = _.map(this.props.tasks, function (task){
-                return (<li>{ task.text }</li>);
+            var self = this,
+                tasks = _.map(this.props.tasks, function (task){
+                return (
+                    <li>
+                        { task.text }
+                        <button
+                            data-task-id={task.id}
+                            onClick={self.props.deleteTask}
+                            ref="delTask"
+                            >
+                            X
+                        </button>
+                    </li>
+                );
             });
 
             return (
@@ -42,7 +55,10 @@
             return (
                 <li>
                     <form id="task=form" onSubmit={this.props.addTask} >
-                        <input placeholder="New Task" ref="newTask" type="text" />
+                        <input
+                            placeholder="New Task"
+                            ref="newTask"
+                            type="text" />
                         <button type="submit">Save</button>
                     </form>
                 </li>
@@ -82,11 +98,26 @@
             inputElement.value = '';
             this.setState({list: list});
         },
+        deleteTask: function (e){
+            var list = this.state.list,
+                buttonElement = e.target;
+
+            e.preventDefault();
+            list = _.filter(list, function (task){
+                return task.id !== parseInt(buttonElement.dataset.taskId, 10);
+            });
+
+            this.setState({list: list});
+        },
         render: function (){
             return (
                 <div>
                     <h1 className="main-header">To Do List</h1>
-                    <TaskList addTask={this.addTask} ref="taskList" tasks={this.state.list} />
+                    <TaskList
+                        addTask={this.addTask}
+                        deleteTask={this.deleteTask}
+                        ref="taskList"
+                        tasks={this.state.list} />
                 </div>
             );
         }
